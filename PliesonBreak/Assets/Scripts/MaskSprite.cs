@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MaskSprite : MonoBehaviour
 {
-    [SerializeField] float Scale;
+    [SerializeField, Range(0.5f, 1.25f)] float Scale;  // ƒvƒŒƒCƒ„[‚Ì‹ŠE‚Ì‘å‚«‚³.
 
     void Start()
     {

@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
 
     #region マネージャー変数
 
+    //ゲームマネージャーのインスタンス
+    public static GameManager GameManagerInstance;
+
     //マップを管理するマネージャー
     //private MapManager MapManager;
 
@@ -54,6 +57,13 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region 関数
+
+    bool Init()
+    {
+        GameManagerInstance = this;
+
+        return true;
+    }
 
     /// <summary>
     /// ゲーム起動時に呼ばれる関数
@@ -74,6 +84,9 @@ public class GameManager : MonoBehaviour
         //プレイヤーのリスポーン位置の取得
         //}
 
+        //テスト
+        GameStatus = GAMESTATUS.INGAME;
+
         Debug.Log("Start Ok");
     }
 
@@ -82,7 +95,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        Init();
+        //テスト
+        GameStart();
     }
 
     

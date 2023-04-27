@@ -63,7 +63,10 @@ public class GameManager : MonoBehaviour
         GameManagerInstance = this;
 
         return true;
+
     }
+
+
 
     /// <summary>
     /// ƒQ[ƒ€‹N“®‚ÉŒÄ‚Î‚ê‚éŠÖ”

@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class InteractObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public enum InteractObj
     {
-        
+        None,
+        Door,
+        Key,
     }
 
-    // Update is called once per frame
+    public InteractObj NowInteract;
+
+    void Start()
+    {
+        NowInteract = InteractObj.None;
+    }
+
     void Update()
     {
         

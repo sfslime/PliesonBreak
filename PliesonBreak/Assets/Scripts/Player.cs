@@ -15,6 +15,14 @@ public class Player : MonoBehaviour
     string ObjName;                   // 現在重なっているオブジェクトの情報を取得.
     public bool isGetKey;             // 鍵を持っているか.
 
+
+    enum InteractObjID
+    {
+        None,
+        Key,
+        Door,
+    }
+
     #endregion
 
     /// <summary>
@@ -36,7 +44,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         isGetKey = false;
-        cUIManager.IsInteractButton(false);
     }
 
     void Update()
@@ -81,12 +88,12 @@ public class Player : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        if(ObjName == "Key")
+        if(ObjName == InteractObjID.Key.ToString())
         {
             isGetKey = true;
             Debug.Log("鍵を入手");
         }
-        else if(ObjName == "Door")
+        else if(ObjName == InteractObjID.Door.ToString())
         {
             PlayerHaveKey();
         }

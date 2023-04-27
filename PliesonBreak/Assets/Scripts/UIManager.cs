@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    GameObject InteractButton;
+    [SerializeField]GameObject InteractButton;
 
     private void Awake()
     {
@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         InteractButton = GameObject.Find("InteractButton");
+        IsInteractButton(false);
     }
 
     void Update()

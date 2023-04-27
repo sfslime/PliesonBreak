@@ -11,15 +11,19 @@ public class Player : MonoBehaviour
 
     public InputAction cInputAction;  // 操作にどういったキーを割り当てるかを決めるためのクラス.
     public UIManager cUIManager;      // UIを管理するマネージャー.
-
+    Door Door;
     string ObjName;                   // 現在重なっているオブジェクトの情報を取得.
     public bool isGetKey;             // 鍵を持っているか.
+
+    [SerializeField] List<bool> isEscapeItem;
 
 
     enum InteractObjID
     {
         None,
         Key,
+        EscapeItem1,
+        EscapeItem2,
         Door,
     }
 
@@ -43,7 +47,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Door = GameObject.Find("Door").GetComponent<Door>();
         isGetKey = false;
+
+        for (int i = 0; i < isEscapeItem.Count; i++)
+        {
+            isEscapeItem[i] = false;
+        }
     }
 
     void Update()
@@ -97,6 +107,16 @@ public class Player : MonoBehaviour
         {
             PlayerHaveKey();
         }
+        else if (ObjName == InteractObjID.EscapeItem1.ToString())
+        {
+            isEscapeItem[0] = true;
+            Debug.Log("脱出アイテム1を入手");
+        }
+        else if (ObjName == InteractObjID.EscapeItem2.ToString())
+        {
+            isEscapeItem[1] = true;
+            Debug.Log("脱出アイテム2を入手");
+        }
     }
 
     /// <summary>
@@ -111,6 +131,15 @@ public class Player : MonoBehaviour
         else if (isGetKey == true)
         {
             Debug.Log("ドアが開いた");
+            Door.DoorOpen(true);
+        }
+        else if(isEscapeItem[0] == true)
+        {
+
+        }
+        else if (isEscapeItem[1] == true)
+        {
+
         }
     }
 }

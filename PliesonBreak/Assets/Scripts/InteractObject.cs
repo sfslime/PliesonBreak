@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class InteractObject : MonoBehaviour
 {
+    protected Player cPlayer;
 
-    public enum InteractObj
+    protected enum InteractObj
     {
         None,
         Door,
         Key,
+        EscapeItem1,
+        EscapeItem2,
+        EscapeObj,
     }
 
-    public InteractObj NowInteract;
+    protected InteractObj NowInteract;
 
     void Start()
     {
+        cPlayer = GameObject.Find("Player").GetComponent<Player>();
         NowInteract = InteractObj.None;
     }
 

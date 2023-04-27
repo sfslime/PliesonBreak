@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractObject : MonoBehaviour
+public class InteractObjectBase : MonoBehaviour
 {
-    protected Player cPlayer;
+    protected PlayerBase Player;
 
-    protected enum InteractObj
+    protected enum InteractObjs
     {
         None,
         Door,
@@ -17,12 +17,11 @@ public class InteractObject : MonoBehaviour
         EscapeObj,
     }
 
-    protected InteractObj NowInteract;
+    protected InteractObjs NowInteract;
 
     void Start()
     {
-        cPlayer = GameObject.Find("Player").GetComponent<Player>();
-        NowInteract = InteractObj.None;
+        NowInteract = InteractObjs.None;
     }
 
     void Update()

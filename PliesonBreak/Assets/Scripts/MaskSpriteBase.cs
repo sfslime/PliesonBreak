@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaskSprite : MonoBehaviour
+public class MaskSpriteBase : MonoBehaviour
 {
     [SerializeField, Range(0.5f, 1.25f)] float Scale;  // ƒvƒŒƒCƒ„[‚Ì‹ŠE‚Ì‘å‚«‚³.
 

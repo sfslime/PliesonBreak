@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractObject
+public class DoorBase : InteractObjectBase
 {
     Collider2D Collider2D;
 
     void Start()
     {
         Collider2D = GetComponent<Collider2D>();
-        NowInteract = InteractObj.Door;
+        NowInteract = InteractObjs.Door;
     }
 
     // Update is called once per frame

@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SearchPoint : InteractObject
+public class SearchPoint : InteractObjectBase
 {
-    private InteractObject DropItem;
+    private InteractObjectBase DropItem;
     [SerializeField] float DefaltSearchTime;
     [SerializeField] bool isDestroy;
 
     // Start is called before the first frame update
     void Start()
     {
-        NowInteract = InteractObj.Search;
+        NowInteract = InteractObjs.Search;
     }
 
     // Update is called once per frame

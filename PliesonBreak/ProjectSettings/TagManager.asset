@@ -9,6 +9,7 @@ TagManager:
   - Trap
   - Door
   - Key
+  - InteractObject
   layers:
   - Default
   - TransparentFX

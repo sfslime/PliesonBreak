@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManagerBase : MonoBehaviour
 {
-    public static UIManager instance;
+    public static UIManagerBase instance;
     [SerializeField]GameObject InteractButton;
 
     private void Awake()

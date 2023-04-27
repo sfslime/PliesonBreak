@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DoorSpriteChange : MonoBehaviour
+public class cDoorSpriteChange : MonoBehaviour
 {
     //変更するタイルマップ（自分自身）
     Tilemap tilemap;

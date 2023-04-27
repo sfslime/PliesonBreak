@@ -21,12 +21,16 @@ public class InteractObject : MonoBehaviour
 
     void Start()
     {
-        cPlayer = GameObject.Find("Player").GetComponent<Player>();
         NowInteract = InteractObj.None;
     }
 
     void Update()
     {
         
+    }
+
+    public virtual void CopyProperty(InteractObject newobject)
+    {
+        //î•ñ‚ÌƒRƒs[
     }
 }

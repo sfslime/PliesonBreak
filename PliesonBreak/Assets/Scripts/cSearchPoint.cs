@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SearchPoint : InteractObject
+public class cSearchPoint : InteractObject
 {
+    //保持している、探索後に出現させるアイテム
     private InteractObject DropItem;
-    [SerializeField] float DefaltSearchTime;
+    //生成するアイテムプレファブのリスト
+    [SerializeField] List<GameObject> InteractObjectList = new List<GameObject>();
+    //標準探索時間。秒単位で記述
+    [SerializeField,Range(1f,10f)] float DefaltSearchTime;
+    //アイテムを保持していない状態なら消えるかどうか
     [SerializeField] bool isDestroy;
 
     // Start is called before the first frame update
@@ -34,17 +39,31 @@ public class SearchPoint : InteractObject
         if(DropItem != null)
         {
 
-            Instantiate(DropItem,transform.position,transform.rotation);
+            //var Obj = Instantiate(InteractObjectList[/*オブジェクトのID*/],transform.position,transform.rotation);
+            //Obj.GetComponent<InteractObject>().CopyProperty(DropItem);
             //あたり演出
         }
         else
         {
             //はずれ演出
         }
+        Destroy(gameObject);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void StopSearch()
     {
         StopCoroutine("SearchStart");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ID"></param>
+    public void SetDropItem(InteractObject interactobj)
+    {
+        
     }
 }

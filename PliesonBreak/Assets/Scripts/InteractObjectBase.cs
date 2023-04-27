@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractObject : MonoBehaviour
+public class InteractObjectBase : MonoBehaviour
 {
-    protected Player cPlayer;
+    protected PlayerBase Player;
 
-    protected enum InteractObj
+    protected enum InteractObjs
     {
         None,
         Door,
@@ -17,11 +17,15 @@ public class InteractObject : MonoBehaviour
         EscapeObj,
     }
 
-    protected InteractObj NowInteract;
+    protected InteractObjs NowInteract;
 
     void Start()
     {
+<<<<<<< HEAD:PliesonBreak/Assets/Scripts/InteractObject.cs
         NowInteract = InteractObj.None;
+=======
+        NowInteract = InteractObjs.None;
+>>>>>>> c5fdca62245b2074e985cbe2dbdc8545a78b2268:PliesonBreak/Assets/Scripts/InteractObjectBase.cs
     }
 
     void Update()

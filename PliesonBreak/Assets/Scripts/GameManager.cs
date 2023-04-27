@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("現在のゲームの状態")] GAMESTATUS GameStatus { get; set; }
 
-    [SerializeField, Tooltip("プレイヤークラス")] Player Player;
+    [SerializeField, Tooltip("プレイヤークラス")] PlayerBase Player;
 
     #endregion
 

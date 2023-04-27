@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
-  - Dore
   - Enemy
   - Trap
+  - Door
   layers:
   - Default
   - TransparentFX

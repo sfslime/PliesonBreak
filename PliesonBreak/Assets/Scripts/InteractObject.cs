@@ -10,9 +10,10 @@ public class InteractObject : MonoBehaviour
         None,
         Door,
         Key,
+        Search
     }
 
-    public InteractObj NowInteract;
+    protected InteractObj NowInteract;
 
     void Start()
     {

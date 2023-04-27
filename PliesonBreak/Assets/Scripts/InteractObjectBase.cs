@@ -21,11 +21,7 @@ public class InteractObjectBase : MonoBehaviour
 
     void Start()
     {
-<<<<<<< HEAD:PliesonBreak/Assets/Scripts/InteractObject.cs
-        NowInteract = InteractObj.None;
-=======
         NowInteract = InteractObjs.None;
->>>>>>> c5fdca62245b2074e985cbe2dbdc8545a78b2268:PliesonBreak/Assets/Scripts/InteractObjectBase.cs
     }
 
     void Update()
@@ -33,7 +29,7 @@ public class InteractObjectBase : MonoBehaviour
         
     }
 
-    public virtual void CopyProperty(InteractObject newobject)
+    public virtual void CopyProperty(InteractObjectBase newobject)
     {
         //èÓïÒÇÃÉRÉsÅ[
     }

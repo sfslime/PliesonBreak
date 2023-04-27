@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8284212665470414307}
   - component: {fileID: 4024585745272185632}
   - component: {fileID: 3523120399043837670}
+  - component: {fileID: 6699197833226022569}
   m_Layer: 0
   m_Name: TilemapDore
   m_TagString: Door
@@ -358,3 +359,15 @@ MonoBehaviour:
   RightDoorPositions:
   - {x: 15, y: -1, z: 0}
   - {x: 15, y: -2, z: 0}
+--- !u!114 &6699197833226022569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417083808402987442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5a49d81b5225548a40cadb428c44d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

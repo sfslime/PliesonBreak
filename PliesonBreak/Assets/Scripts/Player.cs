@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     public InputAction cInputAction;  // 操作にどういったキーを割り当てるかを決めるためのクラス.
     public UIManager cUIManager;      // UIを管理するマネージャー.
-    Door Door;
+    [SerializeField] Door Door;
     string ObjName;                   // 現在重なっているオブジェクトの情報を取得.
     public bool isGetKey;             // 鍵を持っているか.
 
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Door = GameObject.Find("Door").GetComponent<Door>();
+        //Door = GameObject.Find("Door").GetComponent<Door>();
         isGetKey = false;
 
         for (int i = 0; i < isEscapeItem.Count; i++)
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     /// <param name="collision"></param>
     void GetItemInformation(Collider2D collision)
     {
-        ObjName = collision.gameObject.name;
+        ObjName = collision.gameObject.tag;
         Debug.Log(ObjName);
     }
 

@@ -26,6 +26,7 @@ public class Door : InteractObject
         if(isopendoor == true)
         {
             Collider2D.enabled = false;
+            GetComponent<DoorSpriteChange>().ChangeTile(isopendoor);
         }
         else
         {

@@ -11,13 +11,10 @@ public class InteractObject : MonoBehaviour
         None,
         Door,
         Key,
-<<<<<<< HEAD
-        Search
-=======
+        Search,
         EscapeItem1,
         EscapeItem2,
         EscapeObj,
->>>>>>> 23b2aa81cb4cd3f99624771852734103b3c29768
     }
 
     protected InteractObj NowInteract;

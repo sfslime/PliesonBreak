@@ -9,6 +9,7 @@ public class InteractObjectBase : MonoBehaviour
     protected enum InteractObjs
     {
         None,
+        NullDrop,
         Door,
         Key,
         Search,

@@ -6,14 +6,16 @@ using UnityEngine.InputSystem;
 public class PlayerBase : MonoBehaviour
 {
     #region 変数.
+    Rigidbody2D Rb;
 
-    [SerializeField] float speed;     // 移動の速さ.
+    [SerializeField] float Speed;     // 移動の速さ.
 
     public InputAction InputAction;  // 操作にどういったキーを割り当てるかを決めるためのクラス.
-    public UIManagerBase UIManager;      // UIを管理するマネージャー.
+    public UIManagerBase UIManager;  // UIを管理するマネージャー.
     [SerializeField] DoorBase Door;
+    [SerializeField]InteractObjectBase InteractObjectBase;
     string ObjID;                   // 現在重なっているオブジェクトの情報を取得.
-    public bool isGetKey;             // 鍵を持っているか.
+    public bool isGetKey;           // 鍵を持っているか.
 
     [SerializeField] List<bool> isEscapeItem;
 
@@ -26,6 +28,8 @@ public class PlayerBase : MonoBehaviour
         EscapeItem2,
         Door,
     }
+
+    InteractObjIDs NowInteractObjID;
 
     #endregion
 
@@ -47,8 +51,10 @@ public class PlayerBase : MonoBehaviour
 
     void Start()
     {
+        Rb = GetComponent<Rigidbody2D>();
         //Door = GameObject.Find("Door").GetComponent<Door>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
+
         isGetKey = false;
 
         for (int i = 0; i < isEscapeItem.Count; i++)
@@ -79,7 +85,9 @@ public class PlayerBase : MonoBehaviour
     {
         var MoveVector = InputAction.ReadValue<Vector2>();
 
-        transform.position += new Vector3(MoveVector.x * speed, MoveVector.y * speed, 0) * Time.deltaTime;
+        Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
+
+        
         // Debug.Log(MoveVector);
     }
 
@@ -89,8 +97,8 @@ public class PlayerBase : MonoBehaviour
     /// <param name="collision"></param>
     void GetItemInformation(Collider2D collision)
     {
-       //ObjID  = ;
-        Debug.Log(ObjID);
+        ObjID = collision.gameObject.name;
+        
     }
 
     /// <summary>
@@ -98,12 +106,12 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        if(ObjID == InteractObjIDs.Key.ToString())
+        if (ObjID == InteractObjIDs.Key.ToString())
         {
             isGetKey = true;
             Debug.Log("鍵を入手");
         }
-        else if(ObjID == InteractObjIDs.Door.ToString())
+        else if (ObjID == InteractObjIDs.Door.ToString())
         {
             PlayerHaveKey();
         }
@@ -143,6 +151,10 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// イントラクト可能なオブジェクトに触れたときに呼ぶ.
+    /// </summary>
+    /// <param name="collision"></param>
     void EnterInteractObj(Collider2D collision)
     {
         if (collision.gameObject.tag == "InteractObject")

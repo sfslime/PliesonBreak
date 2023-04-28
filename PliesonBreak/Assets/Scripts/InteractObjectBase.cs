@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class InteractObjectBase : MonoBehaviour
 {
-    protected PlayerBase Player;
-
-    protected enum InteractObjs
+    public  enum InteractObjs
     {
         None,
         Door,
@@ -17,7 +15,7 @@ public class InteractObjectBase : MonoBehaviour
         EscapeObj,
     }
 
-    protected InteractObjs NowInteract;
+    public InteractObjs NowInteract;
 
     void Start()
     {

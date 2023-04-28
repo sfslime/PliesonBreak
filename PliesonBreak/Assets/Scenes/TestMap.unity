@@ -545,17 +545,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2658396639101774388, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
+    - target: {fileID: 1574552609, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: m_Mass
+      value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: Door
+      value: 
+      objectReference: {fileID: 1481800389}
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: Speed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: InteractObjectBase
+      value: 
+      objectReference: {fileID: 1481800389}
     - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Name
       value: PlayerSprite
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658396639101774394, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2658396639101774395, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Pivot.x
@@ -8026,6 +8034,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
   m_PrefabInstance: {fileID: 3960539307011548483}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1481800389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+  m_PrefabInstance: {fileID: 3960539307011548483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5a49d81b5225548a40cadb428c44d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1489487822
 GameObject:
   m_ObjectHideFlags: 0
@@ -14153,132 +14172,17 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 2658396639057297139, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
   m_PrefabInstance: {fileID: 1021958374}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1574552604 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+--- !u!114 &1574552619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
   m_PrefabInstance: {fileID: 1021958374}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1574552609
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574552604}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &1574552614
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574552604}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &1574552619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574552604}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9be6c39237081c42b5273fb72cca5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  InputAction:
-    m_Name: Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 49079ee9-ea86-4fd7-88ab-d92cd4d06203
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 5f14281d-a1e7-4a21-adb8-a5eeef77d5a5
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 82953063-fd07-4d07-90f5-d8294312efde
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 8
-    - m_Name: down
-      m_Id: eb56d2f6-b804-422c-aac5-c815b8496728
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 8
-    - m_Name: left
-      m_Id: fb8b7011-0b1e-40af-8330-4058ef55246e
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 91344b6a-7111-4981-a2ef-b17a56b9169a
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 8
-    - m_Name: 
-      m_Id: 638e7e71-7301-4d4a-b5f9-bb1bf8c7a124
-      m_Path: <Gamepad>/leftStick
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input
-      m_Flags: 0
-    m_Flags: 0
-  UIManager: {fileID: 0}
-  Door: {fileID: 0}
-  isGetKey: 0
-  isEscapeItem: 
 --- !u!1 &1595408556
 GameObject:
   m_ObjectHideFlags: 0
@@ -15143,9 +15047,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NowInteract
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_Name
       value: TilemapDore
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: m_TagString
+      value: InteractObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77ced927ccec52e468c51281740b5b74, type: 3}

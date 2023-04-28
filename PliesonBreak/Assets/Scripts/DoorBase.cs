@@ -20,6 +20,7 @@ public class DoorBase : InteractObjectBase
 
     /// <summary>
     /// 扉を開けるスクリプト.
+    /// PlayerBase.csがこの関数を呼び出す.
     /// </summary>
     public void DoorOpen(bool isopendoor)
     {

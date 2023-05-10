@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6956f242aa1db4d9abe76ce07a5554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scale: 100
+  ViewScale: 0
 --- !u!331 &1004232939
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010208881502, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
       propertyPath: m_Name
-      value: Rogue_01
+      value: PlayerSprite
       objectReference: {fileID: 0}
     - target: {fileID: 4000010141028922, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
       propertyPath: m_RootOrder
@@ -14650,6 +14650,7 @@ GameObject:
   - component: {fileID: 1595408559}
   - component: {fileID: 1595408558}
   - component: {fileID: 1595408557}
+  - component: {fileID: 1595408561}
   m_Layer: 0
   m_Name: Key
   m_TagString: InteractObject
@@ -14771,6 +14772,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1595408561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595408556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4208ff8f8ce18e44892ef667f2f53cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NowInteract: 1
 --- !u!1001 &1726013527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14778,6 +14792,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7010743200776983621, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
+      propertyPath: NowInteract
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -7010743200776983621, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: TestDropItem
       value: 
@@ -15265,7 +15283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_Name
-      value: TilemapDore
+      value: TilemapDoor
       objectReference: {fileID: 0}
     - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_TagString

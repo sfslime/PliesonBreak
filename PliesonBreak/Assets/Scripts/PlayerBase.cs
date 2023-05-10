@@ -13,7 +13,7 @@ public class PlayerBase : MonoBehaviour
     public InputAction InputAction;  // 操作にどういったキーを割り当てるかを決めるためのクラス.
     public UIManagerBase UIManager;  // UIを管理するマネージャー.
     [SerializeField] DoorBase Door;
-    [SerializeField]InteractObjectBase InteractObjectBase;
+    [SerializeField] InteractObjectBase InteractObjectBase;
     int ObjID;                      // 現在重なっているオブジェクトの情報を取得.
     public bool isGetKey;           // 鍵を持っているか.
 
@@ -63,7 +63,7 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -90,7 +90,7 @@ public class PlayerBase : MonoBehaviour
 
         Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
 
-        
+
         // Debug.Log(MoveVector);
     }
 
@@ -109,7 +109,7 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        if (ObjID == 1)
+        if (ObjID == (int)InteractObjIDs.Key)
         {
             isGetKey = true;
             Debug.Log("鍵を入手");
@@ -127,42 +127,44 @@ public class PlayerBase : MonoBehaviour
         {
             isEscapeItem[1] = true;
             Debug.Log("脱出アイテム2を入手");
+           
         }
     }
 
-    /// <summary>
-    /// プレイヤーが鍵を持っている場合にドアを開ける処理.
-    /// </summary>
-    void PlayerHaveKey()
-    {
-        if (isGetKey == false)
+        /// <summary>
+        /// プレイヤーが鍵を持っている場合にドアを開ける処理.
+        /// </summary>
+        void PlayerHaveKey()
         {
-            Debug.Log("鍵がかかっている");
-        }
-        else if (isGetKey == true)
-        {
-            Debug.Log("ドアが開いた");
-            Door.DoorOpen(true);
-        }
-        else if(isEscapeItem[0] == true)
-        {
+            if (isGetKey == false)
+            {
+                Debug.Log("鍵がかかっている");
+            }
+            else if (isGetKey == true)
+            {
+                Debug.Log("ドアが開いた");
+                Door.DoorOpen(true);
+            }
+            else if (isEscapeItem[0] == true)
+            {
 
-        }
-        else if (isEscapeItem[1] == true)
-        {
+            }
+            else if (isEscapeItem[1] == true)
+            {
 
+            }
         }
-    }
 
-    /// <summary>
-    /// イントラクト可能なオブジェクトに触れたときに呼ぶ.
-    /// </summary>
-    /// <param name="collision"></param>
-    void EnterInteractObj(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "InteractObject")
+        /// <summary>
+        /// イントラクト可能なオブジェクトに触れたときに呼ぶ.
+        /// </summary>
+        /// <param name="collision"></param>
+        void EnterInteractObj(Collider2D collision)
         {
-            UIManager.IsInteractButton(true);
+            if (collision.gameObject.tag == "InteractObject")
+            {
+                UIManager.IsInteractButton(true);
+            }
         }
-    }
+    
 }

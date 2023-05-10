@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class InteractObjectBase : MonoBehaviour
 {
+    PlayerBase PlayerBase;
     public  enum InteractObjs
     {
         None,
+<<<<<<< HEAD
         NullDrop,
         Door,
+=======
+>>>>>>> 419166b7b746de499991cf9d8b9dc22edb7ca33e
         Key,
+        Door,
         Search,
         EscapeItem1,
         EscapeItem2,
@@ -17,9 +22,13 @@ public class InteractObjectBase : MonoBehaviour
     }
 
     public InteractObjs NowInteract;
-
+    protected void SetUp()
+    {
+        PlayerBase = GameObject.Find("PlayerSprite").GetComponent<PlayerBase>();
+    }
     void Start()
     {
+        SetUp();
         NowInteract = InteractObjs.None;
     }
 
@@ -28,9 +37,24 @@ public class InteractObjectBase : MonoBehaviour
         
     }
 
+<<<<<<< HEAD
     public virtual void CopyProperty(InteractObjectBase oldobject)
     {
         //情報のコピー
         NowInteract =  oldobject.GetComponent<InteractObjectBase>().NowInteract;
+=======
+    protected void OnTriggerStay2D(Collider2D collision)
+    {
+        PlayerBase.GetItemInformation((int)NowInteract);
+    }
+
+    /// <summary>
+    /// 新しく生成されたオブジェクトに渡す関数.
+    /// </summary>
+    /// <param name="oldobject"></param>
+    public virtual void CopyProperty(InteractObjectBase oldobject)
+    {
+        NowInteract = oldobject.GetComponent<InteractObjectBase>().NowInteract;
+>>>>>>> 419166b7b746de499991cf9d8b9dc22edb7ca33e
     }
 }

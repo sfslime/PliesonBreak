@@ -14,7 +14,7 @@ public class PlayerBase : MonoBehaviour
     public UIManagerBase UIManager;  // UIを管理するマネージャー.
     [SerializeField] DoorBase Door;
     [SerializeField]InteractObjectBase InteractObjectBase;
-    string ObjID;                   // 現在重なっているオブジェクトの情報を取得.
+    int ObjID;                      // 現在重なっているオブジェクトの情報を取得.
     public bool isGetKey;           // 鍵を持っているか.
 
     [SerializeField] List<bool> isEscapeItem;
@@ -28,8 +28,6 @@ public class PlayerBase : MonoBehaviour
         EscapeItem2,
         Door,
     }
-
-    InteractObjIDs NowInteractObjID;
 
     #endregion
 
@@ -65,6 +63,11 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
+        
+    }
+
+    private void FixedUpdate()
+    {
         PlayerMove();
     }
 
@@ -95,10 +98,10 @@ public class PlayerBase : MonoBehaviour
     /// 現在触れているオブジェクトの情報を取得.
     /// </summary>
     /// <param name="collision"></param>
-    void GetItemInformation(Collider2D collision)
+    public void GetItemInformation(int InteractObjID)
     {
-        ObjID = collision.gameObject.name;
-        
+        ObjID = InteractObjID;
+        Debug.Log(InteractObjID);
     }
 
     /// <summary>
@@ -106,21 +109,21 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        if (ObjID == InteractObjIDs.Key.ToString())
+        if (ObjID == 1)
         {
             isGetKey = true;
             Debug.Log("鍵を入手");
         }
-        else if (ObjID == InteractObjIDs.Door.ToString())
+        else if (ObjID == 2)
         {
             PlayerHaveKey();
         }
-        else if (ObjID == InteractObjIDs.EscapeItem1.ToString())
+        else if (ObjID == 3)
         {
             isEscapeItem[0] = true;
             Debug.Log("脱出アイテム1を入手");
         }
-        else if (ObjID == InteractObjIDs.EscapeItem2.ToString())
+        else if (ObjID == 4)
         {
             isEscapeItem[1] = true;
             Debug.Log("脱出アイテム2を入手");
@@ -160,7 +163,6 @@ public class PlayerBase : MonoBehaviour
         if (collision.gameObject.tag == "InteractObject")
         {
             UIManager.IsInteractButton(true);
-            GetItemInformation(collision);
         }
     }
 }

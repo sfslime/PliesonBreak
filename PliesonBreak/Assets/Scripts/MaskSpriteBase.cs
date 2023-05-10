@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MaskSpriteBase : MonoBehaviour
 {
-    [SerializeField, Range(0.5f, 1.25f)] float Scale;  // プレイヤーの視界の大きさ.
+    [SerializeField, Range(0.5f, 100f)] float Scale;  // プレイヤーの視界の大きさ.
 
     void Start()
     {

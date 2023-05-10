@@ -8,13 +8,9 @@ public class InteractObjectBase : MonoBehaviour
     public  enum InteractObjs
     {
         None,
-<<<<<<< HEAD
-        NullDrop,
-        Door,
-=======
->>>>>>> 419166b7b746de499991cf9d8b9dc22edb7ca33e
         Key,
         Door,
+        NullDrop,
         Search,
         EscapeItem1,
         EscapeItem2,
@@ -36,13 +32,6 @@ public class InteractObjectBase : MonoBehaviour
     {
         
     }
-
-<<<<<<< HEAD
-    public virtual void CopyProperty(InteractObjectBase oldobject)
-    {
-        //î•ñ‚ÌƒRƒs[
-        NowInteract =  oldobject.GetComponent<InteractObjectBase>().NowInteract;
-=======
     protected void OnTriggerStay2D(Collider2D collision)
     {
         PlayerBase.GetItemInformation((int)NowInteract);
@@ -55,6 +44,5 @@ public class InteractObjectBase : MonoBehaviour
     public virtual void CopyProperty(InteractObjectBase oldobject)
     {
         NowInteract = oldobject.GetComponent<InteractObjectBase>().NowInteract;
->>>>>>> 419166b7b746de499991cf9d8b9dc22edb7ca33e
     }
 }

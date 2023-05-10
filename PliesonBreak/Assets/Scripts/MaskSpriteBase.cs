@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MaskSpriteBase : MonoBehaviour
 {
-    [SerializeField, Range(0.5f, 1.25f)] float Scale;  // プレイヤーの視界の大きさ.
+    [SerializeField, Range(0.5f, 1.25f)] float ViewScale;  // プレイヤーの視界の大きさ.
 
     void Start()
     {
@@ -21,6 +21,6 @@ public class MaskSpriteBase : MonoBehaviour
     /// プレイヤーの視界変更.
     /// </summary>
     public void ChangeView() {
-        transform.localScale = new Vector3(Scale, Scale, Scale);
+        transform.localScale = new Vector3(ViewScale, ViewScale, ViewScale);
     }
 }

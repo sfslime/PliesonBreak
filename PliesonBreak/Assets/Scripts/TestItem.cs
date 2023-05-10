@@ -40,7 +40,7 @@ public class TestItem : MonoBehaviour
             var obj = Instantiate(ItemPrefab, pos, Quaternion.identity);
             obj.transform.parent = PointLists.transform;
             Point = obj;
-            obj.GetComponent<cSearchPoint>().SetDropItem(obj.GetComponent<cSearchPoint>());
+            obj.GetComponent<SearchPoint>().SetDropItem(obj.GetComponent<SearchPoint>());
         }
     }
 
@@ -50,23 +50,23 @@ public class TestItem : MonoBehaviour
     /// </summary>
     public void TestUsePush()
     {
-        if (!Point.GetComponent<cSearchPoint>().GetSearchState())
+        if (!Point.GetComponent<SearchPoint>().GetSearchState())
         {
             StartCoroutine(TestSearch());
         }
         else
         {
             Debug.Log("test:íTçıíÜé~");
-            Point.GetComponent<cSearchPoint>().StopSearch();
+            Point.GetComponent<SearchPoint>().StopSearch();
         }
     }
 
     IEnumerator TestSearch()
     {
-        if (Point.GetComponent<cSearchPoint>().GetSearchState())
+        if (Point.GetComponent<SearchPoint>().GetSearchState())
         {
             Debug.Log("test:íTçıäJén");
-            yield return StartCoroutine(Point.GetComponent<cSearchPoint>().SearchStart(1));
+            yield return StartCoroutine(Point.GetComponent<SearchPoint>().SearchStart(1));
             Debug.Log("test:íTçıèIóπ");
         }
     }

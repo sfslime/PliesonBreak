@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class cSearchPoint : InteractObjectBase
+public class SearchPoint : InteractObjectBase
 {
     //保持している、探索後に出現させるアイテム
     private InteractObjectBase DropItem;

@@ -28,8 +28,9 @@ public class InteractObjectBase : MonoBehaviour
         
     }
 
-    public virtual void CopyProperty(InteractObjectBase newobject)
+    public virtual void CopyProperty(InteractObjectBase oldobject)
     {
         //î•ñ‚ÌƒRƒs[
+        NowInteract =  oldobject.GetComponent<InteractObjectBase>().NowInteract;
     }
 }

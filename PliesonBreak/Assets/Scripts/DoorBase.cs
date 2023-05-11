@@ -10,7 +10,6 @@ public class DoorBase : InteractObjectBase
     {
         SetUp();
         Collider2D = GetComponent<Collider2D>();
-        NowInteract = InteractObjs.Door;
     }
 
     // Update is called once per frame

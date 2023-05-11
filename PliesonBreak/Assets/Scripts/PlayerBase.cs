@@ -127,7 +127,6 @@ public class PlayerBase : MonoBehaviour
         {
             isEscapeItem[1] = true;
             Debug.Log("脱出アイテム2を入手");
-           
         }
     }
 
@@ -145,14 +144,7 @@ public class PlayerBase : MonoBehaviour
                 Debug.Log("ドアが開いた");
                 Door.DoorOpen(true);
             }
-            else if (isEscapeItem[0] == true)
-            {
-
-            }
-            else if (isEscapeItem[1] == true)
-            {
-
-            }
+   
         }
 
         /// <summary>

@@ -14622,22 +14622,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!20 &1532667448 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2658396639057297139, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-  m_PrefabInstance: {fileID: 1021958374}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1574552619 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-  m_PrefabInstance: {fileID: 1021958374}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9be6c39237081c42b5273fb72cca5e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1595408556
 GameObject:
   m_ObjectHideFlags: 0
@@ -14804,6 +14788,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sercth
       objectReference: {fileID: 0}
+    - target: {fileID: 762486187142702149, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
+      propertyPath: m_TagString
+      value: InteractObject
+      objectReference: {fileID: 0}
     - target: {fileID: 762486187142702151, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -14919,7 +14907,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1532667448}
+  m_Camera: {fileID: 826722765}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -15036,7 +15024,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1574552619}
+      - m_Target: {fileID: 1392295875}
         m_TargetAssemblyTypeName: PlayerBase, Assembly-CSharp
         m_MethodName: PushInteractButton
         m_Mode: 1

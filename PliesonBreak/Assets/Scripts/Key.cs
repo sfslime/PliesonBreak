@@ -8,7 +8,6 @@ public class Key : InteractObjectBase
     void Start()
     {
         SetUp();
-        NowInteract = InteractObjs.Key;
     }
 
     // Update is called once per frame

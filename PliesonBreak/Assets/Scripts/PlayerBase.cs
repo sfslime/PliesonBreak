@@ -105,9 +105,11 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        StartCoroutine("Search");
-
-        if (ObjID == (int)InteractObjectBase.InteractObjs.Key)
+        if (ObjID == (int)InteractObjectBase.InteractObjs.Search)
+        {
+            StartCoroutine("Search");
+        }
+        else if (ObjID == (int)InteractObjectBase.InteractObjs.Key)
         {
             isGetKey = true;
             Debug.Log("Œ®‚ð“üŽè");

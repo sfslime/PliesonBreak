@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1775186232}
+  - component: {fileID: 580606341103868252}
   - component: {fileID: 1775186231}
   - component: {fileID: 1775186233}
   m_Layer: 0
@@ -18,8 +18,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1775186232
-Transform:
+--- !u!224 &580606341103868252
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -33,6 +33,11 @@ Transform:
   m_Father: {fileID: 2658396639101774395}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!331 &1775186231
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -96,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6956f242aa1db4d9abe76ce07a5554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scale: 1.195
+  ViewScale: 0
 --- !u!1 &2658396639057297136
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +240,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2658396639057296909}
-  - {fileID: 1775186232}
+  - {fileID: 580606341103868252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -442,5 +447,7 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   Door: {fileID: 0}
   InteractObjectBase: {fileID: 0}
+  SearchPoint: {fileID: 0}
   isGetKey: 0
+  isSearch: 0
   isEscapeItem: 0000

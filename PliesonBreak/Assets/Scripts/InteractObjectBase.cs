@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractObjectBase : MonoBehaviour
 {
-    PlayerBase PlayerBase;
+    protected PlayerBase PlayerBase;
     public  enum InteractObjs
     {
         None,
@@ -25,7 +25,6 @@ public class InteractObjectBase : MonoBehaviour
     void Start()
     {
         SetUp();
-        NowInteract = InteractObjs.None;
     }
 
     void Update()

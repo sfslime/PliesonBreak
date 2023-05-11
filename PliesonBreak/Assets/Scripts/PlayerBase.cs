@@ -14,20 +14,13 @@ public class PlayerBase : MonoBehaviour
     public UIManagerBase UIManager;  // UIを管理するマネージャー.
     [SerializeField] DoorBase Door;
     [SerializeField] InteractObjectBase InteractObjectBase;
+    [SerializeField] SearchPoint SearchPoint;
     int ObjID;                      // 現在重なっているオブジェクトの情報を取得.
     public bool isGetKey;           // 鍵を持っているか.
+    [SerializeField]bool isSearch;                  // インタラクトしているかどうか
 
     [SerializeField] List<bool> isEscapeItem;
 
-
-    enum InteractObjIDs
-    {
-        None,
-        Key,
-        EscapeItem1,
-        EscapeItem2,
-        Door,
-    }
 
     #endregion
 
@@ -86,12 +79,15 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerMove()
     {
-        var MoveVector = InputAction.ReadValue<Vector2>();
+        if(isSearch != true)
+        {
+            var MoveVector = InputAction.ReadValue<Vector2>();
 
-        Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
+            Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
 
 
-        // Debug.Log(MoveVector);
+            // Debug.Log(MoveVector);
+        }
     }
 
     /// <summary>
@@ -109,25 +105,28 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        if (ObjID == (int)InteractObjIDs.Key)
+        if (ObjID == (int)InteractObjectBase.InteractObjs.Search)
+        {
+            StartCoroutine("Search");
+        }
+        else if (ObjID == (int)InteractObjectBase.InteractObjs.Key)
         {
             isGetKey = true;
             Debug.Log("鍵を入手");
         }
-        else if (ObjID == 2)
+        else if (ObjID == (int)InteractObjectBase.InteractObjs.Door)
         {
             PlayerHaveKey();
         }
-        else if (ObjID == 3)
+        else if (ObjID == (int)InteractObjectBase.InteractObjs.EscapeItem1)
         {
             isEscapeItem[0] = true;
             Debug.Log("脱出アイテム1を入手");
         }
-        else if (ObjID == 4)
+        else if (ObjID == (int)InteractObjectBase.InteractObjs.EscapeItem2)
         {
             isEscapeItem[1] = true;
             Debug.Log("脱出アイテム2を入手");
-           
         }
     }
 
@@ -145,14 +144,7 @@ public class PlayerBase : MonoBehaviour
                 Debug.Log("ドアが開いた");
                 Door.DoorOpen(true);
             }
-            else if (isEscapeItem[0] == true)
-            {
-
-            }
-            else if (isEscapeItem[1] == true)
-            {
-
-            }
+   
         }
 
         /// <summary>
@@ -166,5 +158,11 @@ public class PlayerBase : MonoBehaviour
                 UIManager.IsInteractButton(true);
             }
         }
-    
+
+    IEnumerator Search()
+    {
+        isSearch = true;
+        yield return StartCoroutine(SearchPoint.SearchStart(1));
+        isSearch = false;
+    }
 }

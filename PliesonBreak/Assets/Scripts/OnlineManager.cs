@@ -40,6 +40,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
         // ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
         var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
         Player = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        PhotonNetwork.Instantiate("maru", position, Quaternion.identity);
         isJoin = true;
         mes = Player.transform.Find("Mes").gameObject.GetComponent<TextMesh>();
     }

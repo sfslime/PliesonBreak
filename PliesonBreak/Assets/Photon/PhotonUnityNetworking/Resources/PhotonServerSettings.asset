@@ -40,6 +40,13 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPCtest
+  - DropItem
+  - RPCDropItem
+  - NullDrop
+  - NullDropSet
+  - RPCNullDropSet
+  - RPCEndInteract
+  - RPCDestroy
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

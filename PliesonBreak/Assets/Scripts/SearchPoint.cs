@@ -7,6 +7,7 @@ public class SearchPoint : InteractObjectBase
 {
     //保持している、探索後に出現させるアイテム
     private InteractObjectBase DropItem;
+    private InteractObjs DropItemID;
     //テストで、出したいアイテムがある場合セットする
     [SerializeField,Tooltip("テストで出したいアイテムがある場合")] InteractObjectBase TestDropItem;
     //生成するアイテムプレファブのリスト
@@ -17,6 +18,8 @@ public class SearchPoint : InteractObjectBase
     bool isCoroutineStop;
     //探索中かどうか
     bool isNowSearch;
+    //他ユーザーとのリンクスクリプト
+
 
     // Start is called before the first frame update
     void Start()
@@ -64,21 +67,33 @@ public class SearchPoint : InteractObjectBase
             Timer += Time.deltaTime;
             yield return null;
         }
+
+        //アイテムの出現
+        InstantiateItem();
+
         Debug.Log("point:探索時間終了");
-        if(DropItem != null)
+        
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// アイテムを出現させる
+    /// </summary>
+    public void InstantiateItem()
+    {
+        if (DropItem != null && DropItemID != InteractObjs.NullDrop)
         {
 
-            //var Obj = Instantiate(InteractObjectList[/*オブジェクトのID*/],transform.position,transform.rotation);
-            //Obj.GetComponent<InteractObject>().CopyProperty(DropItem);
+            var Obj = Instantiate(InteractObjectPrefabList[(int)DropItemID], transform.position, transform.rotation);
+            Obj.GetComponent<InteractObjectBase>().CopyProperty(DropItem);
             //あたり演出
-            Debug.Log("point:アイテムドロップ>"+DropItem.GetComponent<InteractObjectBase>().name);
+            Debug.Log("point:アイテムドロップ>" + DropItem.GetComponent<InteractObjectBase>().name);
         }
         else
         {
             //はずれ演出
             Debug.Log("point:アイテムなし");
         }
-        Destroy(gameObject);
     }
 
     /// <summary>
@@ -108,10 +123,20 @@ public class SearchPoint : InteractObjectBase
     public void SetDropItem(InteractObjectBase interactobj)
     {
         DropItem = interactobj;
+        DropItemID = interactobj.NowInteract;
 
         //if(DropItem/*所持ID*/ == InteractObjs.None)
         //{
         //    Destroy(gameobject);
         //}
+    }
+
+    /// <summary>
+    /// 他ユーザーの探索終了などの理由で中のアイテムを変更、または消去する
+    /// </summary>
+    /// <param name="interactObject"></param>
+    public void ChangeDropItem(InteractObjectBase interactObject)
+    {
+        DropItem = interactObject;
     }
 }

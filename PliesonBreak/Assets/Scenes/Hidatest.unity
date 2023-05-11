@@ -8477,7 +8477,9 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   Door: {fileID: 1481800389}
   InteractObjectBase: {fileID: 1481800389}
+  SearchPoint: {fileID: 0}
   isGetKey: 0
+  isSearch: 0
   isEscapeItem: 0000
 --- !u!4 &1392295877 stripped
 Transform:

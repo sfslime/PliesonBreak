@@ -8,8 +8,7 @@ public class NameControl : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        if (!photonView.IsMine) return;
-        GetComponent<TextMesh>().text = PhotonNetwork.NickName;
+        GetComponent<TextMesh>().text = photonView.Owner.NickName;
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
@@ -11,6 +12,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
     [SerializeField] string Name;
     bool isJoin;
     [SerializeField] InputAction InputAction;
+    //[SerializeField] Inpu
 
     private void Start()
     {

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -5,14 +7,16 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
-public class OnlineManager : MonoBehaviourPunCallbacks
+public class OnlineManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     GameObject Player;
     [SerializeField] float Speed;
     [SerializeField] string Name;
     bool isJoin;
     [SerializeField] InputAction InputAction;
-    //[SerializeField] Inpu
+    [SerializeField] Text SendMessage;
+    [SerializeField] Text Message;
+    string mes;
 
     private void Start()
     {
@@ -35,7 +39,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
     {
         // ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
         var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
-        Player =  PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        Player = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
         isJoin = true;
     }
 
@@ -50,5 +54,19 @@ public class OnlineManager : MonoBehaviourPunCallbacks
         pos.y += MoveVector.y * Speed * Time.deltaTime;
 
         Player.transform.position = pos;
+    }
+
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            mes = SendMessage.text;
+            stream.SendNext(mes);
+        }
+        else
+        {
+            mes = (string)stream.ReceiveNext();
+            Message.text = mes;
+        }
     }
 }

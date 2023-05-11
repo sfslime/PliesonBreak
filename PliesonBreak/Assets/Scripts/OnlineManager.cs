@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
-public class OnlineManager : MonoBehaviourPunCallbacks, IPunObservable
+public class OnlineManager : MonoBehaviourPunCallbacks
 {
     GameObject Player;
     [SerializeField] float Speed;
@@ -56,17 +56,5 @@ public class OnlineManager : MonoBehaviourPunCallbacks, IPunObservable
         Player.transform.position = pos;
     }
 
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            mes = SendMessage.text;
-            stream.SendNext(mes);
-        }
-        else
-        {
-            mes = (string)stream.ReceiveNext();
-            Message.text = mes;
-        }
-    }
+    
 }

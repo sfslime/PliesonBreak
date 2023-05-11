@@ -277,7 +277,6 @@ GameObject:
   - component: {fileID: 1842146444838753971}
   - component: {fileID: 5657016293990993192}
   - component: {fileID: 9083932891023127786}
-  - component: {fileID: 3222387302524057567}
   m_Layer: 0
   m_Name: Mes
   m_TagString: Untagged
@@ -364,15 +363,3 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &3222387302524057567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7371149648832181300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42a97f9b411058f4cb66e00302003a51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

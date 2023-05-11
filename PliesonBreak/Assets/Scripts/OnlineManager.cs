@@ -16,7 +16,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
     [SerializeField] InputAction InputAction;
     [SerializeField] Text SendMessage;
     [SerializeField] Text Message;
-    string mes;
+    TextMesh mes;
 
     private void Start()
     {
@@ -41,6 +41,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
         var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
         Player = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
         isJoin = true;
+        mes = Player.transform.Find("Mes").gameObject.GetComponent<TextMesh>();
     }
 
     void Update()
@@ -54,6 +55,8 @@ public class OnlineManager : MonoBehaviourPunCallbacks
         pos.y += MoveVector.y * Speed * Time.deltaTime;
 
         Player.transform.position = pos;
+
+        mes.text = SendMessage.text;
     }
 
     

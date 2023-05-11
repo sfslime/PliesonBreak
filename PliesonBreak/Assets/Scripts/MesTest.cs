@@ -9,6 +9,7 @@ public class MesTest : MonoBehaviourPunCallbacks, IPunObservable
 {
     string mes;
     [SerializeField] TextMesh mesText;
+    [SerializeField] LinkDoor LinkDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +26,12 @@ public class MesTest : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
+            LinkDoor.CallRPC();
             stream.SendNext(mesText.text);
         }
         else
         {
+            LinkDoor.CallRPC();
             mesText.text = (string)stream.ReceiveNext();
         }
     }

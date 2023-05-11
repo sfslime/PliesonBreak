@@ -15269,6 +15269,10 @@ PrefabInstance:
       propertyPath: NowInteract
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_Name
       value: TilemapDoor

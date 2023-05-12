@@ -45,6 +45,7 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
             photonView.RPC(nameof(RPCDestroy), RpcTarget.Others);
         }
         //破壊しない処理では他プレイヤーに送信するものはなく、探索したプレイヤーでのみ破壊される
+        //※falseの場合、中身がNullDropであることが確定している
     }
 
     /// <summary>

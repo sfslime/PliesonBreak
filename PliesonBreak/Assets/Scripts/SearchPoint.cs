@@ -19,7 +19,9 @@ public class SearchPoint : InteractObjectBase
     //探索中かどうか
     bool isNowSearch;
     //他ユーザーとのリンクスクリプト
-
+    SearchPointLink SearchPointLink;
+    //空のドロップの場合、他のプレイヤーでも破壊するか
+    [SerializeField, Tooltip("空ドロップの際、他プレイヤーでの破壊設定")] bool isDestroy;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,9 @@ public class SearchPoint : InteractObjectBase
         NowInteract = InteractObjs.Search;
         isNowSearch = false;
         isCoroutineStop = false;
+
+        SearchPointLink = GetComponent<SearchPointLink>();
+        if (SearchPointLink == null) Debug.Log("point:SearchPointLink not found");
 
         if(TestDropItem != null)
         {
@@ -70,6 +75,9 @@ public class SearchPoint : InteractObjectBase
 
         //アイテムの出現
         InstantiateItem();
+
+        //他プレイヤーに探索終了を送信
+        SearchPointLink.EndInteract(DropItem != null && DropItemID != InteractObjs.NullDrop || isDestroy);
 
         Debug.Log("point:探索時間終了");
         

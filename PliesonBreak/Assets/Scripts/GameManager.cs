@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
 
+    [SerializeField,Tooltip("アイテム変更用画像")] List<Sprite> InteractSprits = new List<Sprite>();
+
     #endregion
 
     #region マネージャー変数
@@ -131,6 +133,11 @@ public class GameManager : MonoBehaviour
 
         ReleaseErea = EreaNm;
         StartCoroutine(EreaReleaseEffect(EreaNm));
+    }
+
+    public Sprite ReturnSprite(InteractObjectBase.InteractObjs ObjID)
+    {
+        return InteractSprits[(int)ObjID];
     }
 
 

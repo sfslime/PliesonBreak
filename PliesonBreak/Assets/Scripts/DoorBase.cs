@@ -8,7 +8,6 @@ public class DoorBase : InteractObjectBase
 
     void Start()
     {
-        SetUp();
         Collider2D = GetComponent<Collider2D>();
     }
 

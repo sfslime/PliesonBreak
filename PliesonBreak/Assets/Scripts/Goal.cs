@@ -7,7 +7,7 @@ public class Goal : InteractObjectBase
     // Start is called before the first frame update
     void Start()
     {
-        SetUp();
+       
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class Goal : InteractObjectBase
     /// <summary>
     /// ゴールしたときの処理.
     /// </summary>
-    void PlayerGoal()
+    public void PlayerGoal()
     {
         Debug.Log("ゴールしました！！");
     }

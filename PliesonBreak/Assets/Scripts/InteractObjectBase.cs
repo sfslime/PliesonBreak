@@ -20,7 +20,7 @@ public class InteractObjectBase : MonoBehaviour
     public InteractObjs NowInteract;
     protected void SetUp()
     {
-        PlayerBase = GameObject.Find("PlayerSprite").GetComponent<PlayerBase>();
+      
     }
     void Start()
     {
@@ -33,6 +33,7 @@ public class InteractObjectBase : MonoBehaviour
     }
     protected void OnTriggerStay2D(Collider2D collision)
     {
+        PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
         PlayerBase.GetItemInformation((int)NowInteract);
     }
 

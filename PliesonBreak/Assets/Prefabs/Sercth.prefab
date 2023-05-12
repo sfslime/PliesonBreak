@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 762486187142702144}
   - component: {fileID: -7010743200776983621}
   - component: {fileID: -402427164621693920}
+  - component: {fileID: 1770666600}
   m_Layer: 0
   m_Name: Sercth
-  m_TagString: Untagged
+  m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +121,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NowInteract: 0
-  TestDropItem: {fileID: 0}
-  InteractObjectPrefabList: []
+  TestDropItem: {fileID: 3133997238768261919, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  InteractObjectPrefabList:
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
   DefaltSearchTime: 3
 --- !u!58 &-402427164621693920
 CircleCollider2D:
@@ -139,3 +149,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
+--- !u!114 &1770666600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762486187142702149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4208ff8f8ce18e44892ef667f2f53cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NowInteract: 4

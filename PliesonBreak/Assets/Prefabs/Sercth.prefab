@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 762486187142702144}
   - component: {fileID: -7010743200776983621}
   - component: {fileID: -402427164621693920}
-  - component: {fileID: 1770666600}
+  - component: {fileID: -1620707367478991099}
+  - component: {fileID: -2084778826834602786}
   m_Layer: 0
   m_Name: Sercth
   m_TagString: InteractObject
@@ -121,18 +122,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NowInteract: 0
-  TestDropItem: {fileID: 3133997238768261919, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  TestDropItem: {fileID: 3133997238768261919, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
   InteractObjectPrefabList:
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
-  - {fileID: 3133997238768261890, guid: bd24cd6894470e748b0358e19c3c8476, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
   DefaltSearchTime: 3
+  isDestroy: 0
 --- !u!58 &-402427164621693920
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -149,7 +151,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
---- !u!114 &1770666600
+--- !u!114 &-1620707367478991099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +160,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 762486187142702149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4208ff8f8ce18e44892ef667f2f53cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 41f6f5edc53deab429290457b7236a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NowInteract: 4
+  OriginSearchPoint: {fileID: 0}
+--- !u!114 &-2084778826834602786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762486187142702149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

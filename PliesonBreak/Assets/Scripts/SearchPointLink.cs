@@ -4,6 +4,16 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+/*
+探索ポイントをオンライン化するスクリプト
+探索ポイントでオンライン化する必要があるのは
+・探索を終え、アイテムが出現する
+・終わった探索を中止し、破壊する
+・空のアイテムの場合、設定によって空のまま残す（技術的な問題でアイテムがある場合はこのポイントを破壊する必要がある）
+であり、探索ポイントでは探索終了時に
+EndIntearact関数を呼ぶ
+ */
+
 public class SearchPointLink : MonoBehaviourPunCallbacks
 {
     [SerializeField] SearchPoint OriginSearchPoint;

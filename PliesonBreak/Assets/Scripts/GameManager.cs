@@ -61,7 +61,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
 
-    [SerializeField,Tooltip("アイテム変更用画像")] List<Sprite> InteractSprits = new List<Sprite>();
+    [SerializeField, Header("アイテム関係"), Tooltip("アイテム変更用画像")] List<Sprite> InteractSprits = new List<Sprite>();
+
+    [SerializeField, Tooltip("アイテム出現用プレファブ")] List<GameObject> interactObjectPrefabs = new List<GameObject>();
 
     #endregion
 
@@ -135,9 +137,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(EreaReleaseEffect(EreaNm));
     }
 
+    /// <summary>
+    /// アイテムの画像変更用に引数に応じてスプライトを返す
+    /// </summary>
+    /// <param name="ObjID"></param>
+    /// <returns></returns>
     public Sprite ReturnSprite(InteractObjectBase.InteractObjs ObjID)
     {
         return InteractSprits[(int)ObjID];
+    }
+
+    /// <summary>
+    /// アイテム出現用に引数に応じてゲームオブジェクトを返す
+    /// </summary>
+    /// <param name="ObjectID"></param>
+    /// <returns></returns>
+    public GameObject GetObjectPrefab(InteractObjectBase.InteractObjs ObjectID)
+    {
+        return interactObjectPrefabs[(int)ObjectID];
     }
 
 

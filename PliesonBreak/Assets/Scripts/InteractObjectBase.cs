@@ -33,6 +33,7 @@ public class InteractObjectBase : MonoBehaviour
     }
     protected void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.tag != "Player") return;
         PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
         PlayerBase.GetItemInformation((int)NowInteract);
     }

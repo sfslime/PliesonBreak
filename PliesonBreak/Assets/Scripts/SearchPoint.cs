@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SearchPoint : InteractObjectBase
 {
+    //ゲームマネージャーのインスタンス
+    private GameManager GameManager;
     //保持している、探索後に出現させるアイテム
     private InteractObjectBase DropItem;
     private InteractObjs DropItemID;
     //テストで、出したいアイテムがある場合セットする
     [SerializeField,Tooltip("テストで出したいアイテムがある場合")] InteractObjectBase TestDropItem;
-    //生成するアイテムプレファブのリスト
-    [SerializeField] List<GameObject> InteractObjectPrefabList = new List<GameObject>();
     //標準探索時間。秒単位で記述
     [SerializeField,Range(1f,10f)] float DefaltSearchTime;
     //コルーチンのストップフラグ
@@ -29,6 +29,9 @@ public class SearchPoint : InteractObjectBase
         NowInteract = InteractObjs.Search;
         isNowSearch = false;
         isCoroutineStop = false;
+
+        GameManager = GameManager.GameManagerInstance;
+        if (GameManager == null) Debug.Log("GameManagerInstance not found");
 
         SearchPointLink = GetComponent<SearchPointLink>();
         if (SearchPointLink == null) Debug.Log("point:SearchPointLink not found");
@@ -84,14 +87,22 @@ public class SearchPoint : InteractObjectBase
     }
 
     /// <summary>
+    /// テスト用サーチ
+    /// </summary>
+    public void TestSearch()
+    {
+        StartCoroutine(SearchStart(1));
+    }
+
+    /// <summary>
     /// アイテムを出現させる
     /// </summary>
     public void InstantiateItem()
     {
         if (DropItem != null && DropItemID != InteractObjs.NullDrop)
         {
-
-            var Obj = Instantiate(InteractObjectPrefabList[(int)DropItemID], transform.position, transform.rotation);
+            //ゲームマネージャーからプレファブを取得し、情報を新しいオブジェクトに反映する
+            var Obj = Instantiate(GameManager.GetObjectPrefab(DropItemID), transform.position, transform.rotation);
             Obj.GetComponent<InteractObjectBase>().CopyProperty(DropItem);
             //あたり演出
             Debug.Log("point:アイテムドロップ>" + DropItem.GetComponent<InteractObjectBase>().name);

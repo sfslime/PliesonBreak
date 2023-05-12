@@ -8234,6 +8234,7 @@ MonoBehaviour:
     EffectSE: {fileID: 0}
     SEvolume: 0
     EffectPanel: {fileID: 0}
+  InteractSprits: []
 --- !u!4 &1373032243
 Transform:
   m_ObjectHideFlags: 0
@@ -8478,8 +8479,11 @@ MonoBehaviour:
   Door: {fileID: 1481800389}
   InteractObjectBase: {fileID: 1481800389}
   SearchPoint: {fileID: 0}
+  Goal: {fileID: 0}
+  PlayerHaveItem: 0
   isGetKey: 0
   isSearch: 0
+  isGetEscapeItem: 
   isEscapeItem: 0000
 --- !u!4 &1392295877 stripped
 Transform:
@@ -14785,6 +14789,10 @@ PrefabInstance:
     - target: {fileID: -7010743200776983621, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: TestDropItem
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -2084778826834602786, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
+      propertyPath: sceneViewId
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 762486187142702149, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_Name

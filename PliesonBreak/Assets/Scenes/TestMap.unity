@@ -7972,6 +7972,7 @@ MonoBehaviour:
     EffectSE: {fileID: 0}
     SEvolume: 0
     EffectPanel: {fileID: 0}
+  InteractSprits: []
 --- !u!4 &1373032243
 Transform:
   m_ObjectHideFlags: 0
@@ -14376,6 +14377,10 @@ PrefabInstance:
       propertyPath: TestDropItem
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -2084778826834602786, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 762486187142702149, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_Name
       value: Sercth
@@ -14855,6 +14860,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: NowInteract
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}

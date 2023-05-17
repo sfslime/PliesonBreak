@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 857ce0b4b40dd5045b78a95f26b98171
+=======
 guid: bd24cd6894470e748b0358e19c3c8476
+>>>>>>> origin/develop/Saitou/Interact
 PrefabImporter:
   externalObjects: {}
   userData: 

@@ -24,8 +24,6 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] List<bool> isGetEscapeItem;  // 脱出アイテムを持っているか.
     [SerializeField] List<bool> isEscapeItem;     // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
-    
-
     #endregion
 
     /// <summary>
@@ -97,7 +95,6 @@ public class PlayerBase : MonoBehaviour
     /// <summary>
     /// 現在触れているオブジェクトの情報を取得.
     /// </summary>
-    /// <param name="collision"></param>
     public void GetItemInformation(int InteractObjID)
     {
         ObjID = InteractObjID;
@@ -200,3 +197,4 @@ public class PlayerBase : MonoBehaviour
         isSearch = false;
     }
 }
+

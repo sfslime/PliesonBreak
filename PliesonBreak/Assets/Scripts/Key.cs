@@ -7,7 +7,7 @@ public class Key : InteractObjectBase
     // Start is called before the first frame update
     void Start()
     {
-        SetUp();
+       
     }
 
     // Update is called once per frame

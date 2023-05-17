@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class InteractObjectBase : MonoBehaviour
 {
+    // ‚â‚é‚±‚Æ
+    //Player > ˆø”oldId.
+    //GameManager‚©‚çoldID‚Ì‰æ‘œ‚ğæ“¾.
+    //oldId‚Å‰æ‘œ‚Ì·‚µ‘Ö‚¦‚ğ‚·‚é.
+    //–ß‚è’l‚ÅV‚µ‚¢ID‚ğPlayer‚É•Ô‚·.
+
+
     protected PlayerBase PlayerBase;
+    protected GameManager GameManager;
     public  enum InteractObjs
     {
         None,
@@ -18,13 +26,10 @@ public class InteractObjectBase : MonoBehaviour
     }
 
     public InteractObjs NowInteract;
-    protected void SetUp()
-    {
-      
-    }
+
     void Start()
     {
-        SetUp();
+        
     }
 
     void Update()
@@ -44,5 +49,10 @@ public class InteractObjectBase : MonoBehaviour
     public virtual void CopyProperty(InteractObjectBase oldobject)
     {
         NowInteract = oldobject.GetComponent<InteractObjectBase>().NowInteract;
+    }
+
+    public void RequestSprite()
+    {
+        GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
     }
 }

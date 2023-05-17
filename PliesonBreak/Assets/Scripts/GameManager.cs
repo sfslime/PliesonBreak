@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     class ReleaseEffectSetting
     {
-        [Range(1,5)] public float ActiveTime;
+        [Range(1, 5)] public float ActiveTime;
         public float FontSize;
         public AudioClip EffectSE;
         public float SEvolume;
@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
+
+    [SerializeField] List<Sprite> InteractSprits = new List<Sprite>();
 
     #endregion
 
@@ -125,12 +127,17 @@ public class GameManager : MonoBehaviour
         //正常に空いているかを判定
         if (ReleaseErea + 1 != EreaNm)
         {
-            Debug.Log("EreaNm Error!"); 
+            Debug.Log("EreaNm Error!");
             return;
         }
 
         ReleaseErea = EreaNm;
         StartCoroutine(EreaReleaseEffect(EreaNm));
+    }
+
+    public Sprite ReturnSprite(InteractObjectBase.InteractObjs ObjID)
+    {
+        return InteractSprits[(int)ObjID];
     }
 
 
@@ -179,9 +186,9 @@ public class GameManager : MonoBehaviour
         GameStart();
     }
 
-    
+
     void Update()
     {
-        
+
     }
 }

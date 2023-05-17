@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class SearchPoint : InteractObjectBase
 {
     //保持している、探索後に出現させるアイテム

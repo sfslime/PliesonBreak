@@ -49,6 +49,7 @@ MonoBehaviour:
   - RPCDestroy
   - RPCChangeSprite
   - RPCChangeItem
+  - RPCAnimLink
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

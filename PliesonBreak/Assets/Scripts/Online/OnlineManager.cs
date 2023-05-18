@@ -14,7 +14,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
     [SerializeField] string Name;
     bool isJoin;
     [SerializeField] InputAction InputAction;
-    [SerializeField] Text SendMessage;
+    //[SerializeField] Text SendMessage;
     [SerializeField] Text Message;
     TextMesh mes;
 
@@ -57,7 +57,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
 
         Player.transform.position = pos;
 
-        mes.text = SendMessage.text;
+        //mes.text = SendMessage.text;
     }
 
     

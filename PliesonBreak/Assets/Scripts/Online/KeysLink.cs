@@ -57,12 +57,12 @@ public class KeysLink : MonoBehaviourPunCallbacks
 
     /// <summary>
     /// アイテムを切り替える場合のオーバーロード
-    /// 新しい
+    /// 新しいアイテム情報を引数で取る
     /// </summary>
     /// <param name="ObjID"></param>
     public void StateLink(InteractObjectBase.InteractObjs ObjID)
     {
-
+        photonView.RPC(nameof(RPCChangeItem), RpcTarget.Others, ObjID);
     }
 
     /// <summary>

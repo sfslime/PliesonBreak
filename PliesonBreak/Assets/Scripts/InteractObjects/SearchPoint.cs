@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+アイテムを出現させる探索ポイント
+ゲームマネージャーとの併用必須
+探索は SearchStart をスタートコルーチンで呼ぶと探索終了時にリターンする
+探索前に必ず GetSearchState で他プレイヤーの探索状態を確認し、
+false の場合にのみ探索すること
+何らかの理由で探索中止する場合、StopSearch で中止する
+作成者：飛田
+ */
 
 public class SearchPoint : InteractObjectBase
 {
@@ -11,15 +20,15 @@ public class SearchPoint : InteractObjectBase
     private InteractObjectBase DropItem;
     private InteractObjs DropItemID;
     //テストで、出したいアイテムがある場合セットする
-    [SerializeField,Tooltip("テストで出したいアイテムがある場合")] InteractObjectBase TestDropItem;
+    [SerializeField,Tooltip("テストで出したいアイテムの設定済みスクリプト(必要な場合のみSet)")] InteractObjectBase TestDropItem;
     //標準探索時間。秒単位で記述
-    [SerializeField,Range(1f,10f)] float DefaltSearchTime;
+    [SerializeField,Range(1f,10f),Tooltip("デフォルトの探索時間(Set必須)")] float DefaltSearchTime;
     //コルーチンのストップフラグ
     bool isCoroutineStop;
     //探索中かどうか
     bool isNowSearch;
     //他ユーザーとのリンクスクリプト
-    SearchPointLink SearchPointLink;
+    private SearchPointLink SearchPointLink;
     //空のドロップの場合、他のプレイヤーでも破壊するか
     [SerializeField, Tooltip("空ドロップの際、他プレイヤーでの破壊設定")] bool isDestroy;
 
@@ -51,7 +60,7 @@ public class SearchPoint : InteractObjectBase
     /// <summary>
     /// この探索ポイントを探索開始する。呼び出し前に必ずGetSearchStateで探索確認を行う
     /// 呼び出す際はStartCroutineで呼び出し、リターンで終了が返ってくる。
-    /// 引数:addsearchtime,1を基準に探索時間を変化させる。例　0.9で早く、1.5で遅くなる
+    /// 引数:addsearchtime,1を基準に探索時間を変化させる。例　0.9で10%早く、1.5で50%遅くなる
     /// </summary>
     /// <param name="addsearchtime"></param>
     /// <returns></returns>

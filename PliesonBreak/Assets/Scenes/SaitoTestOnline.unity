@@ -8183,6 +8183,16 @@ MonoBehaviour:
     SEvolume: 0
     EffectPanel: {fileID: 0}
   InteractSprits: []
+  interactObjectPrefabs:
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
 --- !u!4 &1373032243
 Transform:
   m_ObjectHideFlags: 0
@@ -14429,6 +14439,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9be6c39237081c42b5273fb72cca5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1588409204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588409206}
+  - component: {fileID: 1588409205}
+  m_Layer: 0
+  m_Name: ConectServer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1588409205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588409204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ea560865bb51240bdbc6fdbf0999ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnConect:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJoinde:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &1588409206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588409204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.872437, y: 0.57075936, z: 0.030175833}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1696475330
 PrefabInstance:
   m_ObjectHideFlags: 0

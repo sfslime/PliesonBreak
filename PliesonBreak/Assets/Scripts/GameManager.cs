@@ -196,9 +196,14 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    void Start()
+    private void Awake()
     {
         Init();
+    }
+
+    void Start()
+    {
+        
         //ƒeƒXƒg
         GameStart();
     }

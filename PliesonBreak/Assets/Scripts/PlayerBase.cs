@@ -24,7 +24,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] List<bool> isGetEscapeItem;  // 脱出アイテムを持っているか.
     [SerializeField] List<bool> isEscapeItem;     // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
-    
+
 
     #endregion
 
@@ -135,25 +135,25 @@ public class PlayerBase : MonoBehaviour
             PlayerHaveItem--;
             Debug.Log("脱出アイテム2を入手");
         }
-        else if(ObjID== (int)InteractObjectBase.InteractObjs.EscapeObj)
+        else if (ObjID == (int)InteractObjectBase.InteractObjs.EscapeObj)
         {
-            
+
             if (isGetEscapeItem[0] == true && isEscapeItem[0] == false)
             {
                 isEscapeItem[0] = true;
                 PlayerHaveItem++;
             }
-            if(isGetEscapeItem[1] == true && isEscapeItem[1] == false)
+            if (isGetEscapeItem[1] == true && isEscapeItem[1] == false)
             {
                 isEscapeItem[1] = true;
                 PlayerHaveItem++;
             }
-            if(isGetEscapeItem[0] == true && isGetEscapeItem[1] == true)
+            if (isGetEscapeItem[0] == true && isGetEscapeItem[1] == true)
             {
                 Goal.PlayerGoal();
             }
         }
-        if(PlayerHaveItem <= 0)
+        if (PlayerHaveItem <= 0)
         {
             Debug.Log("これ以上アイテムを持てません");
         }

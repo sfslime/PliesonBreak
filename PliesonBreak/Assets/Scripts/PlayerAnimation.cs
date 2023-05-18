@@ -40,6 +40,15 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     /// <summary>
+    /// アニメーションを変更する
+    /// </summary>
+    /// <param name="anim"></param>
+    public void SetAnim(AnimCode anim)
+    {
+        if (isAnim) AnimState = anim;
+    }
+
+    /// <summary>
     /// Triggerが使えないため、boolのオンオフで代用
     /// trueにしたあと1フレーム後にfalseにする
     /// </summary>

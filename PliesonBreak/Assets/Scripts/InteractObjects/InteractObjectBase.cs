@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractObjectBase : MonoBehaviour
 {
     protected PlayerBase PlayerBase;
+    [SerializeField]protected GameManager GameManager;
     public  enum InteractObjs
     {
         None,
@@ -18,10 +19,14 @@ public class InteractObjectBase : MonoBehaviour
     }
 
     public InteractObjs NowInteract;
+    int SaveId;  // IDを保存しておく変数.
+
     protected void SetUp()
     {
-      
+        GameManager = GameManager.GameManagerInstance;
+        if (GameManager == null) Debug.Log("GameManagerInstance not found");
     }
+
     void Start()
     {
         SetUp();
@@ -33,9 +38,11 @@ public class InteractObjectBase : MonoBehaviour
     }
     protected void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
-        PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
-        PlayerBase.GetItemInformation((int)NowInteract);
+        if(collision.gameObject.tag == "Player")
+        {
+            PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
+            PlayerBase.GetItemInformation((int)NowInteract);
+        }
     }
 
     /// <summary>
@@ -45,5 +52,35 @@ public class InteractObjectBase : MonoBehaviour
     public virtual void CopyProperty(InteractObjectBase oldobject)
     {
         NowInteract = oldobject.GetComponent<InteractObjectBase>().NowInteract;
+    }
+
+    public void RequestSprite()
+    {
+        // ゲームマネージャーからスプライトの取得.
+        var Sprite = GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
+
+        // 自分のスプライトの変更.
+        
+
+        // 自分のIDを保存.
+        SaveId = (int)NowInteract;
+
+        // プレイヤーから貰ったIDに自分のIDを変更.
+        NowInteract = (InteractObjs)PlayerBase.HaveId;
+        
+
+        // プレイヤーに自分のIDを返す.
+        PlayerBase.ChangeHaveItem(SaveId);
+
+        Debug.Log("Save"+SaveId);
+
+    }
+
+    /// <summary>
+    /// 自身を消す関数.
+    /// </summary>
+    protected void Death(GameObject thisobj)
+    {
+        Destroy(thisobj);
     }
 }

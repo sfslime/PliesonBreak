@@ -37,25 +37,25 @@ public class OnlineManager : MonoBehaviourPunCallbacks
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
-        // ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
-        var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
-        Player = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
-        PhotonNetwork.Instantiate("maru", position, Quaternion.identity);
-        isJoin = true;
-        mes = Player.transform.Find("Mes").gameObject.GetComponent<TextMesh>();
+        //// ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
+        //var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+        //Player = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        //PhotonNetwork.Instantiate("maru", position, Quaternion.identity);
+        //isJoin = true;
+        //mes = Player.transform.Find("Mes").gameObject.GetComponent<TextMesh>();
     }
 
     void Update()
     {
-        if (!isJoin) return;
-        var pos = Player.transform.position;
+        //if (!isJoin) return;
+        //var pos = Player.transform.position;
 
-        var MoveVector = InputAction.ReadValue<Vector2>();
+        //var MoveVector = InputAction.ReadValue<Vector2>();
 
-        pos.x += MoveVector.x * Speed * Time.deltaTime;
-        pos.y += MoveVector.y * Speed * Time.deltaTime;
+        //pos.x += MoveVector.x * Speed * Time.deltaTime;
+        //pos.y += MoveVector.y * Speed * Time.deltaTime;
 
-        Player.transform.position = pos;
+        //Player.transform.position = pos;
 
         //mes.text = SendMessage.text;
     }

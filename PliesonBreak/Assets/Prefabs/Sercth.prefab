@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437eeb2b3349bb24b8103bc8d9f84db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
   NowInteract: 0
   TestDropItem: {fileID: 3133997238768261919, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
   InteractObjectPrefabList:

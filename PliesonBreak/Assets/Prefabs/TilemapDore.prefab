@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3523120399043837670}
   - component: {fileID: 6699197833226022569}
   - component: {fileID: 8025419951612197766}
+  - component: {fileID: 4749611954891189015}
   m_Layer: 0
   m_Name: TilemapDore
   m_TagString: Door
@@ -372,6 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5a49d81b5225548a40cadb428c44d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  KeysLink: {fileID: 0}
   NowInteract: 0
 --- !u!114 &8025419951612197766
 MonoBehaviour:
@@ -395,3 +398,16 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4749611954891189015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8417083808402987442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a1534773695f94382ccb8f8a2a6a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originObject: {fileID: 0}

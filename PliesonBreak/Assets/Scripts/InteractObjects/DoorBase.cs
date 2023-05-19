@@ -6,10 +6,15 @@ public class DoorBase : InteractObjectBase
 {
     Collider2D Collider2D;
 
+    //”ò“c’Ç‰Á•ª
+    private DoorLink DoorLink;
+    private bool isOpen;
+
     void Start()
     {
         SetUp();
         Collider2D = GetComponent<Collider2D>();
+        isOpen = false;
     }
 
     // Update is called once per frame
@@ -24,6 +29,7 @@ public class DoorBase : InteractObjectBase
     /// </summary>
     public void DoorOpen(bool isopendoor)
     {
+        if (isopendoor == isOpen) return;
         if(isopendoor == true)
         {
             Collider2D.enabled = false;
@@ -33,5 +39,8 @@ public class DoorBase : InteractObjectBase
         {
             Collider2D.enabled = true;
         }
+
+        isOpen = isopendoor;
+        DoorLink.DoorStateLink(isOpen);
     }
 }

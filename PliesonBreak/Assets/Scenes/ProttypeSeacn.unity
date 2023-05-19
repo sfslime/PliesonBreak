@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3133997238768261918, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3133997238768261918, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
       propertyPath: m_LocalPosition.x
@@ -246,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 762486187142702151, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 762486187142702151, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8078,7 +8078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 762486187142702151, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 762486187142702151, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8225,7 +8225,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  objname: Rogue_01
+  objname: PlayerLink
   Player: {fileID: 0}
 --- !u!1 &1386084060
 GameObject:
@@ -14562,6 +14562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
+  KeysLink: {fileID: 0}
   NowInteract: 7
 --- !u!61 &1920282386
 BoxCollider2D:

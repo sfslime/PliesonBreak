@@ -14,8 +14,6 @@ false の場合にのみ探索すること
 
 public class SearchPoint : InteractObjectBase
 {
-    //ゲームマネージャーのインスタンス
-    private GameManager GameManager;
     //保持している、探索後に出現させるアイテム
     private InteractObjectBase DropItem;
     private InteractObjs DropItemID;
@@ -39,9 +37,6 @@ public class SearchPoint : InteractObjectBase
         NowInteract = InteractObjs.Search;
         isNowSearch = false;
         isCoroutineStop = false;
-
-        GameManager = GameManager.GameManagerInstance;
-        if (GameManager == null) Debug.Log("GameManagerInstance not found");
 
         SearchPointLink = GetComponent<SearchPointLink>();
         if (SearchPointLink == null) Debug.Log("point:SearchPointLink not found");

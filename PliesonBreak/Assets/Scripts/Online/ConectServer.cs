@@ -10,10 +10,14 @@ public class ConectServer : MonoBehaviourPunCallbacks
     [Tooltip("サーバー接続時に呼ばれるイベント")] public UnityEvent OnConect;
     [Tooltip("ルーム参加時に呼ばれるイベント")] public UnityEvent OnJoinde;
     [SerializeField,Header("テスト")] string objname;
-    [SerializeField] GameObject player;
+    [SerializeField] GameObject Player;
+    private GameManager GameManagerInstance;
     // Start is called before the first frame update
     void Start()
     {
+        GameManagerInstance = GameManager.GameManagerInstance;
+        if (GameManagerInstance == null) Debug.Log("GameManagerInstance not found");
+        Player = GameManagerInstance.GetPlayer();
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -30,6 +34,7 @@ public class ConectServer : MonoBehaviourPunCallbacks
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
+        
         OnJoinde.Invoke();
         Debug.Log("Onjoin");
     }
@@ -43,7 +48,7 @@ public class ConectServer : MonoBehaviourPunCallbacks
     //テスト
     public void PopPlayer()
     {
-        var Link = PhotonNetwork.Instantiate(objname, player.transform.position, Quaternion.identity);
-        Link.GetComponent<PlayerLink>().SetOrigin(player);
+        var Link = PhotonNetwork.Instantiate(objname, Player.transform.position, Quaternion.identity);
+        Link.transform.GetComponent<PlayerLink>().SetOrigin(Player);
     }
 }

@@ -23,8 +23,8 @@ public class PlayerLink : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            SetOrigin(transform.parent.gameObject);
-            PlayerAnimation = OriginObject.GetComponent<PlayerAnimation>();
+            //SetOrigin(transform.parent.gameObject);
+            PlayerAnimation = GetComponent<PlayerAnimation>();
         }
     }
 
@@ -37,6 +37,7 @@ public class PlayerLink : MonoBehaviourPunCallbacks
     public void SetOrigin(GameObject OriginPlayer)
     {
         OriginObject = OriginPlayer;
+        transform.parent = OriginPlayer.transform;
     }
 
     public void AnimLink(AnimCode anim)

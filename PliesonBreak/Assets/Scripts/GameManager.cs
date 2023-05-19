@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("現在のゲームの状態")] GAMESTATUS GameStatus { get; set; }
 
-    [SerializeField, Tooltip("プレイヤークラス")] PlayerBase Player;
+    [SerializeField, Tooltip("プレイヤークラス(testでインスペクターから)")] GameObject Player;
 
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
@@ -155,6 +155,12 @@ public class GameManager : MonoBehaviour
     public GameObject GetObjectPrefab(InteractObjectBase.InteractObjs ObjectID)
     {
         return interactObjectPrefabs[(int)ObjectID];
+    }
+
+    public GameObject GetPlayer()
+    {
+        Debug.Log("おけ");
+        return Player;
     }
 
 

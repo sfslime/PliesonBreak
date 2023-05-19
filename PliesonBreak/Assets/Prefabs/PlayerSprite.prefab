@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6956f242aa1db4d9abe76ce07a5554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewScale: 0
+  ViewScale: 1.25
 --- !u!1 &2658396639057297136
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 1574552619}
   m_Layer: 0
   m_Name: PlayerSprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,7 +339,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9be6c39237081c42b5273fb72cca5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
+  Speed: 600
   InputAction:
     m_Name: Input
     m_Type: 0
@@ -448,6 +448,11 @@ MonoBehaviour:
   Door: {fileID: 0}
   InteractObjectBase: {fileID: 0}
   SearchPoint: {fileID: 0}
+  Goal: {fileID: 0}
+  ObjID: 0
+  HaveId: 0
+  PlayerHaveItem: 1
   isGetKey: 0
   isSearch: 0
+  isGetEscapeItem: 0000
   isEscapeItem: 0000

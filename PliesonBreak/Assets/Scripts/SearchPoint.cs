@@ -25,6 +25,7 @@ public class SearchPoint : InteractObjectBase
     // Start is called before the first frame update
     void Start()
     {
+        SetUp();
         NowInteract = InteractObjs.Search;
         isNowSearch = false;
         isCoroutineStop = false;

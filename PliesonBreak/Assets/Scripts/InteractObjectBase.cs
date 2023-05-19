@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class InteractObjectBase : MonoBehaviour
 {
-    // やること
-    //Player > 引数oldId.
-    //GameManagerからoldIDの画像を取得.
-    //oldIdで画像の差し替えをする.
-    //戻り値で新しいIDをPlayerに返す.
-
-
     protected PlayerBase PlayerBase;
-    protected GameManager GameManager;
+    [SerializeField]protected GameManager GameManager;
     public  enum InteractObjs
     {
         None,
@@ -26,10 +19,17 @@ public class InteractObjectBase : MonoBehaviour
     }
 
     public InteractObjs NowInteract;
+    int SaveId;  // IDを保存しておく変数.
+
+    protected void SetUp()
+    {
+        GameManager = GameManager.GameManagerInstance;
+        if (GameManager == null) Debug.Log("GameManagerInstance not found");
+    }
 
     void Start()
     {
-        
+        SetUp();
     }
 
     void Update()
@@ -38,8 +38,11 @@ public class InteractObjectBase : MonoBehaviour
     }
     protected void OnTriggerStay2D(Collider2D collision)
     {
-        PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
-        PlayerBase.GetItemInformation((int)NowInteract);
+        if(collision.gameObject.tag == "Player")
+        {
+            PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
+            PlayerBase.GetItemInformation((int)NowInteract);
+        }
     }
 
     /// <summary>
@@ -53,6 +56,31 @@ public class InteractObjectBase : MonoBehaviour
 
     public void RequestSprite()
     {
-        GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
+        // ゲームマネージャーからスプライトの取得.
+        var Sprite = GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
+
+        // 自分のスプライトの変更.
+        
+
+        // 自分のIDを保存.
+        SaveId = (int)NowInteract;
+
+        // プレイヤーから貰ったIDに自分のIDを変更.
+        NowInteract = (InteractObjs)PlayerBase.HaveId;
+        
+
+        // プレイヤーに自分のIDを返す.
+        PlayerBase.ChangeHaveItem(SaveId);
+
+        Debug.Log("Save"+SaveId);
+
+    }
+
+    /// <summary>
+    /// 自身を消す関数.
+    /// </summary>
+    protected void Death(GameObject thisobj)
+    {
+        Destroy(thisobj);
     }
 }

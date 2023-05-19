@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3133997238768261889}
   - component: {fileID: 3133997238768261888}
   - component: {fileID: 3133997238768261891}
-  - component: {fileID: 5094878181354890227}
+  - component: {fileID: 6206802636489908306}
   m_Layer: 0
-  m_Name: Key
+  m_Name: Key2
   m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 33cdcdf850c10a740898bfb000c75de0, type: 3}
-  m_Color: {r: 1, g: 0.89776754, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5dbb279ff6a089c46be8f02e0c09b855, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5094878181354890227
+--- !u!114 &6206802636489908306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,4 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
-  NowInteract: 1
+  NowInteract: 5

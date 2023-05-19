@@ -16,8 +16,10 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] InteractObjectBase InteractObjectBase;
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
-    int ObjID;                           // 現在重なっているオブジェクトの情報を取得.
+    [SerializeField] int ObjID;          // 現在重なっているオブジェクトの情報を取得.
+    public int HaveId;         // 現在持っているアイテムのID.
     [SerializeField] int PlayerHaveItem; // プレイヤーが一度に持てるアイテムの個数.
+
     public bool isGetKey;                // 鍵を持っているか.
     [SerializeField] bool isSearch;      // インタラクトしているかどうか
 
@@ -57,7 +59,7 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     private void FixedUpdate()
@@ -67,7 +69,14 @@ public class PlayerBase : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Door = collision.gameObject.GetComponent<DoorBase>();
+        if(collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjectBase.InteractObjs.Door)
+        {
+            Door = collision.gameObject.GetComponent<DoorBase>();
+        }
+        if (collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjectBase.InteractObjs.Search)
+        {
+            SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
+        }
         EnterInteractObj(collision);
     }
 
@@ -98,7 +107,7 @@ public class PlayerBase : MonoBehaviour
     public void GetItemInformation(int InteractObjID)
     {
         ObjID = InteractObjID;
-        Debug.Log(InteractObjID);
+        // Debug.Log(InteractObjID);
     }
 
     /// <summary>
@@ -106,6 +115,17 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
+        Debug.Log("ID>" + ObjID);
+        if (ObjID != (int)InteractObjectBase.InteractObjs.Search && 
+            ObjID != (int)InteractObjectBase.InteractObjs.Door && 
+            ObjID != (int)InteractObjectBase.InteractObjs.EscapeObj)
+        {
+            
+            InteractObjectBase.RequestSprite();
+            HaveId = ObjID;
+            Debug.Log("おけ");
+        }
+        
         if (ObjID == (int)InteractObjectBase.InteractObjs.Search)
         {
             StartCoroutine("Search");
@@ -153,6 +173,7 @@ public class PlayerBase : MonoBehaviour
         if(PlayerHaveItem <= 0)
         {
             Debug.Log("これ以上アイテムを持てません");
+            ChangeHaveItem(HaveId);
         }
     }
 
@@ -182,6 +203,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (collision.gameObject.tag == "InteractObject")
         {
+            InteractObjectBase = collision.gameObject.GetComponent<InteractObjectBase>();
             UIManager.IsInteractButton(true);
         }
     }
@@ -195,6 +217,15 @@ public class PlayerBase : MonoBehaviour
         isSearch = true;
         yield return StartCoroutine(SearchPoint.SearchStart(1));
         isSearch = false;
+    }
+
+    /// <summary>
+    /// プレイヤーがすでにアイテムを持っているときにアイテムを切り替える処理.
+    /// </summary>
+    public void ChangeHaveItem(int olditem)
+    {
+        HaveId = olditem;
+        //Debug.Log(olditem);
     }
 }
 

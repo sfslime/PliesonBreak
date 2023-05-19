@@ -5,7 +5,8 @@ using UnityEngine;
 public class InteractObjectBase : MonoBehaviour
 {
     protected PlayerBase PlayerBase;
-    [SerializeField]protected GameManager GameManager;
+    [SerializeField] protected GameManager GameManager;
+    [SerializeField] protected KeysLink KeysLink;
     public  enum InteractObjs
     {
         None,
@@ -25,6 +26,7 @@ public class InteractObjectBase : MonoBehaviour
     {
         GameManager = GameManager.GameManagerInstance;
         if (GameManager == null) Debug.Log("GameManagerInstance not found");
+        KeysLink = GetComponent<KeysLink>();
     }
 
     void Start()
@@ -58,9 +60,9 @@ public class InteractObjectBase : MonoBehaviour
     {
         // ゲームマネージャーからスプライトの取得.
         var Sprite = GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
-
-        // 自分のスプライトの変更.
         
+        // 自分のスプライトの変更.
+
 
         // 自分のIDを保存.
         SaveId = (int)NowInteract;
@@ -72,15 +74,15 @@ public class InteractObjectBase : MonoBehaviour
         // プレイヤーに自分のIDを返す.
         PlayerBase.ChangeHaveItem(SaveId);
 
+        KeysLink.StateLink(NowInteract);
         Debug.Log("Save"+SaveId);
 
     }
 
-    /// <summary>
-    /// 自身を消す関数.
-    /// </summary>
-    protected void Death(GameObject thisobj)
+    public KeysLink PostKeyLink()
     {
-        Destroy(thisobj);
+
+        Debug.Log("InteractObject");
+        return GetComponent<KeysLink>();
     }
 }

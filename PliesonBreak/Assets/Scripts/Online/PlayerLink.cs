@@ -38,7 +38,7 @@ public class PlayerLink : MonoBehaviourPunCallbacks
     {
         OriginObject = OriginPlayer;
         transform.parent = OriginPlayer.transform;
-        //OriginObject.GetComponent<PlayerBase>().PostPlayerLink(this);
+        OriginObject.GetComponent<PlayerBase>().PostPlayerLink(this);
     }
 
     public void AnimLink(AnimCode anim)

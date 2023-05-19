@@ -10,14 +10,15 @@ public class PlayerBase : MonoBehaviour
 
     [SerializeField] float Speed;     // 移動の速さ.
 
-    public InputAction InputAction;  // 操作にどういったキーを割り当てるかを決めるためのクラス.
-    public UIManagerBase UIManager;  // UIを管理するマネージャー.
+    public InputAction InputAction;      // 操作にどういったキーを割り当てるかを決めるためのクラス.
+    public UIManagerBase UIManager;      // UIを管理するマネージャー.
     [SerializeField] DoorBase Door;
     [SerializeField] InteractObjectBase InteractObjectBase;
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
+    public KeysLink KeysLink;
     [SerializeField] int ObjID;          // 現在重なっているオブジェクトの情報を取得.
-    public int HaveId;         // 現在持っているアイテムのID.
+    public int HaveId;                   // 現在持っているアイテムのID.
     [SerializeField] int PlayerHaveItem; // プレイヤーが一度に持てるアイテムの個数.
 
     public bool isGetKey;                // 鍵を持っているか.
@@ -48,7 +49,6 @@ public class PlayerBase : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
-
         isGetKey = false;
 
         for (int i = 0; i < isGetEscapeItem.Count; i++)
@@ -77,6 +77,7 @@ public class PlayerBase : MonoBehaviour
         {
             SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
         }
+        
         EnterInteractObj(collision);
     }
 
@@ -135,6 +136,7 @@ public class PlayerBase : MonoBehaviour
             isGetKey = true;
             PlayerHaveItem--;
             Debug.Log("鍵を入手");
+            KeysLink.StateLink(false);
         }
         else if (ObjID == (int)InteractObjectBase.InteractObjs.Door)
         {
@@ -145,12 +147,14 @@ public class PlayerBase : MonoBehaviour
             isGetEscapeItem[0] = true;
             PlayerHaveItem--;
             Debug.Log("脱出アイテム1を入手");
+            KeysLink.StateLink(false);
         }
         else if ((ObjID == (int)InteractObjectBase.InteractObjs.EscapeItem2) && PlayerHaveItem > 0)
         {
             isGetEscapeItem[1] = true;
             PlayerHaveItem--;
             Debug.Log("脱出アイテム2を入手");
+            KeysLink.StateLink(false);
         }
         else if (ObjID == (int)InteractObjectBase.InteractObjs.EscapeObj)
         {
@@ -205,6 +209,7 @@ public class PlayerBase : MonoBehaviour
         {
             InteractObjectBase = collision.gameObject.GetComponent<InteractObjectBase>();
             UIManager.IsInteractButton(true);
+            KeysLink = InteractObjectBase.PostKeyLink();
         }
     }
 

@@ -15,6 +15,7 @@ public class DoorBase : InteractObjectBase
         SetUp();
         Collider2D = GetComponent<Collider2D>();
         isOpen = false;
+        DoorLink = GetComponent<DoorLink>();
     }
 
     // Update is called once per frame

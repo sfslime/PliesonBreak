@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 /*
 アイテムを出現させる探索ポイント
@@ -107,7 +109,9 @@ public class SearchPoint : InteractObjectBase
         if (DropItem != null && DropItemID != InteractObjs.NullDrop)
         {
             //ゲームマネージャーからプレファブを取得し、情報を新しいオブジェクトに反映する
-            var Obj = Instantiate(GameManager.GetObjectPrefab(DropItemID), transform.position, transform.rotation);
+            //オフライン時はこの生成
+            //var Obj = Instantiate(GameManager.GetObjectPrefab(DropItemID), transform.position, transform.rotation);
+            var Obj = PhotonNetwork.Instantiate(DropItemID.ToString(), transform.position, transform.rotation);
             Obj.GetComponent<InteractObjectBase>().CopyProperty(DropItem);
             //あたり演出
             Debug.Log("point:アイテムドロップ>" + DropItem.GetComponent<InteractObjectBase>().name);

@@ -50,5 +50,6 @@ public class ConectServer : MonoBehaviourPunCallbacks
     {
         var Link = PhotonNetwork.Instantiate(objname, Player.transform.position, Quaternion.identity);
         Link.transform.GetComponent<PlayerLink>().SetOrigin(Player);
+        Player.GetComponent<PlayerBase>().PostPlayerLink(Link.GetComponent<PlayerLink>());
     }
 }

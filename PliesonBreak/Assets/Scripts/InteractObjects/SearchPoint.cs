@@ -86,7 +86,7 @@ public class SearchPoint : InteractObjectBase
         InstantiateItem();
 
         //他プレイヤーに探索終了を送信
-        SearchPointLink.EndInteract(DropItem != null && DropItemID != InteractObjs.NullDrop || isDestroy);
+        SearchPointLink.EndInteract((DropItem != null && DropItemID != InteractObjs.NullDrop) || isDestroy);
 
         Debug.Log("point:探索時間終了");
         

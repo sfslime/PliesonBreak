@@ -876,6 +876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OriginObject: {fileID: 0}
   PlayerAnimation: {fileID: 0}
+  LerpSpeed: 10
+  isJoin: 0
 --- !u!114 &930732714524950414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,6 +924,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 325248708802956600}
   - {fileID: 930732714524950414}
   - {fileID: 3093676773399748528}
   sceneViewId: 0

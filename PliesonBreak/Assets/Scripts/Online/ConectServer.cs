@@ -46,9 +46,10 @@ public class ConectServer : MonoBehaviourPunCallbacks
     }
 
     //テスト
+    //オンラインオブジェクトを生成する
     public void PopPlayer()
     {
         var Link = PhotonNetwork.Instantiate(objname, Player.transform.position, Quaternion.identity);
-        Link.transform.GetComponent<PlayerLink>().SetOrigin(Player);
+        Link.GetComponent<PlayerLink>().SetOrigin(Player);
     }
 }

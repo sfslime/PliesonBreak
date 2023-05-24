@@ -16,7 +16,6 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] InteractObjectBase InteractObjectBase;
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
-    [SerializeField] PlayerLink PlayerLink;
     public KeysLink KeysLink;
     [SerializeField] int ObjID;          // 現在重なっているオブジェクトの情報を取得.
     public int HaveId;                   // 現在持っているアイテムのID.
@@ -97,11 +96,6 @@ public class PlayerBase : MonoBehaviour
             var MoveVector = InputAction.ReadValue<Vector2>();
 
             Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
-
-            if(PlayerLink != null)
-            {
-                PlayerLink.transform.position = Rb.velocity;
-            }
         }
     }
 
@@ -234,11 +228,6 @@ public class PlayerBase : MonoBehaviour
     {
         HaveId = olditem;
         //Debug.Log(olditem);
-    }
-
-    public void PostPlayerLink(PlayerLink playerlink)
-    {
-         PlayerLink = playerlink;
     }
 }
 

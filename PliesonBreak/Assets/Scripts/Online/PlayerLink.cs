@@ -14,42 +14,83 @@ AnimLink
 作成社：飛田
 */
 
-public class PlayerLink : MonoBehaviourPunCallbacks
+public class PlayerLink : MonoBehaviourPun, IPunObservable
 {
     [SerializeField,Tooltip("自分が操作しているプレイヤー(Set不要)")] GameObject OriginObject;
     [SerializeField, Tooltip("アニメーションスクリプト")] PlayerAnimation PlayerAnimation;
+
+    [SerializeField,Header("移動共有用変数"),Tooltip("滑らかな移動のための速度")] float LerpSpeed;
+    [SerializeField,Tooltip("接続済みかどうか")] bool isJoin = false;
+    Vector3 PlayerPosition;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (photonView.IsMine)
-        {
-            //SetOrigin(transform.parent.gameObject);
-            PlayerAnimation = GetComponent<PlayerAnimation>();
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(photonView.IsMine) transform.position = OriginObject.transform.position;
+        //移動計算用ポジションに変換
+        if (photonView.IsMine && isJoin) PlayerPosition = OriginObject.transform.position;
     }
 
+    private void FixedUpdate()
+    {
+        //プレイヤーに追従
+        if (!photonView.IsMine && !isJoin) return;
+        transform.position = Vector3.Lerp(transform.position, PlayerPosition, LerpSpeed * Time.fixedDeltaTime);
+    }
+
+    /// <summary>
+    /// 操作している元のプレイヤーをセットし、接続を確認する
+    /// </summary>
+    /// <param name="OriginPlayer"></param>
     public void SetOrigin(GameObject OriginPlayer)
     {
         OriginObject = OriginPlayer;
-        transform.parent = OriginPlayer.transform;
-        OriginObject.GetComponent<PlayerBase>().PostPlayerLink(this);
+        isJoin = true;
     }
 
+    /// <summary>
+    /// 他プレイヤーにアニメーションの状態を共有する
+    /// 引数でアニメーションIDを取る
+    /// </summary>
+    /// <param name="anim"></param>
     public void AnimLink(AnimCode anim)
     {
         photonView.RPC(nameof(RPCAnimLink), RpcTarget.Others, anim);
     }
 
+    /// <summary>
+    /// アニメーションを共有するRPC
+    /// AnimLinkで呼び出す
+    /// </summary>
+    /// <param name="anim"></param>
     [PunRPC]
     void RPCAnimLink(AnimCode anim)
     {
         PlayerAnimation.SetAnim(anim);
 
+    }
+
+    /// <summary>
+    /// 位置情報をクローンした他オブジェクトと共有する
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // プレイヤーオブジェクトの位置情報を送信
+            stream.SendNext(PlayerPosition);
+        }
+        else
+        {
+            // プレイヤーオブジェクトの位置情報を受信
+            PlayerPosition = (Vector3)stream.ReceiveNext();
+        }
     }
 }

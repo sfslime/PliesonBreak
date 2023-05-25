@@ -27,13 +27,13 @@ public class ItemImage : MonoBehaviour
     }
 
     /// <summary>
-    /// アイテムの画像を切り替える.
+    /// アイテムボタンの画像を切り替える.
     /// </summary>
     void ItemImageChange()
     {
         HaveId = Player.HaveId;
 
-        Debug.Log("HaveId > " +HaveId);
+        // Debug.Log("HaveId > " +HaveId);
         if(HaveId == (int)InteractObjs.Key)
         {
             image.sprite = GameManager.ReturnSprite(InteractObjs.Key);
@@ -42,6 +42,17 @@ public class ItemImage : MonoBehaviour
         {
             image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
         }
+        else if (HaveId == (int)InteractObjs.EscapeItem2)
+        {
+            image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
+        }
 
+        if (HaveId != (int)InteractObjs.Key &&
+            HaveId != (int)InteractObjs.EscapeItem1 &&
+            HaveId != (int)InteractObjs.EscapeItem2)
+        {
+            Debug.Log("None");
+            image.sprite = GameManager.ReturnSprite(InteractObjs.None);
+        }
     }
 }

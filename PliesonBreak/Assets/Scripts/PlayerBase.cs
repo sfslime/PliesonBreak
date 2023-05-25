@@ -18,15 +18,13 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
     public KeysLink KeysLink;
-    [SerializeField] int ObjID;          // 現在重なっているオブジェクトの情報を取得.
-    public int HaveId;                   // 現在持っているアイテムのID.
-    [SerializeField] int PlayerHaveItem; // プレイヤーが一度に持てるアイテムの個数.
+    public int ObjID;                         // 現在重なっているオブジェクトの情報を取得.
+    public int HaveId;                        // 現在持っているアイテムのID.
+    [SerializeField] bool isPlayerHaveItem;      // プレイヤーが一度に持てるアイテムの個数.
 
-    public bool isGetKey;                // 鍵を持っているか.
-    [SerializeField] bool isSearch;      // インタラクトしているかどうか
+    [SerializeField] bool isSearch;           // インタラクトしているかどうか
 
-    [SerializeField] List<bool> isGetEscapeItem;  // 脱出アイテムを持っているか.
-    [SerializeField] List<bool> isEscapeItem;     // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
+    [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
     [SerializeField, Header("アニメーション用変数"), Tooltip("現在のアニメーション状態")] AnimCode AnimState;
 
@@ -52,12 +50,6 @@ public class PlayerBase : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
-        isGetKey = false;
-
-        for (int i = 0; i < isGetEscapeItem.Count; i++)
-        {
-            isGetEscapeItem[i] = false;
-        }
     }
 
     void Update()
@@ -124,57 +116,60 @@ public class PlayerBase : MonoBehaviour
             
             InteractObjectBase.RequestSprite();
             HaveId = ObjID;
-            Debug.Log("おけ");
         }
-        
+
+        if ((ObjID == (int)InteractObjs.Key ||
+                 ObjID == (int)InteractObjs.EscapeItem1 ||
+                 ObjID == (int)InteractObjs.EscapeItem2) &&
+                 isPlayerHaveItem == false)
+        {
+            KeysLink.StateLink(false);
+        }
+
         if (ObjID == (int)InteractObjs.Search)
         {
             StartCoroutine("Search");
         }
-        else if ((ObjID == (int)InteractObjs.Key) && PlayerHaveItem > 0)
+        else if (ObjID == (int)InteractObjs.Key)
         {
-            isGetKey = true;
-            PlayerHaveItem--;
+            isPlayerHaveItem = true;
             Debug.Log("鍵を入手");
-            KeysLink.StateLink(false);
         }
         else if (ObjID == (int)InteractObjs.Door)
         {
             PlayerHaveKey();
         }
-        else if ((ObjID == (int)InteractObjs.EscapeItem1) && PlayerHaveItem > 0)
+        else if (ObjID == (int)InteractObjs.EscapeItem1)
         {
-            isGetEscapeItem[0] = true;
-            PlayerHaveItem--;
-            Debug.Log("脱出アイテム1を入手");
-            KeysLink.StateLink(false);
+            isPlayerHaveItem = true;
+            // Debug.Log("脱出アイテム1を入手");
         }
-        else if ((ObjID == (int)InteractObjs.EscapeItem2) && PlayerHaveItem > 0)
+        else if (ObjID == (int)InteractObjs.EscapeItem2)
         {
-            isGetEscapeItem[1] = true;
-            PlayerHaveItem--;
-            Debug.Log("脱出アイテム2を入手");
-            KeysLink.StateLink(false);
+            isPlayerHaveItem = true;
+            // Debug.Log("脱出アイテム2を入手");
         }
         else if (ObjID == (int)InteractObjs.EscapeObj)
         {
-
-            if (isGetEscapeItem[0] == true && isEscapeItem[0] == false)
+            if (HaveId == (int)InteractObjs.EscapeItem1)
             {
-                isEscapeItem[0] = true;
-                PlayerHaveItem++;
+                isPlayerHaveItem = isEscapeItem[0] = true;
+                HaveId = (int)InteractObjs.None;
+                Debug.Log("脱出アイテム1をセット");
             }
-            if (isGetEscapeItem[1] == true && isEscapeItem[1] == false)
+            if (HaveId == (int)InteractObjs.EscapeItem2)
             {
-                isEscapeItem[1] = true;
-                PlayerHaveItem++;
+                isPlayerHaveItem = isEscapeItem[1] = true;
+                HaveId = (int)InteractObjs.None;
+                Debug.Log("脱出アイテム2をセット");
             }
-            if (isGetEscapeItem[0] == true && isGetEscapeItem[1] == true)
+            if (isEscapeItem[0] == true && isEscapeItem[1] == true)
             {
-                Goal.PlayerGoal();
+                //Goal.PlayerGoal();
+                Debug.Log("ゴールしました");
             }
         }
-        if (PlayerHaveItem <= 0)
+        if (isPlayerHaveItem == true)
         {
             Debug.Log("これ以上アイテムを持てません");
             ChangeHaveItem(HaveId);
@@ -186,15 +181,16 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerHaveKey()
     {
-        if (isGetKey == false)
+        if (HaveId != (int)InteractObjs.Key)
         {
             Debug.Log("鍵がかかっている");
         }
-        else if (isGetKey == true)
+        else if (HaveId == (int)InteractObjs.Key)
         {
             Debug.Log("ドアが開いた");
             Door.DoorOpen(true);
-            PlayerHaveItem++;
+            isPlayerHaveItem = false;
+            HaveId = (int)InteractObjs.None;
         }
 
     }

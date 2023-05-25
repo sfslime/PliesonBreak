@@ -1,23 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ConstList;
 
 public class InteractObjectBase : MonoBehaviour
 {
     protected PlayerBase PlayerBase;
     [SerializeField] protected GameManager GameManager;
     [SerializeField] protected KeysLink KeysLink;
-    public  enum InteractObjs
-    {
-        None,
-        Key,
-        Door,
-        NullDrop,
-        Search,
-        EscapeItem1,
-        EscapeItem2,
-        EscapeObj,
-    }
 
     public InteractObjs NowInteract;
     int SaveId;  // IDÇï€ë∂ÇµÇƒÇ®Ç≠ïœêî.

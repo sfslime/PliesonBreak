@@ -72,11 +72,11 @@ public class PlayerBase : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjectBase.InteractObjs.Door)
+        if(collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.Door)
         {
             Door = collision.gameObject.GetComponent<DoorBase>();
         }
-        if (collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjectBase.InteractObjs.Search)
+        if (collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.Search)
         {
             SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
         }
@@ -117,9 +117,9 @@ public class PlayerBase : MonoBehaviour
     public void PushInteractButton()
     {
         Debug.Log("ID>" + ObjID);
-        if (ObjID != (int)InteractObjectBase.InteractObjs.Search && 
-            ObjID != (int)InteractObjectBase.InteractObjs.Door && 
-            ObjID != (int)InteractObjectBase.InteractObjs.EscapeObj)
+        if (ObjID != (int)InteractObjs.Search && 
+            ObjID != (int)InteractObjs.Door && 
+            ObjID != (int)InteractObjs.EscapeObj)
         {
             
             InteractObjectBase.RequestSprite();
@@ -127,36 +127,36 @@ public class PlayerBase : MonoBehaviour
             Debug.Log("おけ");
         }
         
-        if (ObjID == (int)InteractObjectBase.InteractObjs.Search)
+        if (ObjID == (int)InteractObjs.Search)
         {
             StartCoroutine("Search");
         }
-        else if ((ObjID == (int)InteractObjectBase.InteractObjs.Key) && PlayerHaveItem > 0)
+        else if ((ObjID == (int)InteractObjs.Key) && PlayerHaveItem > 0)
         {
             isGetKey = true;
             PlayerHaveItem--;
             Debug.Log("鍵を入手");
             KeysLink.StateLink(false);
         }
-        else if (ObjID == (int)InteractObjectBase.InteractObjs.Door)
+        else if (ObjID == (int)InteractObjs.Door)
         {
             PlayerHaveKey();
         }
-        else if ((ObjID == (int)InteractObjectBase.InteractObjs.EscapeItem1) && PlayerHaveItem > 0)
+        else if ((ObjID == (int)InteractObjs.EscapeItem1) && PlayerHaveItem > 0)
         {
             isGetEscapeItem[0] = true;
             PlayerHaveItem--;
             Debug.Log("脱出アイテム1を入手");
             KeysLink.StateLink(false);
         }
-        else if ((ObjID == (int)InteractObjectBase.InteractObjs.EscapeItem2) && PlayerHaveItem > 0)
+        else if ((ObjID == (int)InteractObjs.EscapeItem2) && PlayerHaveItem > 0)
         {
             isGetEscapeItem[1] = true;
             PlayerHaveItem--;
             Debug.Log("脱出アイテム2を入手");
             KeysLink.StateLink(false);
         }
-        else if (ObjID == (int)InteractObjectBase.InteractObjs.EscapeObj)
+        else if (ObjID == (int)InteractObjs.EscapeObj)
         {
 
             if (isGetEscapeItem[0] == true && isEscapeItem[0] == false)

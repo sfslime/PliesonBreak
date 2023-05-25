@@ -8,7 +8,8 @@ namespace ConstList
         None,
         Idel,
         Walk,
-        Run
+        Run,
+        Search
     }
 
     public enum InteractObjs

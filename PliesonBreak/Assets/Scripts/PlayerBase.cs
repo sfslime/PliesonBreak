@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ConstList;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PlayerBase : MonoBehaviour
 
     [SerializeField] List<bool> isGetEscapeItem;  // 脱出アイテムを持っているか.
     [SerializeField] List<bool> isEscapeItem;     // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
+
+    [SerializeField, Header("アニメーション用変数"), Tooltip("現在のアニメーション状態")] AnimCode AnimState;
 
     #endregion
 
@@ -228,6 +231,15 @@ public class PlayerBase : MonoBehaviour
     {
         HaveId = olditem;
         //Debug.Log(olditem);
+    }
+
+    public AnimCode GetAnimState()
+    {
+        if (isSearch) return AnimCode.Search;
+
+        if (Rb.velocity.magnitude > 0) return AnimCode.Run;
+
+        return AnimCode.Idel;
     }
 }
 

@@ -122,18 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
-  NowInteract: 0
-  TestDropItem: {fileID: 3133997238768261919, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  InteractObjectPrefabList:
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
-  - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
+  KeysLink: {fileID: 0}
+  NowInteract: 4
+  TestDropItem: {fileID: 0}
   DefaltSearchTime: 3
   isDestroy: 0
 --- !u!58 &-402427164621693920

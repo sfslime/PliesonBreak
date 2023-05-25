@@ -8,7 +8,8 @@ namespace ConstList
         None,
         Idel,
         Walk,
-        Run
+        Run,
+        Search
     }
 
     public enum InteractObjs
@@ -21,5 +22,13 @@ namespace ConstList
         EscapeItem1,
         EscapeItem2,
         EscapeObj,
+    }
+
+    public enum SEid
+    {
+        None,
+        Search,
+        SearchHit,
+        SearchNull
     }
 }

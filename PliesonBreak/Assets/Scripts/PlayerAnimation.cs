@@ -10,32 +10,40 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField,Tooltip("アニメーションさせるアニメーター(Set必須)")] Animator SpriteAnimator;
     [SerializeField,Tooltip("アニメーションのステータス(関数で変更)")] AnimCode AnimState;
     [SerializeField,Tooltip("現在アニメーションのさせるかどうか(関数で変更)")] bool isAnim;
+    PlayerBase Player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        var gamemanager = GameManager.GameManagerInstance;
+        if (gamemanager == null) return;
+
+        Player = gamemanager.GetPlayer().GetComponent<PlayerBase>();
+        isAnim = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (isAnim)
         {
-            switch (AnimState)
-            {
-                case AnimCode.Idel:
-                    StartCoroutine(SetBoolTrigger(AnimCode.Idel));
-                    break;
-                case AnimCode.Walk:
-                    StartCoroutine(SetBoolTrigger(AnimCode.Walk));
-                    break;
-                case AnimCode.Run:
-                    StartCoroutine(SetBoolTrigger(AnimCode.Run));
-                    break;
-                default:
-                    break;
-            }
+            SetAnim(Player.GetAnimState());
+            StartCoroutine(SetBoolTrigger(AnimState));
+            //switch (AnimState)
+            //{
+            //    case AnimCode.Idel:
+            //        StartCoroutine(SetBoolTrigger(AnimCode.Idel));
+            //        break;
+            //    case AnimCode.Walk:
+            //        StartCoroutine(SetBoolTrigger(AnimCode.Walk));
+            //        break;
+            //    case AnimCode.Run:
+            //        StartCoroutine(SetBoolTrigger(AnimCode.Run));
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ConstList;
 
 public class ItemImage : MonoBehaviour
 {
@@ -33,25 +34,25 @@ public class ItemImage : MonoBehaviour
         HaveId = Player.HaveId;
 
         // Debug.Log("HaveId > " +HaveId);
-        if(HaveId == (int)InteractObjectBase.InteractObjs.Key)
+        if(HaveId == (int)InteractObjs.Key)
         {
-            image.sprite = GameManager.ReturnSprite(InteractObjectBase.InteractObjs.Key);
+            image.sprite = GameManager.ReturnSprite(InteractObjs.Key);
         }
-        else if(HaveId == (int)InteractObjectBase.InteractObjs.EscapeItem1)
+        else if(HaveId == (int)InteractObjs.EscapeItem1)
         {
-            image.sprite = GameManager.ReturnSprite(InteractObjectBase.InteractObjs.EscapeItem1);
+            image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
         }
-        else if (HaveId == (int)InteractObjectBase.InteractObjs.EscapeItem2)
+        else if (HaveId == (int)InteractObjs.EscapeItem2)
         {
-            image.sprite = GameManager.ReturnSprite(InteractObjectBase.InteractObjs.EscapeItem2);
+            image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
         }
 
-        if (HaveId != (int)InteractObjectBase.InteractObjs.Key &&
-            HaveId != (int)InteractObjectBase.InteractObjs.EscapeItem1 &&
-            HaveId != (int)InteractObjectBase.InteractObjs.EscapeItem2)
+        if (HaveId != (int)InteractObjs.Key &&
+            HaveId != (int)InteractObjs.EscapeItem1 &&
+            HaveId != (int)InteractObjs.EscapeItem2)
         {
             Debug.Log("None");
-            image.sprite = GameManager.ReturnSprite(InteractObjectBase.InteractObjs.None);
+            image.sprite = GameManager.ReturnSprite(InteractObjs.None);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ConstList;
 
 /*
 KeyItemなどをオンライン化するスクリプト
@@ -60,7 +61,7 @@ public class KeysLink : MonoBehaviourPunCallbacks
     /// 新しいアイテム情報を引数で取る
     /// </summary>
     /// <param name="ObjID"></param>
-    public void StateLink(InteractObjectBase.InteractObjs ObjID)
+    public void StateLink(InteractObjs ObjID)
     {
         photonView.RPC(nameof(RPCChangeItem), RpcTarget.Others, ObjID);
     }
@@ -81,7 +82,7 @@ public class KeysLink : MonoBehaviourPunCallbacks
     /// </summary>
     /// <param name="ObjID"></param>
     [PunRPC]
-    public void RPCChangeItem(InteractObjectBase.InteractObjs ObjID)
+    public void RPCChangeItem(InteractObjs ObjID)
     {
         //ゲームマネージャーからスプライト取得
         var Sprite = GameManager.ReturnSprite(ObjID);

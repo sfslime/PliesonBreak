@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using ConstList;
 
 /*
 全体の進行を管理するマネージャー
@@ -47,6 +48,13 @@ public class GameManager : MonoBehaviour
         public GameObject EffectPanel;
     }
 
+    [System.Serializable]
+    class EscapeSetting
+    {
+        public bool isGoal;
+        public List<InteractObjs> NeedEscapeList = new List<InteractObjs>();
+    }
+
     #endregion
 
     #region 変数宣言
@@ -59,7 +67,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
-    [SerializeField, Header("エリア解放時設定"), Tooltip("表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
+    [SerializeField, Header("エリア解放時設定"), Tooltip("脱出アイテム・表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
+
+    [SerializeField, Header("ゴール処理関係"), Tooltip("必要なアイテム・終了時に呼ばれる関数など")] EscapeSetting EscapeSettings;
 
     [SerializeField, Header("アイテム関係"), Tooltip("アイテム変更用画像")] List<Sprite> InteractSprits = new List<Sprite>();
 
@@ -75,6 +85,9 @@ public class GameManager : MonoBehaviour
     //マップを管理するマネージャー
     //private MapManager MapManager;
 
+    //SEを管理するマネージャー
+    private AudioManager AudioManager;
+
     #endregion
 
     #endregion
@@ -84,6 +97,13 @@ public class GameManager : MonoBehaviour
     bool Init()
     {
         GameManagerInstance = this;
+
+        AudioManager = GetComponent<AudioManager>();
+        if(AudioManager == null)
+        {
+            Debug.Log("AudioManager not found");
+            return false;
+        }
 
         return true;
 
@@ -137,12 +157,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(EreaReleaseEffect(EreaNm));
     }
 
+    public void PlaySE(SEid id,Vector2 pos)
+    {
+        AudioManager.SE(id, pos);
+    }
+
     /// <summary>
     /// アイテムの画像変更用に引数に応じてスプライトを返す
     /// </summary>
     /// <param name="ObjID"></param>
     /// <returns></returns>
-    public Sprite ReturnSprite(InteractObjectBase.InteractObjs ObjID)
+    public Sprite ReturnSprite(InteractObjs ObjID)
     {
         return InteractSprits[(int)ObjID];
     }
@@ -152,7 +177,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="ObjectID"></param>
     /// <returns></returns>
-    public GameObject GetObjectPrefab(InteractObjectBase.InteractObjs ObjectID)
+    public GameObject GetObjectPrefab(InteractObjs ObjectID)
     {
         return interactObjectPrefabs[(int)ObjectID];
     }
@@ -161,6 +186,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("おけ");
         return Player;
+    }
+
+    public List<InteractObjs> GetNeedItemList()
+    {
+        return EscapeSettings.NeedEscapeList;
     }
 
 

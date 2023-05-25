@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ConstList;
 using UnityEngine.UI;
 
 public class InteractObjectBase : MonoBehaviour
@@ -8,21 +9,8 @@ public class InteractObjectBase : MonoBehaviour
     protected PlayerBase PlayerBase;
     [SerializeField] protected GameManager GameManager;
     [SerializeField] protected KeysLink KeysLink;
-    SpriteRenderer SpriteRenderer;
-    Sprite sprite;
-    public Image image;
-    public  enum InteractObjs
-    {
-        None,
-        Key,
-        Door,
-        NullDrop,
-        Search,
-        EscapeItem1,
-        EscapeItem2,
-        EscapeObj,
-    }
 
+    SpriteRenderer SpriteRenderer;
     public InteractObjs NowInteract;
     int SaveId;  // IDÇï€ë∂ÇµÇƒÇ®Ç≠ïœêî.
 

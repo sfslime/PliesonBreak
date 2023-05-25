@@ -63,7 +63,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision)
-    {
+    { 
         if(collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.Door)
         {
             Door = collision.gameObject.GetComponent<DoorBase>();
@@ -72,7 +72,11 @@ public class PlayerBase : MonoBehaviour
         {
             SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
         }
-        
+        if (collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.EscapeObj)
+        {
+            Goal = collision.gameObject.GetComponent<Goal>();
+        }
+
         EnterInteractObj(collision);
     }
 
@@ -117,7 +121,7 @@ public class PlayerBase : MonoBehaviour
             InteractObjectBase.RequestSprite();
             HaveId = ObjID;
         }
-
+        // オブジェクトを破棄.
         if ((ObjID == (int)InteractObjs.Key ||
                  ObjID == (int)InteractObjs.EscapeItem1 ||
                  ObjID == (int)InteractObjs.EscapeItem2) &&
@@ -151,22 +155,10 @@ public class PlayerBase : MonoBehaviour
         }
         else if (ObjID == (int)InteractObjs.EscapeObj)
         {
-            if (HaveId == (int)InteractObjs.EscapeItem1)
+            if (Goal.SetEscapeItem((InteractObjs)HaveId))
             {
-                isPlayerHaveItem = isEscapeItem[0] = true;
+                isPlayerHaveItem = false;
                 HaveId = (int)InteractObjs.None;
-                Debug.Log("脱出アイテム1をセット");
-            }
-            if (HaveId == (int)InteractObjs.EscapeItem2)
-            {
-                isPlayerHaveItem = isEscapeItem[1] = true;
-                HaveId = (int)InteractObjs.None;
-                Debug.Log("脱出アイテム2をセット");
-            }
-            if (isEscapeItem[0] == true && isEscapeItem[1] == true)
-            {
-                //Goal.PlayerGoal();
-                Debug.Log("ゴールしました");
             }
         }
         if (isPlayerHaveItem == true)

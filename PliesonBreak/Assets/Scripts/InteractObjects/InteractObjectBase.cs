@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractObjectBase : MonoBehaviour
 {
     protected PlayerBase PlayerBase;
     [SerializeField] protected GameManager GameManager;
     [SerializeField] protected KeysLink KeysLink;
+    SpriteRenderer SpriteRenderer;
+    Sprite sprite;
+    public Image image;
     public  enum InteractObjs
     {
         None,
@@ -25,6 +29,7 @@ public class InteractObjectBase : MonoBehaviour
     protected void SetUp()
     {
         GameManager = GameManager.GameManagerInstance;
+        SpriteRenderer = GetComponent<SpriteRenderer>();
         if (GameManager == null) Debug.Log("GameManagerInstance not found");
         KeysLink = GetComponent<KeysLink>();
     }
@@ -58,18 +63,17 @@ public class InteractObjectBase : MonoBehaviour
 
     public void RequestSprite()
     {
-        // ゲームマネージャーからスプライトの取得.
-        var Sprite = GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
-        
-        // 自分のスプライトの変更.
-
-
         // 自分のIDを保存.
         SaveId = (int)NowInteract;
 
         // プレイヤーから貰ったIDに自分のIDを変更.
         NowInteract = (InteractObjs)PlayerBase.HaveId;
-        
+
+        // ゲームマネージャーからスプライトの取得.
+        GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
+
+        // 自分のスプライトの変更.
+        ChangeSprite();
 
         // プレイヤーに自分のIDを返す.
         PlayerBase.ChangeHaveItem(SaveId);
@@ -84,5 +88,24 @@ public class InteractObjectBase : MonoBehaviour
 
         Debug.Log("InteractObject");
         return GetComponent<KeysLink>();
+    }
+
+    void ChangeSprite()
+    {
+        if(NowInteract == InteractObjs.Key)
+        {
+            Debug.Log("Sprite:Key");
+            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key);
+        }
+        else if(NowInteract == InteractObjs.EscapeItem1)
+        {
+            Debug.Log("Sprite:EscapeItem1");
+            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
+        }
+        else if (NowInteract == InteractObjs.EscapeItem2)
+        {
+            Debug.Log("Sprite:EscapeItem2");
+            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
+        }
     }
 }

@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
+  image: {fileID: 0}
   NowInteract: 1
 --- !u!114 &5753060010256477209
 MonoBehaviour:

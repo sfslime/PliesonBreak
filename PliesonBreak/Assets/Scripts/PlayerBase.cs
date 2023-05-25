@@ -150,13 +150,15 @@ public class PlayerBase : MonoBehaviour
         {
             if (HaveId == (int)InteractObjectBase.InteractObjs.EscapeItem1)
             {
-                isPlayerHaveItem = isEscapeItem[0] = true;
+                isEscapeItem[0] = true;
+                isPlayerHaveItem = false;
                 HaveId = (int)InteractObjectBase.InteractObjs.None;
                 Debug.Log("脱出アイテム1をセット");
             }
             if (HaveId == (int)InteractObjectBase.InteractObjs.EscapeItem2)
             {
-                isPlayerHaveItem = isEscapeItem[1] = true;
+                isEscapeItem[1] = true;
+                isPlayerHaveItem = false;
                 HaveId = (int)InteractObjectBase.InteractObjs.None;
                 Debug.Log("脱出アイテム2をセット");
             }

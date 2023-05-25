@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using ConstList;
 using UnityEngine.Animations;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerAnimation : MonoBehaviour
+public class PlayerAnimation : MonoBehaviourPunCallbacks
 {
 
     [SerializeField,Tooltip("アニメーションさせるアニメーター(Set必須)")] Animator SpriteAnimator;
@@ -15,6 +17,8 @@ public class PlayerAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!photonView.IsMine) return;
+
         var gamemanager = GameManager.GameManagerInstance;
         if (gamemanager == null) return;
 
@@ -25,7 +29,7 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!photonView.IsMine) return;
         if (isAnim)
         {
             SetAnim(Player.GetAnimState());

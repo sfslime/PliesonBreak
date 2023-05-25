@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     public static GameManager GameManagerInstance;
 
     //マップを管理するマネージャー
-    //private MapManager MapManager;
+    private MapManager MapManager;
 
     //SEを管理するマネージャー
     private AudioManager AudioManager;
@@ -105,6 +105,13 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
+        MapManager = GetComponent<MapManager>();
+        if(MapManager == null)
+        {
+            Debug.Log("MapManager not found");
+            return false;
+        }
+
         return true;
 
     }
@@ -120,15 +127,7 @@ public class GameManager : MonoBehaviour
         //プレイヤーの実体宣言
         //Player = プレイヤーの探索
 
-        //各マネージャーの起動、エラーチェック
-        //MapManager = マップマネージャーの検索
-        //if(MapManager == null)
-        //{
-        //    Debug.Log("MapManager Not Find");
-        //}else{
-        //マップの生成
-        //プレイヤーのリスポーン位置の取得
-        //}
+        MapManager.PopSearchPoint();
 
         //テスト
         GameStatus = GAMESTATUS.INGAME;
@@ -241,7 +240,7 @@ public class GameManager : MonoBehaviour
     {
         
         //テスト
-        GameStart();
+        //GameStart();
     }
 
     

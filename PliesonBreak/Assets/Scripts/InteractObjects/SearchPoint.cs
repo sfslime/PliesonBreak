@@ -33,6 +33,8 @@ public class SearchPoint : InteractObjectBase
     //空のドロップの場合、他のプレイヤーでも破壊するか
     [SerializeField, Tooltip("空ドロップの際、他プレイヤーでの破壊設定")] bool isDestroy;
 
+    AudioSource AudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,8 @@ public class SearchPoint : InteractObjectBase
         {
             SetDropItem(TestDropItem);
         }
+
+        AudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -71,9 +75,15 @@ public class SearchPoint : InteractObjectBase
         Debug.Log("point:探索開始");
         float SearchTime = DefaltSearchTime * addsearchtime;
 
+        AudioSource.Play();
+
         while (true)
         {
-            if (isCoroutineStop) yield break;
+            if (isCoroutineStop)
+            {
+                AudioSource.Stop();
+                yield break;
+            }
 
             if(Timer >= SearchTime)
             {
@@ -82,6 +92,8 @@ public class SearchPoint : InteractObjectBase
             Timer += Time.deltaTime;
             yield return null;
         }
+
+        AudioSource.Stop();
 
         //アイテムの出現
         InstantiateItem();
@@ -115,11 +127,13 @@ public class SearchPoint : InteractObjectBase
             var Obj = PhotonNetwork.Instantiate(DropItemID.ToString(), transform.position, transform.rotation);
             Obj.GetComponent<InteractObjectBase>().CopyProperty(DropItem);
             //あたり演出
+            GameManager.PlaySE(SEid.SearchHit, transform.position);
             Debug.Log("point:アイテムドロップ>" + DropItem.GetComponent<InteractObjectBase>().name);
         }
         else
         {
             //はずれ演出
+            GameManager.PlaySE(SEid.SearchNull, transform.position);
             Debug.Log("point:アイテムなし");
         }
     }

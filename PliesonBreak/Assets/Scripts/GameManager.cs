@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
     //マップを管理するマネージャー
     //private MapManager MapManager;
 
+    //SEを管理するマネージャー
+    private AudioManager AudioManager;
+
     #endregion
 
     #endregion
@@ -94,6 +97,13 @@ public class GameManager : MonoBehaviour
     bool Init()
     {
         GameManagerInstance = this;
+
+        AudioManager = GetComponent<AudioManager>();
+        if(AudioManager == null)
+        {
+            Debug.Log("AudioManager not found");
+            return false;
+        }
 
         return true;
 
@@ -145,6 +155,11 @@ public class GameManager : MonoBehaviour
 
         ReleaseErea = EreaNm;
         StartCoroutine(EreaReleaseEffect(EreaNm));
+    }
+
+    public void PlaySE(SEid id,Vector2 pos)
+    {
+        AudioManager.SE(id, pos);
     }
 
     /// <summary>

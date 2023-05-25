@@ -23,4 +23,12 @@ namespace ConstList
         EscapeItem2,
         EscapeObj,
     }
+
+    public enum SEid
+    {
+        None,
+        Search,
+        SearchHit,
+        SearchNull
+    }
 }

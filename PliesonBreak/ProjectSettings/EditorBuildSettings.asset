@@ -7,5 +7,5 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Hidatest.unity
-    guid: 2ed99ae6645a36a49babe840c0367845
+    guid: bfed8028c1cfd7c4288ca327ef1cb710
   m_configObjects: {}

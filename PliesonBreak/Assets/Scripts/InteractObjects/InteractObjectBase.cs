@@ -78,7 +78,7 @@ public class InteractObjectBase : MonoBehaviour
         return GetComponent<KeysLink>();
     }
 
-    void ChangeSprite()
+    public void ChangeSprite()
     {
         if(NowInteract == InteractObjs.Key)
         {

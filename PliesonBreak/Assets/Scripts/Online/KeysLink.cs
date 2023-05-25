@@ -30,6 +30,8 @@ public class KeysLink : MonoBehaviourPunCallbacks
         //ゲームマネージャーインスタンスを設定
         GameManager = GameManager.GameManagerInstance;
         if (GameManager == null) Debug.Log("GameManager not found");
+
+        originObject = GetComponent<InteractObjectBase>();
     }
 
     // Update is called once per frame
@@ -84,10 +86,9 @@ public class KeysLink : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCChangeItem(InteractObjs ObjID)
     {
-        //ゲームマネージャーからスプライト取得
-        var Sprite = GameManager.ReturnSprite(ObjID);
+        originObject.NowInteract = ObjID;
 
         //画像の切り替えを要求
-        //originObject
+        originObject.ChangeSprite();
     }
 }

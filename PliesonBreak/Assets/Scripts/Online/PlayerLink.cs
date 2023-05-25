@@ -60,7 +60,7 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
     /// <param name="anim"></param>
     public void AnimLink(AnimCode anim)
     {
-        photonView.RPC(nameof(RPCAnimLink), RpcTarget.Others, anim);
+        //photonView.RPC(nameof(RPCAnimLink), RpcTarget.Others, anim);
     }
 
     /// <summary>

@@ -112,7 +112,6 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void PushInteractButton()
     {
-        // E‚¦‚È‚¢ƒAƒCƒeƒ€‚Ì”rœ.
         Debug.Log("ID>" + ObjID);
         if (ObjID != (int)InteractObjs.Search && 
             ObjID != (int)InteractObjs.Door && 

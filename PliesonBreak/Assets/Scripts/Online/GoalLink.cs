@@ -11,7 +11,7 @@ public class GoalLink : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        OriginObject = GetComponent<Goal>();
+        GetComponent<Goal>();
     }
 
     // Update is called once per frame

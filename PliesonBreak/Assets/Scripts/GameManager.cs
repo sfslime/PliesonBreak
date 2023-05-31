@@ -1,11 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using ConstList;
+using Photon.Pun;
+using Photon.Realtime;
 
 /*
-全体の進行を管理するマネージャー
+ゲームの進行を管理するマネージャー
+すべてのプレイヤーが揃い、ゲームシーン遷移後から管理する
+各マネージャーなどの初期化を始め、全員の準備が終わり次第開始する
+開始後はエリア解放、捕縛、中止　のメッセージを受け取り、適切に処理する
+
+初期化順
+(マスター)
+1,接続確認、待機
+2,プレイヤー生成
+3,アイテム生成、送信
+4,看守生成、送信
+5,初期化完了、待機
+6,コネクトサーバークラスによるゲーム開始関数
+
+(メンバー)
+1,接続確認、待機
+2,プレイヤー生成
+3,アイテム受信待機
+4,看守受信待機
+5,初期化完了、待機
+6,コネクトサーバークラスによるゲーム開始関数
+
 作成者：飛田
  */
 
@@ -38,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     #region クラス内クラス
 
+    //解放時に関するクラス
     [System.Serializable]
     class ReleaseEffectSetting
     {
@@ -48,6 +73,7 @@ public class GameManager : MonoBehaviour
         public GameObject EffectPanel;
     }
 
+    //ゴールに関するクラス
     [System.Serializable]
     class EscapeSetting
     {
@@ -55,6 +81,8 @@ public class GameManager : MonoBehaviour
         public List<InteractObjs> NeedEscapeList = new List<InteractObjs>();
     }
 
+    //初期化用管理クラス
+    //各初期化の完了状態を参照できる
     [System.Serializable]
     class InitList
     {
@@ -73,6 +101,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("プレイヤークラス(testでインスペクターから)")] GameObject Player;
 
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
+
+    [SerializeField, Tooltip("メッセージ表示UI(インスペクターから)")] Text MessageText;
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("脱出アイテム・表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
 
@@ -106,12 +136,21 @@ public class GameManager : MonoBehaviour
 
     #region 関数
 
+    /// <summary>
+    /// 初期化関数
+    /// 戻り値でエラーチェックになり、falseの場合は直ちに終了すること
+    /// </summary>
+    /// <returns></returns>
     bool Init()
     {
         GameManagerInstance = this;
 
         InitLists.ConectInit = false;
         InitLists.MapInit = false;
+
+        //プレイヤーの探索
+        //Player = GameObject.Find("")
+        //プレイヤーを動けなくする処理
 
         AudioManager = GetComponent<AudioManager>();
         if(AudioManager == null)
@@ -141,22 +180,58 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameStart()
     {
-        //プレイヤーの実体宣言
-        //Player = プレイヤーの探索
-
         //テスト
         GameStatus = GAMESTATUS.INGAME;
         ReleaseErea = 0;
+
+        //MessageText.transform.parent.gameObject.SetActive(false);
 
         Debug.Log("Start OK");
     }
 
     /// <summary>
     /// 各種初期化が終わったかをチェックする
+    /// 現在はテストのため、マップの生成も行っている
     /// </summary>
     public void InitCheck()
     {
-        if (InitLists.ConectInit && InitLists.MapInit) GameStart();
+        if (!InitLists.ConectInit)
+        {
+            MessageText.text = "接続中...";
+        }
+        else
+        {
+            //動けるようにする
+            //Player.GetComponent<PlayerBase>().
+
+            if (PhotonNetwork.LocalPlayer.IsMasterClient == true)
+            {
+                MessageText.text = "参加人数 : " + PhotonNetwork.PlayerList.Length + "\nSPACEキーで開始";
+
+
+                if (InitLists.MapInit)
+                {
+                    GameStart();
+                }
+                //テスト
+                if (Input.GetKeyDown(KeyCode.Space) && !InitLists.MapInit)
+                {
+                    Debug.Log("マスタークライアント確認。アイテムの生成開始");
+                    StartCoroutine(WaitMapPop());
+
+                    //テスト
+                    InitLists.MapInit = true;
+                }
+            }
+            else
+            {
+                MessageText.text = "参加人数 : " + PhotonNetwork.PlayerList.Length + "\n待機中";
+
+                //マスタークライアントからアイテム生成位置を受け取る
+                InitLists.MapInit = true;
+            }
+
+        }
     }
 
     /// <summary>
@@ -190,7 +265,6 @@ public class GameManager : MonoBehaviour
     public void RoomJoined()
     {
         InitLists.ConectInit = true;
-        StartCoroutine(WaitMapPop());
         ConectServer.PopPlayer();
     }
 
@@ -216,7 +290,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetPlayer()
     {
-        Debug.Log("おけ");
         return Player;
     }
 
@@ -264,13 +337,19 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// マップの生成を待つ
+    /// 全員が接続後、ゲームシーンに移った後にマスターが呼ぶ
     /// </summary>
     /// <returns></returns>
     IEnumerator WaitMapPop() 
     {
+
+        MessageText.text = "マップ生成中...(ローディング画面)";
+        yield return new WaitForSeconds(3f);
         yield return StartCoroutine(MapManager.StartPop());
         Debug.Log("Map OK");
         InitLists.MapInit = true;
+        //テスト
+        MessageText.transform.parent.gameObject.SetActive(false);
         yield break;
     }
 

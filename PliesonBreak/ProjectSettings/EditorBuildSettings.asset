@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Hidatest.unity
-    guid: bfed8028c1cfd7c4288ca327ef1cb710
+    path: Assets/Scenes/ProttypeSeacn.unity
+    guid: 5c141039694fce346836328b79f3d9f6
   m_configObjects: {}

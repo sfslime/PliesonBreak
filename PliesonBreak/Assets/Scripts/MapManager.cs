@@ -19,7 +19,6 @@ public class MapManager : MonoBehaviourPunCallbacks
     [SerializeField,Tooltip("サーチポイントのリストの親まとめ")]GameObject SearchPointListRoot;
 
     [SerializeField, Tooltip("各エリアの候補地点の親まとめ")] GameObject ListRoot;
-    [SerializeField, Tooltip("(エリア１)出現するポイント候補の親")] GameObject PointListArea1;
 
     [SerializeField, Header("アイテムの出現設定")] PopSetting PopSettings;
 
@@ -171,7 +170,7 @@ public class MapManager : MonoBehaviourPunCallbacks
     bool RandomPar(float Probability)
     {
         float nm = UnityEngine.Random.Range(0f, 1f);
-        return Probability <= nm ? true : false;
+        return Probability >= nm ? true : false;
     }
 
     //public void PopSearchPoint()

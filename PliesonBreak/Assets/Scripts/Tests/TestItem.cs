@@ -40,7 +40,7 @@ public class TestItem : MonoBehaviour
             var obj = Instantiate(ItemPrefab, pos, Quaternion.identity);
             obj.transform.parent = PointLists.transform;
             Point = obj;
-            obj.GetComponent<SearchPoint>().SetDropItem(obj.GetComponent<SearchPoint>());
+            obj.GetComponent<SearchPoint>().SetDropItem(obj.GetComponent<SearchPoint>().NowInteract);
         }
     }
 

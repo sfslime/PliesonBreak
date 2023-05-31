@@ -24,6 +24,15 @@ namespace ConstList
         EscapeObj,
     }
 
+    public enum ItemID
+    {
+        None,
+        Key,
+        EscapeItem1,
+        EscapeItem2,
+        Count
+    }
+
     public enum SEid
     {
         None,

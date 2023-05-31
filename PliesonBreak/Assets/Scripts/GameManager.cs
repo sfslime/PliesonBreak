@@ -55,6 +55,13 @@ public class GameManager : MonoBehaviour
         public List<InteractObjs> NeedEscapeList = new List<InteractObjs>();
     }
 
+    [System.Serializable]
+    class InitList
+    {
+        public bool MapInit;
+        public bool ConectInit;
+    }
+
     #endregion
 
     #region 変数宣言
@@ -75,6 +82,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("アイテム出現用プレファブ")] List<GameObject> interactObjectPrefabs = new List<GameObject>();
 
+    private InitList InitLists = new InitList();
+
     #endregion
 
     #region マネージャー変数
@@ -88,6 +97,9 @@ public class GameManager : MonoBehaviour
     //SEを管理するマネージャー
     private AudioManager AudioManager;
 
+    //オンライン接続マネージャー
+    private ConectServer ConectServer;
+
     #endregion
 
     #endregion
@@ -97,6 +109,9 @@ public class GameManager : MonoBehaviour
     bool Init()
     {
         GameManagerInstance = this;
+
+        InitLists.ConectInit = false;
+        InitLists.MapInit = false;
 
         AudioManager = GetComponent<AudioManager>();
         if(AudioManager == null)
@@ -111,6 +126,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("MapManager not found");
             return false;
         }
+
+        ConectServer = GetComponent<ConectServer>();
 
         return true;
 
@@ -127,13 +144,19 @@ public class GameManager : MonoBehaviour
         //プレイヤーの実体宣言
         //Player = プレイヤーの探索
 
-        MapManager.PopSearchPoint();
-
         //テスト
         GameStatus = GAMESTATUS.INGAME;
         ReleaseErea = 0;
 
         Debug.Log("Start OK");
+    }
+
+    /// <summary>
+    /// 各種初期化が終わったかをチェックする
+    /// </summary>
+    public void InitCheck()
+    {
+        if (InitLists.ConectInit && InitLists.MapInit) GameStart();
     }
 
     /// <summary>
@@ -159,6 +182,16 @@ public class GameManager : MonoBehaviour
     public void PlaySE(SEid id,Vector2 pos)
     {
         AudioManager.SE(id, pos);
+    }
+
+    /// <summary>
+    /// 接続時にコネクトサーバーから呼ばれる
+    /// </summary>
+    public void RoomJoined()
+    {
+        InitLists.ConectInit = true;
+        StartCoroutine(WaitMapPop());
+        ConectServer.PopPlayer();
     }
 
     /// <summary>
@@ -229,6 +262,18 @@ public class GameManager : MonoBehaviour
         yield break;
     }
 
+    /// <summary>
+    /// マップの生成を待つ
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator WaitMapPop() 
+    {
+        yield return StartCoroutine(MapManager.StartPop());
+        Debug.Log("Map OK");
+        InitLists.MapInit = true;
+        yield break;
+    }
+
     #endregion
 
     private void Awake()
@@ -240,12 +285,14 @@ public class GameManager : MonoBehaviour
     {
         
         //テスト
-        //GameStart();
     }
 
     
     void Update()
     {
-        
+        if(GameStatus == GAMESTATUS.READY)
+        {
+            InitCheck();
+        }
     }
 }

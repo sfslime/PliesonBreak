@@ -36,6 +36,7 @@ public class ConectServer : MonoBehaviourPunCallbacks
     {
         
         OnJoinde.Invoke();
+        GameManagerInstance.RoomJoined();
         Debug.Log("Onjoin");
     }
 
@@ -45,7 +46,6 @@ public class ConectServer : MonoBehaviourPunCallbacks
         
     }
 
-    //テスト
     //オンラインオブジェクトを生成する
     public void PopPlayer()
     {

@@ -6,31 +6,32 @@ using UnityEngine.UI;
 public class Jailer : MonoBehaviour
 {
     NavMeshAgent2D NavMeshAgent2D; //NavMeshAgent2Dを使用するための変数
-    [SerializeField] Transform target; //追跡するターゲット
+    //[SerializeField] Transform Target; //追跡するターゲット
+
+    [SerializeField] List<Transform> PatrolPointList = new List<Transform>();
+    int PatrolNumIndex;
 
     void Start()
     {
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
+        // SetNextPatrolPoint();
     }
 
     void Update()
     {
-        
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        TargetHunt(collision);
+        SetNextPatrolPoint();
     }
 
     /// <summary>
-    /// 自分の目的地をtargetの座標にする
+    /// 次の巡回ポイントを設定して自身が目的地に向かうための処理
     /// </summary>
-    void TargetHunt(Collider2D collision)
+    void SetNextPatrolPoint()
     {
-        if(collision.gameObject.tag == "Player")
+        if(NavMeshAgent2D.isArrival == true)
         {
-            NavMeshAgent2D.SetDestination(target.position);
+            PatrolNumIndex = (PatrolNumIndex + 1) % PatrolPointList.Count;
+            NavMeshAgent2D.isArrival = false;
         }
+        NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex].position);
     }
 }

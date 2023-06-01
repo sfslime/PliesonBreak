@@ -8,6 +8,7 @@ public class NavMeshAgent2D : MonoBehaviour
     [Header("Steering")]
     public float speed = 1.0f;
     public float stoppingDistance = 0;
+    public bool isArrival = false; // ターゲットに到達したかどうか.
 
     [HideInInspector]//常にUnityエディタから非表示
     private Vector2 trace_area = Vector2.zero;
@@ -30,6 +31,7 @@ public class NavMeshAgent2D : MonoBehaviour
     {
         if (Vector2.Distance(current, target) <= stoppingDistance)
         {
+            isArrival = true;
             return;
         }
 

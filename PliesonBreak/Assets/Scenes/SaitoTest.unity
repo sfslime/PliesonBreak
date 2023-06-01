@@ -512,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488016321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.53, y: -3.3, z: 0.90496176}
+  m_LocalPosition: {x: 3.66, y: 15.92, z: 0.90496176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 760237866}
   - component: {fileID: 760237865}
   - component: {fileID: 760237868}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TilemapMove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6119,6 +6119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9be6c39237081c42b5273fb72cca5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &851215741 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2658396639101774395, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+  m_PrefabInstance: {fileID: 1728290880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949446538
 GameObject:
   m_ObjectHideFlags: 0
@@ -6143,7 +6148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949446538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.75, y: 1.84, z: 0.90496176}
+  m_LocalPosition: {x: 19.91, y: 20.8, z: 0.90496176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7326,7 +7331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1089460011}
   - component: {fileID: 1089460012}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerSercth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14836,7 +14841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238148730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.56, y: -3.63, z: 0.90496176}
+  m_LocalPosition: {x: 20.08, y: 15.94, z: 0.90496176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15162,7 +15167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448295909}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.08, y: 1.7, z: 0.90496176}
+  m_LocalPosition: {x: 3.69, y: 21.2, z: 0.90496176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21883,7 +21888,8 @@ GameObject:
   - component: {fileID: 2133130466}
   - component: {fileID: 2133130465}
   - component: {fileID: 2133130467}
-  m_Layer: 0
+  - component: {fileID: 2133130468}
+  m_Layer: 2
   m_Name: Jailer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21950,7 +21956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133130460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.62, y: 2.06, z: 0}
+  m_LocalPosition: {x: 13.36, y: 19.68, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -21970,11 +21976,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4952c14334dde11418d0ff0df9f99963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 851215741}
   PatrolPointList:
   - {fileID: 1448295910}
   - {fileID: 488016322}
   - {fileID: 1238148731}
   - {fileID: 949446539}
+  isDiscover: 0
 --- !u!70 &2133130465
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -22027,6 +22035,22 @@ MonoBehaviour:
   speed: 5
   stoppingDistance: 0.1
   isArrival: 0
+--- !u!70 &2133130468
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133130460}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1001 &3960539307011548483
 PrefabInstance:
   m_ObjectHideFlags: 0

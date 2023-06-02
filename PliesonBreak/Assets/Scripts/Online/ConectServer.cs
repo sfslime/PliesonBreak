@@ -1,23 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
 
+/*
+接続を行うマネージャー
+接続後のことは関与せず、接続のみを行う
+ */
+
 public class ConectServer : MonoBehaviourPunCallbacks
 {
+    [System.Serializable]
+    public class RoomPropertie
+    {
+        [Tooltip("参加するルーム名")] public string RoomName;
+        [Tooltip("参加可能人数")] public int MaxPlayer;
+    }
+
     [Tooltip("サーバー接続時に呼ばれるイベント")] public UnityEvent OnConect;
     [Tooltip("ルーム参加時に呼ばれるイベント")] public UnityEvent OnJoinde;
-    [SerializeField,Header("テスト")] string objname;
-    [SerializeField] GameObject Player;
-    private GameManager GameManagerInstance;
+    [SerializeField, Tooltip("ルームに関する情報")] public static RoomPropertie RoomProperties = new RoomPropertie();
     // Start is called before the first frame update
     void Start()
     {
-        GameManagerInstance = GameManager.GameManagerInstance;
-        if (GameManagerInstance == null) Debug.Log("GameManagerInstance not found");
-        Player = GameManagerInstance.GetPlayer();
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -25,18 +33,27 @@ public class ConectServer : MonoBehaviourPunCallbacks
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnConnectedToMaster()
     {
-        // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default);
         OnConect.Invoke();
         Debug.Log("OnConect");
+        //テスト
+        //RoomProperties.MaxPlayer = 2;
+        //RoomProperties.RoomName = "1";
+        //SceneManager.LoadScene("WaitRoom");
+        //テスト
+        //TryRoomJoin();
+    }
+
+    public void TryRoomJoin()
+    {
+        //ルームに参加する（ルームが存在しなければ作成して参加する）
+        PhotonNetwork.JoinOrCreateRoom(RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default);
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
-        
+
         OnJoinde.Invoke();
-        GameManagerInstance.RoomJoined();
         Debug.Log("Onjoin");
     }
 
@@ -44,12 +61,5 @@ public class ConectServer : MonoBehaviourPunCallbacks
     void Update()
     {
         
-    }
-
-    //オンラインオブジェクトを生成する
-    public void PopPlayer()
-    {
-        var Link = PhotonNetwork.Instantiate(objname, Player.transform.position, Quaternion.identity);
-        Link.GetComponent<PlayerLink>().SetOrigin(Player);
     }
 }

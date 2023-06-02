@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     enum GAMESTATUS
     {
+        NONE,    //ゲームシーン外、もしくはセットされていない
         READY,   //ゲーム開始前
         INGAME,  //ゲーム中
         ENDGAME, //ゲーム終了後
@@ -100,9 +101,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("プレイヤークラス(testでインスペクターから)")] GameObject Player;
 
-    [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
+    [SerializeField, Tooltip("出現させるプレイヤーのプレファブ名")] string PlayerPrefabName;
 
-    [SerializeField, Tooltip("メッセージ表示UI(インスペクターから)")] Text MessageText;
+    [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("脱出アイテム・表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
 
@@ -127,9 +128,6 @@ public class GameManager : MonoBehaviour
     //SEを管理するマネージャー
     private AudioManager AudioManager;
 
-    //オンライン接続マネージャー
-    private ConectServer ConectServer;
-
     #endregion
 
     #endregion
@@ -144,6 +142,8 @@ public class GameManager : MonoBehaviour
     bool Init()
     {
         GameManagerInstance = this;
+
+        GameStatus = GAMESTATUS.READY;
 
         InitLists.ConectInit = false;
         InitLists.MapInit = false;
@@ -165,8 +165,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("MapManager not found");
             return false;
         }
-
-        ConectServer = GetComponent<ConectServer>();
 
         return true;
 
@@ -193,45 +191,10 @@ public class GameManager : MonoBehaviour
     /// 各種初期化が終わったかをチェックする
     /// 現在はテストのため、マップの生成も行っている
     /// </summary>
-    public void InitCheck()
+    bool InitCheck()
     {
-        if (!InitLists.ConectInit)
-        {
-            MessageText.text = "接続中...";
-        }
-        else
-        {
-            //動けるようにする
-            //Player.GetComponent<PlayerBase>().
-
-            if (PhotonNetwork.LocalPlayer.IsMasterClient == true)
-            {
-                MessageText.text = "参加人数 : " + PhotonNetwork.PlayerList.Length + "\nSPACEキーで開始";
-
-
-                if (InitLists.MapInit)
-                {
-                    GameStart();
-                }
-                //テスト
-                if (Input.GetKeyDown(KeyCode.Space) && !InitLists.MapInit)
-                {
-                    Debug.Log("マスタークライアント確認。アイテムの生成開始");
-                    StartCoroutine(WaitMapPop());
-
-                    //テスト
-                    InitLists.MapInit = true;
-                }
-            }
-            else
-            {
-                MessageText.text = "参加人数 : " + PhotonNetwork.PlayerList.Length + "\n待機中";
-
-                //マスタークライアントからアイテム生成位置を受け取る
-                InitLists.MapInit = true;
-            }
-
-        }
+        if (InitLists.ConectInit && InitLists.MapInit) return true;
+        return false;
     }
 
     /// <summary>
@@ -260,12 +223,12 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 接続時にコネクトサーバーから呼ばれる
+    /// 看守を生成する
+    /// 未作成のため空白
     /// </summary>
-    public void RoomJoined()
+    void PopJailer()
     {
-        InitLists.ConectInit = true;
-        ConectServer.PopPlayer();
+
     }
 
     /// <summary>
@@ -342,28 +305,112 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator WaitMapPop() 
     {
-
-        MessageText.text = "マップ生成中...(ローディング画面)";
-        yield return new WaitForSeconds(3f);
         yield return StartCoroutine(MapManager.StartPop());
         Debug.Log("Map OK");
         InitLists.MapInit = true;
-        //テスト
-        MessageText.transform.parent.gameObject.SetActive(false);
         yield break;
     }
+
+    /// <summary>
+    /// シーン移動後に各種初期化を行う
+    /// それぞれの初期化後に他のプレイヤーの待機を行う
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator InitGame()
+    {
+        //1,接続確認して他プレイヤーを待つ
+        //接続まで待機して現在の情報（初期化中）を設定
+        while(!PhotonNetwork.InRoom)
+        {
+            yield return null;
+        }
+        PhotonNetwork.LocalPlayer.SetGameStatus((int)GameStatus);
+        //すべてのプレイヤーの状態を確認
+        while (true)
+        {
+            //状態確認用
+            bool isNotReady = false;
+            //すべてのプレイヤーに対して確認
+            foreach(var player in PhotonNetwork.PlayerListOthers)
+            {
+                //初期化中でないなら変更
+                if(player.GetGameStatus() != (int)GAMESTATUS.READY)
+                {
+                    isNotReady = true;
+                }
+            }
+
+            //すべてのプレイヤーが初期化中なら進む
+            if (!isNotReady) break;
+            //フリーズ回避で1フレーム待機
+            yield return null;
+        }
+
+        InitLists.ConectInit = true;
+        Debug.Log("すべてのプレイヤーの接続確認");
+
+        //2,プレイヤー生成
+        var Link = PhotonNetwork.Instantiate(PlayerPrefabName, Player.transform.position, Quaternion.identity);
+        Link.GetComponent<PlayerLink>().SetOrigin(Player);
+
+        //3,(マスター)アイテム生成、送信(メンバー)アイテム受信待機
+        if(PhotonNetwork.LocalPlayer.IsMasterClient == true)
+        {
+            yield return StartCoroutine(WaitMapPop());
+
+            //生成したアイテム位置を必要とする場合、MapManagerから取得し送信
+            //(現在は必要ないため生成のみ)
+
+            //4,看守生成
+            PopJailer();
+        }
+        else
+        {
+            //行うことはないのでスキップ
+        }
+
+        //5,初期化待機
+
+        //自身の初期化完了を送信
+        PhotonNetwork.LocalPlayer.SetInitStatus(true);
+        while (true)
+        {
+            //状態確認用
+            bool isNotReady = false;
+            //すべてのプレイヤーに対して確認
+            foreach (var player in PhotonNetwork.PlayerListOthers)
+            {
+                //初期化中でないなら変更
+                if (player.GetInitStatus() == true)
+                {
+                    isNotReady = true;
+                }
+            }
+
+            //すべてのプレイヤーが初期化中なら進む
+            if (!isNotReady) break;
+            //フリーズ回避で1フレーム待機
+            yield return null;
+        }
+
+        Debug.Log("全プレイヤー初期化完了");
+        yield break;
+    }
+
 
     #endregion
 
     private void Awake()
     {
-        Init();
+        if (Init())
+        {
+            StartCoroutine(InitGame());
+        }
     }
 
     void Start()
     {
         
-        //テスト
     }
 
     
@@ -371,7 +418,14 @@ public class GameManager : MonoBehaviour
     {
         if(GameStatus == GAMESTATUS.READY)
         {
-            InitCheck();
+            if (InitCheck())
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    GameStart();
+                    Debug.Log("GameStart");
+                }
+            }
         }
     }
 }

@@ -21451,6 +21451,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: HaveId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: SearchPoint
       value: 
       objectReference: {fileID: 0}
@@ -21983,6 +21987,9 @@ MonoBehaviour:
   - {fileID: 1238148731}
   - {fileID: 949446539}
   isDiscover: 0
+  isLostTarget: 0
+  LostTime: 0
+  SetTime: 5
 --- !u!70 &2133130465
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

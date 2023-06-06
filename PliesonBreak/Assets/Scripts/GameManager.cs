@@ -184,7 +184,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetPlayer()
     {
-        Debug.Log("‚¨‚¯");
         return Player;
     }
 

@@ -18,10 +18,9 @@ false の場合にのみ探索すること
 public class SearchPoint : InteractObjectBase
 {
     //保持している、探索後に出現させるアイテム
-    private InteractObjectBase DropItem;
     private InteractObjs DropItemID;
     //テストで、出したいアイテムがある場合セットする
-    [SerializeField,Tooltip("テストで出したいアイテムの設定済みスクリプト(必要な場合のみSet)")] InteractObjectBase TestDropItem;
+    [SerializeField,Tooltip("テストで出したいアイテムの設定済みスクリプト(必要な場合のみSet)")] InteractObjs TestDropItemID;
     //標準探索時間。秒単位で記述
     [SerializeField,Range(1f,10f),Tooltip("デフォルトの探索時間(Set必須)")] float DefaltSearchTime;
     //コルーチンのストップフラグ
@@ -46,9 +45,9 @@ public class SearchPoint : InteractObjectBase
         SearchPointLink = GetComponent<SearchPointLink>();
         if (SearchPointLink == null) Debug.Log("point:SearchPointLink not found");
 
-        if(TestDropItem != null)
+        if(TestDropItemID != InteractObjs.None)
         {
-            SetDropItem(TestDropItem);
+            SetDropItem(TestDropItemID);
         }
 
         AudioSource = GetComponent<AudioSource>();
@@ -99,7 +98,7 @@ public class SearchPoint : InteractObjectBase
         InstantiateItem();
 
         //他プレイヤーに探索終了を送信
-        SearchPointLink.EndInteract((DropItem != null && DropItemID != InteractObjs.NullDrop) || isDestroy);
+        SearchPointLink.EndInteract((DropItemID != InteractObjs.None && DropItemID != InteractObjs.NullDrop) || isDestroy);
 
         Debug.Log("point:探索時間終了");
         
@@ -119,16 +118,16 @@ public class SearchPoint : InteractObjectBase
     /// </summary>
     public void InstantiateItem()
     {
-        if (DropItem != null && DropItemID != InteractObjs.NullDrop)
+        if (DropItemID != InteractObjs.None && DropItemID != InteractObjs.NullDrop)
         {
             //ゲームマネージャーからプレファブを取得し、情報を新しいオブジェクトに反映する
             //オフライン時はこの生成
             //var Obj = Instantiate(GameManager.GetObjectPrefab(DropItemID), transform.position, transform.rotation);
             var Obj = PhotonNetwork.Instantiate(DropItemID.ToString(), transform.position, transform.rotation);
-            Obj.GetComponent<InteractObjectBase>().CopyProperty(DropItem);
+            //Obj.GetComponent<InteractObjectBase>().CopyProperty(DropItem);
             //あたり演出
             GameManager.PlaySE(SEid.SearchHit, transform.position);
-            Debug.Log("point:アイテムドロップ>" + DropItem.GetComponent<InteractObjectBase>().name);
+            //Debug.Log("point:アイテムドロップ>" + DropItem.GetComponent<InteractObjectBase>().name);
         }
         else
         {
@@ -162,10 +161,9 @@ public class SearchPoint : InteractObjectBase
     /// 引数:intearactobj,ドロップする内容をクラスとして入れる。Noneだと自身を消す
     /// </summary>
     /// <param name="interactobj"></param>
-    public void SetDropItem(InteractObjectBase interactobj)
+    public void SetDropItem(InteractObjs interactobj)
     {
-        DropItem = interactobj;
-        DropItemID = interactobj.NowInteract;
+        DropItemID = interactobj;
 
         //if(DropItem/*所持ID*/ == InteractObjs.None)
         //{
@@ -177,8 +175,8 @@ public class SearchPoint : InteractObjectBase
     /// 他ユーザーの探索終了などの理由で中のアイテムを変更、または消去する
     /// </summary>
     /// <param name="interactObject"></param>
-    public void ChangeDropItem(InteractObjectBase interactObject)
+    public void ChangeDropItem(InteractObjs interactObject)
     {
-        DropItem = interactObject;
+        DropItemID = interactObject;
     }
 }

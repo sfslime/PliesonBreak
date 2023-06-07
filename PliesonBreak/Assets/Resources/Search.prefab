@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2084778826834602786}
   - component: {fileID: 582010039526816589}
   m_Layer: 0
-  m_Name: Sercth
+  m_Name: Search
   m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,12 +125,9 @@ MonoBehaviour:
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
   NowInteract: 4
-  TestDropItem: {fileID: 0}
+  TestDropItemID: 0
   DefaltSearchTime: 3
   isDestroy: 0
-  SEList:
-  - {fileID: 8300000, guid: 166cb62b418b8d04e9125996ec481cf5, type: 3}
-  - {fileID: 8300000, guid: aa9f71e78a879694f81315387d56bacd, type: 3}
 --- !u!58 &-402427164621693920
 CircleCollider2D:
   m_ObjectHideFlags: 0

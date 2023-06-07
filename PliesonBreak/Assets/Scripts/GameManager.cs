@@ -1,11 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using ConstList;
+using Photon.Pun;
+using Photon.Realtime;
 
 /*
-全体の進行を管理するマネージャー
+ゲームの進行を管理するマネージャー
+すべてのプレイヤーが揃い、ゲームシーン遷移後から管理する
+各マネージャーなどの初期化を始め、全員の準備が終わり次第開始する
+開始後はエリア解放、捕縛、中止　のメッセージを受け取り、適切に処理する
+
+初期化順
+(マスター)
+1,接続確認、待機
+2,プレイヤー生成
+3,アイテム生成、送信
+4,看守生成、送信
+5,初期化完了、待機
+6,コネクトサーバークラスによるゲーム開始関数
+
+(メンバー)
+1,接続確認、待機
+2,プレイヤー生成
+3,アイテム受信待機
+4,看守受信待機
+5,初期化完了、待機
+6,コネクトサーバークラスによるゲーム開始関数
+
 作成者：飛田
  */
 
@@ -18,6 +42,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     enum GAMESTATUS
     {
+        NONE,    //ゲームシーン外、もしくはセットされていない
         READY,   //ゲーム開始前
         INGAME,  //ゲーム中
         ENDGAME, //ゲーム終了後
@@ -38,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     #region クラス内クラス
 
+    //解放時に関するクラス
     [System.Serializable]
     class ReleaseEffectSetting
     {
@@ -48,11 +74,21 @@ public class GameManager : MonoBehaviour
         public GameObject EffectPanel;
     }
 
+    //ゴールに関するクラス
     [System.Serializable]
     class EscapeSetting
     {
         public bool isGoal;
         public List<InteractObjs> NeedEscapeList = new List<InteractObjs>();
+    }
+
+    //初期化用管理クラス
+    //各初期化の完了状態を参照できる
+    [System.Serializable]
+    class InitList
+    {
+        public bool MapInit;
+        public bool ConectInit;
     }
 
     #endregion
@@ -65,6 +101,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("プレイヤークラス(testでインスペクターから)")] GameObject Player;
 
+    [SerializeField, Tooltip("出現させるプレイヤーのプレファブ名")] string PlayerPrefabName;
+
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("脱出アイテム・表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
@@ -75,6 +113,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("アイテム出現用プレファブ")] List<GameObject> interactObjectPrefabs = new List<GameObject>();
 
+    private InitList InitLists = new InitList();
+
     #endregion
 
     #region マネージャー変数
@@ -83,7 +123,7 @@ public class GameManager : MonoBehaviour
     public static GameManager GameManagerInstance;
 
     //マップを管理するマネージャー
-    //private MapManager MapManager;
+    private MapManager MapManager;
 
     //SEを管理するマネージャー
     private AudioManager AudioManager;
@@ -94,14 +134,35 @@ public class GameManager : MonoBehaviour
 
     #region 関数
 
+    /// <summary>
+    /// 初期化関数
+    /// 戻り値でエラーチェックになり、falseの場合は直ちに終了すること
+    /// </summary>
+    /// <returns></returns>
     bool Init()
     {
         GameManagerInstance = this;
+
+        GameStatus = GAMESTATUS.READY;
+
+        InitLists.ConectInit = false;
+        InitLists.MapInit = false;
+
+        //プレイヤーの探索
+        //Player = GameObject.Find("")
+        //プレイヤーを動けなくする処理
 
         AudioManager = GetComponent<AudioManager>();
         if(AudioManager == null)
         {
             Debug.Log("AudioManager not found");
+            return false;
+        }
+
+        MapManager = GetComponent<MapManager>();
+        if(MapManager == null)
+        {
+            Debug.Log("MapManager not found");
             return false;
         }
 
@@ -117,24 +178,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameStart()
     {
-        //プレイヤーの実体宣言
-        //Player = プレイヤーの探索
-
-        //各マネージャーの起動、エラーチェック
-        //MapManager = マップマネージャーの検索
-        //if(MapManager == null)
-        //{
-        //    Debug.Log("MapManager Not Find");
-        //}else{
-        //マップの生成
-        //プレイヤーのリスポーン位置の取得
-        //}
-
         //テスト
         GameStatus = GAMESTATUS.INGAME;
         ReleaseErea = 0;
 
+        //MessageText.transform.parent.gameObject.SetActive(false);
+
         Debug.Log("Start OK");
+    }
+
+    /// <summary>
+    /// 各種初期化が終わったかをチェックする
+    /// 現在はテストのため、マップの生成も行っている
+    /// </summary>
+    bool InitCheck()
+    {
+        if (InitLists.ConectInit && InitLists.MapInit) return true;
+        return false;
     }
 
     /// <summary>
@@ -160,6 +220,15 @@ public class GameManager : MonoBehaviour
     public void PlaySE(SEid id,Vector2 pos)
     {
         AudioManager.SE(id, pos);
+    }
+
+    /// <summary>
+    /// 看守を生成する
+    /// 未作成のため空白
+    /// </summary>
+    void PopJailer()
+    {
+
     }
 
     /// <summary>
@@ -229,23 +298,134 @@ public class GameManager : MonoBehaviour
         yield break;
     }
 
+    /// <summary>
+    /// マップの生成を待つ
+    /// 全員が接続後、ゲームシーンに移った後にマスターが呼ぶ
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator WaitMapPop() 
+    {
+        yield return StartCoroutine(MapManager.StartPop());
+        Debug.Log("Map OK");
+        InitLists.MapInit = true;
+        yield break;
+    }
+
+    /// <summary>
+    /// シーン移動後に各種初期化を行う
+    /// それぞれの初期化後に他のプレイヤーの待機を行う
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator InitGame()
+    {
+        //1,接続確認して他プレイヤーを待つ
+        //接続まで待機して現在の情報（初期化中）を設定
+        while(!PhotonNetwork.InRoom)
+        {
+            yield return null;
+        }
+        PhotonNetwork.LocalPlayer.SetGameStatus((int)GameStatus);
+        //すべてのプレイヤーの状態を確認
+        while (true)
+        {
+            //状態確認用
+            bool isReady = true;
+            //すべてのプレイヤーに対して確認
+            foreach(var player in PhotonNetwork.PlayerListOthers)
+            {
+                //初期化中でないなら変更
+                if(player.GetGameStatus() != (int)GAMESTATUS.READY)
+                {
+                    isReady = false;
+                }
+            }
+
+            //すべてのプレイヤーが初期化中なら進む
+            if (isReady) break;
+            //フリーズ回避で1フレーム待機
+            yield return null;
+        }
+
+        InitLists.ConectInit = true;
+        Debug.Log("すべてのプレイヤーの接続確認");
+
+        //2,プレイヤー生成
+        var Link = PhotonNetwork.Instantiate(PlayerPrefabName, Player.transform.position, Quaternion.identity);
+        Link.GetComponent<PlayerLink>().SetOrigin(Player);
+
+        //3,(マスター)アイテム生成、送信(メンバー)アイテム受信待機
+        if(PhotonNetwork.LocalPlayer.IsMasterClient == true)
+        {
+            yield return StartCoroutine(WaitMapPop());
+
+            //生成したアイテム位置を必要とする場合、MapManagerから取得し送信
+            //(現在は必要ないため生成のみ)
+
+            //4,看守生成
+            PopJailer();
+        }
+        else
+        {
+            //行うことはないのでスキップ
+        }
+
+        //5,初期化待機
+
+        //自身の初期化完了を送信
+        PhotonNetwork.LocalPlayer.SetInitStatus(true);
+        while (true)
+        {
+            //状態確認用
+            bool isReady = true;
+            //すべてのプレイヤーに対して確認
+            foreach (var player in PhotonNetwork.PlayerListOthers)
+            {
+                //初期化中でないなら変更
+                if (player.GetInitStatus() != true)
+                {
+                    isReady = false;
+                }
+            }
+
+            //すべてのプレイヤーが初期化中なら進む
+            if (isReady) break;
+            //フリーズ回避で1フレーム待機
+            yield return null;
+        }
+
+        Debug.Log("全プレイヤー初期化完了");
+        yield break;
+    }
+
+
     #endregion
 
     private void Awake()
     {
-        Init();
+        if (Init())
+        {
+            StartCoroutine(InitGame());
+        }
     }
 
     void Start()
     {
         
-        //テスト
-        GameStart();
     }
 
     
     void Update()
     {
-        
+        if(GameStatus == GAMESTATUS.READY)
+        {
+            if (InitCheck())
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    GameStart();
+                    Debug.Log("GameStart");
+                }
+            }
+        }
     }
 }

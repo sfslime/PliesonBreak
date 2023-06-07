@@ -329,19 +329,19 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             //状態確認用
-            bool isNotReady = false;
+            bool isReady = true;
             //すべてのプレイヤーに対して確認
             foreach(var player in PhotonNetwork.PlayerListOthers)
             {
                 //初期化中でないなら変更
                 if(player.GetGameStatus() != (int)GAMESTATUS.READY)
                 {
-                    isNotReady = true;
+                    isReady = false;
                 }
             }
 
             //すべてのプレイヤーが初期化中なら進む
-            if (!isNotReady) break;
+            if (isReady) break;
             //フリーズ回避で1フレーム待機
             yield return null;
         }
@@ -376,19 +376,19 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             //状態確認用
-            bool isNotReady = false;
+            bool isReady = true;
             //すべてのプレイヤーに対して確認
             foreach (var player in PhotonNetwork.PlayerListOthers)
             {
                 //初期化中でないなら変更
-                if (player.GetInitStatus() == true)
+                if (player.GetInitStatus() != true)
                 {
-                    isNotReady = true;
+                    isReady = false;
                 }
             }
 
             //すべてのプレイヤーが初期化中なら進む
-            if (!isNotReady) break;
+            if (isReady) break;
             //フリーズ回避で1フレーム待機
             yield return null;
         }

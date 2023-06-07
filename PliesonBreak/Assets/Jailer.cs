@@ -13,6 +13,7 @@ public class Jailer : MonoBehaviour
 
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
+    [SerializeField] bool isArrest;      // プレイヤーを捕まえたかどうか.
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
     [SerializeField] float SetTime;      // LostTimeにセットする時間.
     Vector3 ThisSavePos;                 // 自身のポジションを保存.
@@ -34,6 +35,11 @@ public class Jailer : MonoBehaviour
     private void FixedUpdate()
     {
         JailerSight();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        ArrestPlayer(collision);
     }
 
     /// <summary>
@@ -125,4 +131,31 @@ public class Jailer : MonoBehaviour
             }
         }
     }
+
+    void ArrestPlayer(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            // TODO 捕まえたときの処理.
+            Debug.Log("捕まえました");
+        }
+    }
+
+    /// <summary>
+    /// 巡回ポイントの追加.
+    /// </summary>
+    public void AddPatrolPoint(Transform patrolpoint)
+    {
+        PatrolPointList.Add(patrolpoint);
+    }
+
+    /// <summary>
+    /// 巡回ポイントの削除.
+    /// </summary>
+    public void ClearPatorlPoint()
+    {
+        PatrolPointList.Clear();
+    }
+
+
 }

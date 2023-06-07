@@ -21442,53 +21442,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: Door
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: Goal
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: HaveId
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: SearchPoint
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: PlayerHaveItem
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: InteractObjectBase
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Name
       value: PlayerSprite
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658396639101774394, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658396639101774394, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658396639101774394, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658396639101774394, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2658396639101774395, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Pivot.x
@@ -21988,6 +21944,7 @@ MonoBehaviour:
   - {fileID: 949446539}
   isDiscover: 0
   isLostTarget: 0
+  isArrest: 0
   LostTime: 0
   SetTime: 5
 --- !u!70 &2133130465

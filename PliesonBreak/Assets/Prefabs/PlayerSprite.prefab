@@ -449,10 +449,10 @@ MonoBehaviour:
   InteractObjectBase: {fileID: 0}
   SearchPoint: {fileID: 0}
   Goal: {fileID: 0}
+  KeysLink: {fileID: 0}
   ObjID: 0
-  HaveId: 0
-  PlayerHaveItem: 1
-  isGetKey: 0
+  HaveId: 1
+  isPlayerHaveItem: 0
   isSearch: 0
-  isGetEscapeItem: 0000
   isEscapeItem: 0000
+  AnimState: 0

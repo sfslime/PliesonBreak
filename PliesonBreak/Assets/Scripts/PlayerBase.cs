@@ -10,6 +10,7 @@ public class PlayerBase : MonoBehaviour
     Rigidbody2D Rb;
 
     [SerializeField] float Speed;        // 移動の速さ.
+    [SerializeField] float SaveSpeed;    // 移動スピードを保存する変数.
 
     public InputAction InputAction;      // 操作にどういったキーを割り当てるかを決めるためのクラス.
     public UIManagerBase UIManager;      // UIを管理するマネージャー.
@@ -22,6 +23,7 @@ public class PlayerBase : MonoBehaviour
     public int HaveId;                        // 現在持っているアイテムのID.
     [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
     [SerializeField] bool isSearch;           // インタラクトしているかどうか
+    public bool isRestraint;                  // 動けるかどうか.
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
@@ -49,6 +51,8 @@ public class PlayerBase : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
+        SaveSpeed = Speed;
+        isRestraint = false;
     }
 
     void Update()
@@ -79,6 +83,10 @@ public class PlayerBase : MonoBehaviour
                 case (int)InteractObjs.EscapeObj:
                     Goal = collision.gameObject.GetComponent<Goal>();
                     break;
+
+                case (int)InteractObjs.BearTrap:
+                    
+                    break;
             }
             // Debug.Log("ObjID" +ObjID);
         }
@@ -96,11 +104,16 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerMove()
     {
-        if (isSearch != true)
+        if (isSearch == false && isRestraint == false)
         {
             var MoveVector = InputAction.ReadValue<Vector2>();
 
+            Speed = SaveSpeed;
             Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
+        }
+        if(isSearch == true && isRestraint == true)
+        {
+            Speed = 0;
         }
     }
 
@@ -192,7 +205,6 @@ public class PlayerBase : MonoBehaviour
             isPlayerHaveItem = false;
             HaveId = (int)InteractObjs.None;
         }
-
     }
 
     /// <summary>
@@ -219,6 +231,8 @@ public class PlayerBase : MonoBehaviour
         yield return StartCoroutine(SearchPoint.SearchStart(1));
         isSearch = false;
     }
+
+    
 
     /// <summary>
     /// プレイヤーがすでにアイテムを持っているときにアイテムを切り替える処理.

@@ -9,6 +9,7 @@ public class InteractObjectBase : MonoBehaviour
     protected PlayerBase PlayerBase;
     [SerializeField] protected GameManager GameManager;
     [SerializeField] protected KeysLink KeysLink;
+    protected Jailer Jailer;
 
     SpriteRenderer SpriteRenderer;
     public InteractObjs NowInteract;
@@ -73,27 +74,28 @@ public class InteractObjectBase : MonoBehaviour
 
     public KeysLink PostKeyLink()
     {
-
         Debug.Log("InteractObject");
         return GetComponent<KeysLink>();
     }
 
     public void ChangeSprite()
     {
-        if(NowInteract == InteractObjs.Key)
+        switch (NowInteract)
         {
-            Debug.Log("Sprite:Key");
-            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key);
-        }
-        else if(NowInteract == InteractObjs.EscapeItem1)
-        {
-            Debug.Log("Sprite:EscapeItem1");
-            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
-        }
-        else if (NowInteract == InteractObjs.EscapeItem2)
-        {
-            Debug.Log("Sprite:EscapeItem2");
-            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
+            case InteractObjs.Key:
+                Debug.Log("Sprite:Key");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key);
+                break;
+
+            case InteractObjs.EscapeItem1:
+                Debug.Log("Sprite:EscapeItem1");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
+                break;
+
+            case InteractObjs.EscapeItem2:
+                Debug.Log("Sprite:EscapeItem2");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
+                break;
         }
     }
 }

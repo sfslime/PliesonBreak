@@ -14,6 +14,7 @@ public class Jailer : MonoBehaviour
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
     [SerializeField] bool isArrest;      // プレイヤーを捕まえたかどうか.
+    public bool isRestraint;   // 動けるかどうか
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
     [SerializeField] float SetTime;      // LostTimeにセットする時間.
 
@@ -29,13 +30,17 @@ public class Jailer : MonoBehaviour
     {
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
         isDiscover = false;
+        isArrest = false;
         ThisSavePos = transform.position;
     }
 
     void Update()
     {
-        SetNextPatrolPoint();
-        LostPlayer();
+        if(isRestraint == false)
+        {
+            SetNextPatrolPoint();
+            LostPlayer();
+        }
     }
 
     private void FixedUpdate()

@@ -20,12 +20,15 @@ public class ConectServer : MonoBehaviourPunCallbacks
         [Tooltip("参加可能人数")] public int MaxPlayer;
     }
 
+    [SerializeField, Tooltip("デバッグなどでのオフラインモード")] bool isOffline;
+
     [Tooltip("サーバー接続時に呼ばれるイベント")] public UnityEvent OnConect;
     [Tooltip("ルーム参加時に呼ばれるイベント")] public UnityEvent OnJoinde;
     [SerializeField, Tooltip("ルームに関する情報")] public static RoomPropertie RoomProperties = new RoomPropertie();
     // Start is called before the first frame update
     void Start()
     {
+        if(isOffline) PhotonNetwork.OfflineMode = true;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -46,7 +49,7 @@ public class ConectServer : MonoBehaviourPunCallbacks
     public void TryRoomJoin()
     {
         //ルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom(RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(/*RoomProperties.RoomName*/"1", new RoomOptions(), TypedLobby.Default);
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック

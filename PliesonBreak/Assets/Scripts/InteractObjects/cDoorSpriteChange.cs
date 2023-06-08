@@ -8,10 +8,10 @@ public class cDoorSpriteChange : MonoBehaviour
     //変更するタイルマップ（自分自身）
     Tilemap tilemap;
     //変更先の左右の画像
-    [SerializeField,Header("変更先画像")] TileBase LeftOpenTile;
+    [SerializeField, Header("変更先画像")] TileBase LeftOpenTile;
     [SerializeField] TileBase RightOpenTile;
     //変更するタイル座標。グリッド座標で扱う
-    [SerializeField,Header("変更元座標（グリッド座標）")] List<Vector3Int> LeftDoorPositions = new List<Vector3Int>();
+    [SerializeField, Header("変更元座標（グリッド座標）")] List<Vector3Int> LeftDoorPositions = new List<Vector3Int>();
     [SerializeField] List<Vector3Int> RightDoorPositions = new List<Vector3Int>();
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class cDoorSpriteChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>

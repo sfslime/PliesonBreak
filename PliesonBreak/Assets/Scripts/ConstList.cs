@@ -19,6 +19,7 @@ namespace ConstList
         None,
         Key,
         Door,
+        Prison,
         NullDrop,
         Search,
         EscapeItem1,
@@ -55,6 +56,8 @@ namespace ConstList
     {
         private const string GameStatusKey = "Gs";
         private const string InitStatusKey = "Is";
+        private const string ArrestStatusKey = "As";
+        private const string ArrestCntStatusKey = "ACs";
 
         private static readonly ExitGames.Client.Photon.Hashtable propsToSet = new ExitGames.Client.Photon.Hashtable();
 
@@ -100,6 +103,52 @@ namespace ConstList
         public static void SetInitStatus(this Player player, bool status)
         {
             propsToSet[InitStatusKey] = status;
+            player.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        /// <summary>
+        /// 引数でPhotonのプレイヤーを渡すことで
+        /// 戻り値でそのプレイヤーの捕縛情報が返る
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static bool GetArrestStatus(this Player player)
+        {
+            return (player.CustomProperties[ArrestStatusKey] is bool status) ? status : false;
+        }
+
+        /// <summary>
+        /// 引数でPhotonのプレイヤーと捕縛状態を渡すことで
+        /// 他プレイヤーに送信する
+        /// </summary>
+        /// <param name="player"></param>
+        public static void SetArrestStatus(this Player player, bool status)
+        {
+            propsToSet[ArrestStatusKey] = status;
+            player.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        /// <summary>
+        /// 引数でPhotonのプレイヤーを渡すことで
+        /// 戻り値でそのプレイヤーの捕縛情報が返る
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static float GetArrestCntStatus(this Player player)
+        {
+            return (player.CustomProperties[ArrestCntStatusKey] is int cnt) ? cnt : 0;
+        }
+
+        /// <summary>
+        /// 引数でPhotonのプレイヤーと捕縛状態を渡すことで
+        /// 他プレイヤーに送信する
+        /// </summary>
+        /// <param name="player"></param>
+        public static void SetArrestCntStatus(this Player player, float cnt)
+        {
+            propsToSet[ArrestCntStatusKey] = cnt;
             player.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }

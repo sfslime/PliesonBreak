@@ -8,7 +8,7 @@ public class DoorBase : InteractObjectBase
 
     //”ò“c’Ç‰Á•ª
     private DoorLink DoorLink;
-    private bool isOpen;
+    [SerializeField] bool isOpen;
 
     void Start()
     {

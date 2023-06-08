@@ -21,6 +21,7 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
 
     [SerializeField,Header("移動共有用変数"),Tooltip("滑らかな移動のための速度")] float LerpSpeed;
     [SerializeField,Tooltip("接続済みかどうか")] bool isJoin = false;
+    [SerializeField, Tooltip("画像とプレイヤーのずれ修正")] Vector3 Offset;
     Vector3 PlayerPosition;
 
     // Start is called before the first frame update
@@ -40,6 +41,7 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
     {
         //プレイヤーに追従
         if (!photonView.IsMine && !isJoin) return;
+        PlayerPosition += Offset;
         transform.position = Vector3.Lerp(transform.position, PlayerPosition, LerpSpeed * Time.fixedDeltaTime);
     }
 

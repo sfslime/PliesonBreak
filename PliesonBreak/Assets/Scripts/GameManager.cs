@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("出現させるプレイヤーのプレファブ名")] string PlayerPrefabName;
 
-    [SerializeField, Tooltip("牢屋の場所(インスペクターからセット)")] GameObject PrisonPoint;
+    [SerializeField, Tooltip("牢屋の場所")] GameObject PrisonPoint;
 
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
@@ -236,18 +236,102 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// プレイヤーを捕まえたときに看守から呼ばれる
+    /// ローカルプレイヤーであればプレイヤーの場所や画面に演出を起こし、
+    /// 他プレイヤーであれば画面にメッセージを表示する
+    /// </summary>
+    /// <param name="player"></param>
     public void ArrestPlayer(GameObject player)
+    {
+        StartCoroutine(ArrestEffect(player));
+    }
+
+    /// <summary>
+    /// 牢屋が解放されたときにメッセージを表示する
+    /// 牢屋から呼ばれる
+    /// </summary>
+    public void ReleasePrison()
+    {
+        //解放メッセージ
+    }
+
+    /// <summary>
+    /// 捕縛状態から解放する
+    /// 牢屋の柵に触れたときに呼ばれ、カウント減少を停止する
+    /// </summary>
+    /// <param name="player"></param>
+    public void ReleasePlayer(GameObject player)
     {
         if (PlayerSprite.GetComponent<PlayerLink>().GetOrigin() == player)
         {
-            //捕まりエフェクト
-
-            player.transform.position = PrisonPoint.transform.position;
-
-            //捕まり処理（カウント開始や捕まり状態送信）
-
-
+            if (PhotonNetwork.LocalPlayer.GetArrestStatus())
+            {
+                PhotonNetwork.LocalPlayer.SetArrestStatus(false);
+            }
         }
+    }
+
+    /// <summary>
+    /// ゲーム開始前に呼ぶ待機関数
+    /// UpDate内で呼ばれる
+    /// </summary>
+    void Ready()
+    {
+        if (InitCheck())
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GameStart();
+                Debug.Log("GameStart");
+            }
+        }
+    }
+
+    /// <summary>
+    /// ローカルプレイヤーのカウントを減少させる
+    /// 他プレイヤーはそれぞれのゲームマネージャーで減少させる
+    /// その結果を表示する
+    /// </summary>
+    void ArrestCountUpDate()
+    {
+        if (PhotonNetwork.LocalPlayer.GetArrestStatus())
+        {
+            PhotonNetwork.LocalPlayer.SetArrestCntStatus(PhotonNetwork.LocalPlayer.GetArrestCntStatus() - Time.deltaTime);
+        }
+
+        foreach(var player in PhotonNetwork.PlayerList)
+        {
+            if(player == PhotonNetwork.LocalPlayer)
+            {
+                if (player.GetArrestStatus())
+                {
+                    //自身のカウントを表示
+                    player.GetArrestCntStatus();
+                }
+                else
+                {
+                    //通常画像を表示
+                }
+            }
+            else
+            {
+                if (player.GetArrestStatus())
+                {
+                    //他プレイヤーのカウントを表示
+                    player.GetArrestCntStatus();
+                }
+                else
+                {
+                    //通常画像を表示
+                }
+            }
+        }
+    }
+
+    public void Setprisonpoint(GameObject point)
+    {
+        PrisonPoint = point;
     }
 
     /// <summary>
@@ -284,6 +368,30 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region コルーチン
+
+    /// <summary>
+    /// 捕まった時の演出等を順番に処理する
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    IEnumerator ArrestEffect(GameObject player)
+    {
+        if (PlayerSprite.GetComponent<PlayerLink>().GetOrigin() == player)
+        {
+            //捕まり演出(その場にエフェクト、SE、画面にメッセージ、アニメーション)
+
+            player.transform.position = PrisonPoint.transform.position;
+
+            //捕まり処理（カウント開始や捕まり状態送信）
+            PhotonNetwork.LocalPlayer.SetArrestStatus(true);
+        }
+        else
+        {
+            //捕まり演出(画面にメッセージ)
+        }
+
+        yield break;
+    }
 
     /// <summary>
     /// エリア解放時の演出コルーチン
@@ -436,16 +544,18 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        if(GameStatus == GAMESTATUS.READY)
+        switch (GameStatus)
         {
-            if (InitCheck())
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    GameStart();
-                    Debug.Log("GameStart");
-                }
-            }
+            case GAMESTATUS.READY:
+                Ready();
+                break;
+
+            case GAMESTATUS.INGAME:
+                ArrestCountUpDate();
+                break;
+
+            default:
+                break;
         }
     }
 }

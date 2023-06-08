@@ -10,6 +10,7 @@ TagManager:
   - Door
   - Key
   - InteractObject
+  - Jailer
   layers:
   - Default
   - TransparentFX

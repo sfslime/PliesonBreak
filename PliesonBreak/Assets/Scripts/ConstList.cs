@@ -25,6 +25,7 @@ namespace ConstList
         EscapeItem1,
         EscapeItem2,
         EscapeObj,
+        BearTrap,
     }
 
     public enum ItemID

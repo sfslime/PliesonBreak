@@ -14,22 +14,33 @@ public class Jailer : MonoBehaviour
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
     [SerializeField] bool isArrest;      // プレイヤーを捕まえたかどうか.
+    public bool isRestraint;   // 動けるかどうか
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
     [SerializeField] float SetTime;      // LostTimeにセットする時間.
+
     Vector3 ThisSavePos;                 // 自身のポジションを保存.
     Vector3 SavePlayerPos;               // プレイヤーのポジションを保存.
+
+    // 視界のパラメータ.
+    [SerializeField] int RayNum;                    // Rayの本数.
+    [SerializeField] float Angle;                   // 角度.
+    [SerializeField] float Distance;                // Rayの距離.
 
     void Start()
     {
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
         isDiscover = false;
+        isArrest = false;
         ThisSavePos = transform.position;
     }
 
     void Update()
     {
-        SetNextPatrolPoint();
-        LostPlayer();
+        if(isRestraint == false)
+        {
+            SetNextPatrolPoint();
+            LostPlayer();
+        }
     }
 
     private void FixedUpdate()
@@ -65,14 +76,10 @@ public class Jailer : MonoBehaviour
     }
 
     /// <summary>
-    /// 敵の視界 扇形
+    /// 敵の視界.
     /// </summary>
     void JailerSight()
     {
-        int   RayNum = 10;              // Rayの本数.
-        float Angle = 15f;              // 角度.
-        float Distance = 5f;           // Rayの距離.
-        float StartAngle = -Angle / 2;  // 扇の開始角度.
         float AngleIncrement = Angle / (RayNum - 1);                     // Rayの角度増分
         Vector3 RelativeVector = transform.position - ThisSavePos;       // 相対ベクター.
         Vector3 ForwardDir = RelativeVector.normalized;                  // オブジェクトが向いている方向の取得.
@@ -80,10 +87,13 @@ public class Jailer : MonoBehaviour
 
         for (int num = 0; num < RayNum; num++)
         {
+            float StartAngle = -Angle / 2;  // 扇の開始角度.
+
             // 現在の向き.
             float CurrentAngle = StartAngle + num * AngleIncrement;
 
             Quaternion RayRotation = Quaternion.Euler(0, 0, CurrentAngle);
+
             Vector3 RayDir = RayRotation * ForwardDir;
 
             // Rayの発射.
@@ -95,7 +105,7 @@ public class Jailer : MonoBehaviour
                 isDiscover = true;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;
-                Debug.Log("SavePlayerPos" + SavePlayerPos);
+                // Debug.Log("SavePlayerPos" + SavePlayerPos);
             }
             else if (hit.collider == null && SavePlayerPos != Vector3.zero)
             {
@@ -104,7 +114,7 @@ public class Jailer : MonoBehaviour
             }
             else if(hit.collider == null)
             {
-                //isDiscover = false;
+                // 保存していたポジションの初期化.
                 SavePlayerPos = Vector3.zero;
             }
 
@@ -132,11 +142,16 @@ public class Jailer : MonoBehaviour
         }
     }
 
-    void ArrestPlayer(Collision2D collision)
+    /// <summary>
+    /// プレイヤーを捕まえた時の処理.
+    /// </summary>
+    /// <param name="collision"></param>
+    public void ArrestPlayer(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             // TODO 捕まえたときの処理.
+            
             Debug.Log("捕まえました");
         }
     }
@@ -156,6 +171,4 @@ public class Jailer : MonoBehaviour
     {
         PatrolPointList.Clear();
     }
-
-
 }

@@ -19,6 +19,8 @@ public class ItemImage : MonoBehaviour
         image = GetComponent<Image>();
         
         GameManager = GameManager.GameManagerInstance;
+
+        Player = GameManager.GetPlayer().GetComponent<PlayerBase>();
     }
 
     void Update()

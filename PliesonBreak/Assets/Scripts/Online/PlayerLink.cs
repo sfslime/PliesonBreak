@@ -53,6 +53,11 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         isJoin = true;
     }
 
+    public GameObject GetOrigin()
+    {
+        return OriginObject;
+    }
+
     /// <summary>
     /// 他プレイヤーにアニメーションの状態を共有する
     /// 引数でアニメーションIDを取る

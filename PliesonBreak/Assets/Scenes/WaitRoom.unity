@@ -14865,7 +14865,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1680006326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1736406397}
+        m_TargetAssemblyTypeName: WaitRoomManager, Assembly-CSharp
+        m_MethodName: MoveGameScean
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1680006326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15072,7 +15084,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MessageText: {fileID: 2033806403}
   SceanMoveButton: {fileID: 1680006325}
-  MaxPlayer: 2
 --- !u!1 &2033806401
 GameObject:
   m_ObjectHideFlags: 0

@@ -101,7 +101,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("プレイヤークラス(testでインスペクターから)")] GameObject Player;
 
+    //生成したプレイヤーの見た目（オンラインオブジェクト）
+    private GameObject PlayerSprite;
+
     [SerializeField, Tooltip("出現させるプレイヤーのプレファブ名")] string PlayerPrefabName;
+
+    [SerializeField, Tooltip("牢屋の場所(インスペクターからセット)")] GameObject PrisonPoint;
 
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
@@ -231,6 +236,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ArrestPlayer(GameObject player)
+    {
+        if (PlayerSprite.GetComponent<PlayerLink>().GetOrigin() == player)
+        {
+            //捕まりエフェクト
+
+            player.transform.position = PrisonPoint.transform.position;
+
+            //捕まり処理（カウント開始や捕まり状態送信）
+
+
+        }
+    }
+
     /// <summary>
     /// アイテムの画像変更用に引数に応じてスプライトを返す
     /// </summary>
@@ -352,6 +371,7 @@ public class GameManager : MonoBehaviour
         //2,プレイヤー生成
         var Link = PhotonNetwork.Instantiate(PlayerPrefabName, Player.transform.position, Quaternion.identity);
         Link.GetComponent<PlayerLink>().SetOrigin(Player);
+        PlayerSprite = Link;
 
         //3,(マスター)アイテム生成、送信(メンバー)アイテム受信待機
         if(PhotonNetwork.LocalPlayer.IsMasterClient == true)

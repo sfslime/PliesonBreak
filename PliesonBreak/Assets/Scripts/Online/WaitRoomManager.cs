@@ -30,7 +30,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
         if (isMaster)
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.LoadLevel(SceanNames.GAME.ToString());
+            PhotonNetwork.LoadLevel("ProttypeSeacn");//SceanNames.GAME.ToString());
         }
     }
 

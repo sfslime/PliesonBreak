@@ -9,7 +9,7 @@ public class PlayerBase : MonoBehaviour
     #region 変数.
     Rigidbody2D Rb;
 
-    [SerializeField] float Speed;     // 移動の速さ.
+    [SerializeField] float Speed;        // 移動の速さ.
 
     public InputAction InputAction;      // 操作にどういったキーを割り当てるかを決めるためのクラス.
     public UIManagerBase UIManager;      // UIを管理するマネージャー.
@@ -20,8 +20,7 @@ public class PlayerBase : MonoBehaviour
     public KeysLink KeysLink;
     public int ObjID;                         // 現在重なっているオブジェクトの情報を取得.
     public int HaveId;                        // 現在持っているアイテムのID.
-    [SerializeField] bool isPlayerHaveItem;      // プレイヤーが一度に持てるアイテムの個数.
-
+    [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
     [SerializeField] bool isSearch;           // インタラクトしているかどうか
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
@@ -63,18 +62,25 @@ public class PlayerBase : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision)
-    { 
-        if(collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.Door)
+    {
+        // 触れたインタラクトオブジェクトのComponentの取得.
+        if (collision.gameObject.tag == "InteractObject")
         {
-            Door = collision.gameObject.GetComponent<DoorBase>();
-        }
-        if (collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.Search)
-        {
-            SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
-        }
-        if (collision.gameObject.tag == "InteractObject" && ObjID == (int)InteractObjs.EscapeObj)
-        {
-            Goal = collision.gameObject.GetComponent<Goal>();
+            switch (ObjID)
+            {
+                case (int)InteractObjs.Door:
+                    Door = collision.gameObject.GetComponent<DoorBase>();
+                    break;
+
+                case (int)InteractObjs.Search:
+                    SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
+                    break;
+
+                case (int)InteractObjs.EscapeObj:
+                    Goal = collision.gameObject.GetComponent<Goal>();
+                    break;
+            }
+            // Debug.Log("ObjID" +ObjID);
         }
 
         EnterInteractObj(collision);
@@ -124,44 +130,45 @@ public class PlayerBase : MonoBehaviour
         }
         // オブジェクトを破棄.
         if ((ObjID == (int)InteractObjs.Key ||
-                 ObjID == (int)InteractObjs.EscapeItem1 ||
-                 ObjID == (int)InteractObjs.EscapeItem2) &&
-                 isPlayerHaveItem == false)
+             ObjID == (int)InteractObjs.EscapeItem1 ||
+             ObjID == (int)InteractObjs.EscapeItem2) &&
+             isPlayerHaveItem == false)
         {
             KeysLink.StateLink(false);
         }
 
-        if (ObjID == (int)InteractObjs.Search)
+        // 触れているオブジェクトに対してインタラクトボタンを押した時に行う処理.
+        switch (ObjID)
         {
-            StartCoroutine("Search");
+            case (int)InteractObjs.Search:
+                StartCoroutine("Search");
+                break;
+
+            case (int)InteractObjs.Key:
+                isPlayerHaveItem = true;
+                break;
+
+            case (int)InteractObjs.Door:
+                PlayerHaveKey();
+                break;
+
+            case (int)InteractObjs.EscapeItem1:
+                isPlayerHaveItem = true;
+                break;
+
+            case (int)InteractObjs.EscapeItem2:
+                isPlayerHaveItem = true;
+                break;
+
+            case (int)InteractObjs.EscapeObj:
+                if (Goal.SetEscapeItem((InteractObjs)HaveId))
+                {
+                    isPlayerHaveItem = false;
+                    HaveId = (int)InteractObjs.None;
+                }
+                break;
         }
-        else if (ObjID == (int)InteractObjs.Key)
-        {
-            isPlayerHaveItem = true;
-            Debug.Log("鍵を入手");
-        }
-        else if (ObjID == (int)InteractObjs.Door)
-        {
-            PlayerHaveKey();
-        }
-        else if (ObjID == (int)InteractObjs.EscapeItem1)
-        {
-            isPlayerHaveItem = true;
-            // Debug.Log("脱出アイテム1を入手");
-        }
-        else if (ObjID == (int)InteractObjs.EscapeItem2)
-        {
-            isPlayerHaveItem = true;
-            // Debug.Log("脱出アイテム2を入手");
-        }
-        else if (ObjID == (int)InteractObjs.EscapeObj)
-        {
-            if (Goal.SetEscapeItem((InteractObjs)HaveId))
-            {
-                isPlayerHaveItem = false;
-                HaveId = (int)InteractObjs.None;
-            }
-        }
+
         if (isPlayerHaveItem == true)
         {
             Debug.Log("これ以上アイテムを持てません");
@@ -219,7 +226,6 @@ public class PlayerBase : MonoBehaviour
     public void ChangeHaveItem(int olditem)
     {
         HaveId = olditem;
-        //Debug.Log(olditem);
     }
 
     public AnimCode GetAnimState()

@@ -13,7 +13,7 @@ public class MapManager : MonoBehaviourPunCallbacks
     {
         [SerializeField,Tooltip("各エリアの出現するポイント数")] public List<int> PointNmList;
         [SerializeField,Tooltip("各エリアに出現させるキーアイテムのリスト")]public List<InteractObjs> KeyIDList;
-        [SerializeField, Tooltip("出現するはずれポイントの確率")] public float NullDropRate;
+        [SerializeField, Tooltip("各エリアに出現するはずれポイントの確率")] public List<float> NullDropRate = new List<float>();
     }
 
     [SerializeField,Tooltip("サーチポイントのリストの親まとめ")]GameObject SearchPointListRoot;
@@ -56,7 +56,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             var SearchPointList = SearchPointListRoot.transform.GetChild(AreaNm).gameObject;
 
             //アイテムの抽選
-            var ItemIDList = ItemSelect(PopList.Count, PopSettings.KeyIDList[AreaNm]);
+            var ItemIDList = ItemSelect(PopList.Count, PopSettings.KeyIDList[AreaNm],AreaNm);
 
             //決定したポイント毎に生成処理
             for (int cnt = 0;cnt < PopList.Count;cnt++)
@@ -129,7 +129,7 @@ public class MapManager : MonoBehaviourPunCallbacks
     /// 引数で与えられたリスト数で返す
     /// </summary>
     /// <returns></returns>
-    List<InteractObjs> ItemSelect(int Index, InteractObjs KeyID)
+    List<InteractObjs> ItemSelect(int Index, InteractObjs KeyID,int Area)
     {
         List<InteractObjs> IDList = new List<InteractObjs>();
         bool isKeyPop = false;
@@ -149,7 +149,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             {
                 InteractObjs item;
                 //はずれ確率によってはずれ生成
-                if (RandomPar(PopSettings.NullDropRate))
+                if (RandomPar(PopSettings.NullDropRate[Area]))
                 {
                     item = InteractObjs.NullDrop;
                 }

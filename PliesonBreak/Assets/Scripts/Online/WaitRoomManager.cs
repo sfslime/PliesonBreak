@@ -30,7 +30,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
         if (isMaster)
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.LoadLevel("ProttypeSeacn");//SceanNames.GAME.ToString());
+            PhotonNetwork.LoadLevel(/*"ProttypeSeacn");*/SceanNames.GAME.ToString());
         }
     }
 
@@ -55,6 +55,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.CurrentRoom.MaxPlayers = (byte)ConectServer.RoomProperties.MaxPlayer;
         }
+        PhotonNetwork.AutomaticallySyncScene = true;
         Debug.Log("OnJoin");
     }
 

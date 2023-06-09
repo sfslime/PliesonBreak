@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 4
+  NowInteract: 5
   TestDropItemID: 0
   DefaltSearchTime: 3
   isDestroy: 0

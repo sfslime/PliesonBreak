@@ -18,12 +18,13 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] InteractObjectBase InteractObjectBase;
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
+    [SerializeField] BearTrap BearTrap;
     public KeysLink KeysLink;
     public int ObjID;                         // 現在重なっているオブジェクトの情報を取得.
     public int HaveId;                        // 現在持っているアイテムのID.
     [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
     [SerializeField] bool isSearch;           // インタラクトしているかどうか
-    public bool isRestraint;                  // 動けるかどうか.
+    public bool isMove;                  // 動けるかどうか.
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
@@ -52,7 +53,7 @@ public class PlayerBase : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
         SaveSpeed = Speed;
-        isRestraint = false;
+        isMove = false;
     }
 
     void Update()
@@ -85,7 +86,7 @@ public class PlayerBase : MonoBehaviour
                     break;
 
                 case (int)InteractObjs.CloseBearTrap:
-                    
+                    BearTrap = collision.gameObject.GetComponent<BearTrap>();
                     break;
             }
             // Debug.Log("ObjID" +ObjID);
@@ -104,14 +105,14 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerMove()
     {
-        if (isSearch == false && isRestraint == false)
+        if (isSearch == false && isMove == false)
         {
             var MoveVector = InputAction.ReadValue<Vector2>();
 
             Speed = SaveSpeed;
             Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
         }
-        if(isSearch == true && isRestraint == true)
+        if(isSearch == true && isMove == true)
         {
             Speed = 0;
         }
@@ -135,7 +136,9 @@ public class PlayerBase : MonoBehaviour
         Debug.Log("ID>" + ObjID);
         if (ObjID != (int)InteractObjs.Search && 
             ObjID != (int)InteractObjs.Door && 
-            ObjID != (int)InteractObjs.EscapeObj)
+            ObjID != (int)InteractObjs.EscapeObj &&
+            ObjID != (int)InteractObjs.OpenBearTrap &&
+            ObjID != (int)InteractObjs.CloseBearTrap)
         {
             
             InteractObjectBase.RequestSprite();
@@ -180,6 +183,11 @@ public class PlayerBase : MonoBehaviour
                     HaveId = (int)InteractObjs.None;
                 }
                 break;
+
+            case (int)InteractObjs.CloseBearTrap:
+                StartCoroutine(BearTrap.BearTrapOpen(3));
+                StartCoroutine(InteractTime(3));
+                break;
         }
 
         if (isPlayerHaveItem == true)
@@ -216,7 +224,7 @@ public class PlayerBase : MonoBehaviour
         if (collision.gameObject.tag == "InteractObject")
         {
             InteractObjectBase = collision.gameObject.GetComponent<InteractObjectBase>();
-            UIManager.IsInteractButton(true);
+            if(ObjID != (int)InteractObjs.OpenBearTrap) UIManager.IsInteractButton(true);
             KeysLink = InteractObjectBase.PostKeyLink();
         }
     }
@@ -232,6 +240,17 @@ public class PlayerBase : MonoBehaviour
         isSearch = false;
     }
 
+    /// <summary>
+    /// インタラクトするのに掛かる時間.
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    IEnumerator InteractTime(float time)
+    {
+        isMove = true;
+        yield return new WaitForSeconds(time);
+        isMove = false;
+    }
     
 
     /// <summary>

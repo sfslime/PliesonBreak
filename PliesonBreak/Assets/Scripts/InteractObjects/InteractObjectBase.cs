@@ -8,7 +8,7 @@ public class InteractObjectBase : MonoBehaviour
 {
     protected PlayerBase PlayerBase;
     [SerializeField] protected GameManager GameManager;
-    [SerializeField] protected KeysLink KeysLink;
+    [SerializeField] KeysLink KeysLink;
     protected Jailer Jailer;
 
     protected SpriteRenderer SpriteRenderer;
@@ -20,12 +20,12 @@ public class InteractObjectBase : MonoBehaviour
         GameManager = GameManager.GameManagerInstance;
         SpriteRenderer = GetComponent<SpriteRenderer>();
         if (GameManager == null) Debug.Log("GameManagerInstance not found");
-        KeysLink = GetComponent<KeysLink>();
     }
 
     void Start()
     {
         SetUp();
+        KeysLink = GetComponent<KeysLink>();
     }
 
     void Update()

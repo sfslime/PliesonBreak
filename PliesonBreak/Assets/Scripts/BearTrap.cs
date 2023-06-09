@@ -7,12 +7,13 @@ public class BearTrap : InteractObjectBase
 {
     GameObject RestraintObj;  // 拘束しているオブジェクト.
 
-    bool isOpen;              // トラバサミが開いているかどうか.
-    bool isRestraint;         // 拘束しているかどうか.
+    [SerializeField] bool isOpen;              // トラバサミが開いているかどうか.
+    [SerializeField] bool isRestraint;         // 拘束しているかどうか.
 
     void Start()
     {
-        
+        SetUp();
+        isOpen = true;
     }
 
     
@@ -29,6 +30,7 @@ public class BearTrap : InteractObjectBase
         {
             case "Player":
                 PlayerBase = collision.gameObject.GetComponent<PlayerBase>();
+
                 StartCoroutine(RestraintTime(3));
                 break;
 
@@ -44,10 +46,14 @@ public class BearTrap : InteractObjectBase
     /// </summary>
     IEnumerator RestraintTime(float time)
     {
-        isRestraint = true;
-         yield return new WaitForSeconds(time);
-        isRestraint = false;
-        Destroy(gameObject);
+        if(isOpen == true)
+        {
+            isRestraint = true;
+            yield return new WaitForSeconds(time);
+            isRestraint = false;
+            isOpen = false;
+            // Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -55,16 +61,41 @@ public class BearTrap : InteractObjectBase
     /// </summary>
     void Restraint()
     {
-        // ゲームマネージャーからスプライトの取得.
-        GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
-
         if (isRestraint == true && isOpen == true)
         {
             RestraintObj.transform.position = transform.position;
         }
-        else if(isOpen == false)
+
+        if(isOpen == true)
+        {
+            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.OpenBearTrap);
+            NowInteract = InteractObjs.OpenBearTrap;
+        }
+        else if (isOpen == false)
+        {
+            NowInteract = InteractObjs.CloseBearTrap;
+        }
+
+        if (isOpen == false || isRestraint == true)
         {
             SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.CloseBearTrap);
+        }
+        
+        
+    }
+
+    /// <summary>
+    /// トラバサミを開けるための処理.
+    /// プレイヤーがこの関数を呼ぶ.
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public IEnumerator BearTrapOpen(float time)
+    {
+        if(isOpen == false)
+        {
+            yield return new WaitForSeconds(time);
+            isOpen = true;
         }
     }
 }

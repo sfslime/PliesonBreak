@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ConstList;
 
 public class BearTrap : InteractObjectBase
 {
     GameObject RestraintObj;  // 拘束しているオブジェクト.
 
+    bool isOpen;              // トラバサミが開いているかどうか.
     bool isRestraint;         // 拘束しているかどうか.
 
     void Start()
@@ -53,9 +55,16 @@ public class BearTrap : InteractObjectBase
     /// </summary>
     void Restraint()
     {
-        if(isRestraint == true)
+        // ゲームマネージャーからスプライトの取得.
+        GameManager.GetComponent<GameManager>().ReturnSprite(NowInteract);
+
+        if (isRestraint == true && isOpen == true)
         {
             RestraintObj.transform.position = transform.position;
+        }
+        else if(isOpen == false)
+        {
+            SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.CloseBearTrap);
         }
     }
 }

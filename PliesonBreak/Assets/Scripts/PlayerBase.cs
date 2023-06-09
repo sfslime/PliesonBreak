@@ -84,7 +84,7 @@ public class PlayerBase : MonoBehaviour
                     Goal = collision.gameObject.GetComponent<Goal>();
                     break;
 
-                case (int)InteractObjs.BearTrap:
+                case (int)InteractObjs.CloseBearTrap:
                     
                     break;
             }

@@ -11,7 +11,7 @@ public class InteractObjectBase : MonoBehaviour
     [SerializeField] protected KeysLink KeysLink;
     protected Jailer Jailer;
 
-    SpriteRenderer SpriteRenderer;
+    protected SpriteRenderer SpriteRenderer;
     public InteractObjs NowInteract;
     int SaveId;  // ID‚ğ•Û‘¶‚µ‚Ä‚¨‚­•Ï”.
 

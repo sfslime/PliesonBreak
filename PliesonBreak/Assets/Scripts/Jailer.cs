@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Jailer : MonoBehaviour
 {
     NavMeshAgent2D NavMeshAgent2D;      //NavMeshAgent2Dを使用するための変数.
+    [SerializeField] GameManager GameManager;
     [SerializeField] Transform Target;  //追跡するターゲット.
 
     [SerializeField] List<Transform> PatrolPointList = new List<Transform>();
@@ -13,7 +14,7 @@ public class Jailer : MonoBehaviour
 
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
-    [SerializeField] bool isArrest;      // プレイヤーを捕まえたかどうか.
+    
     public bool isRestraint;   // 動けるかどうか
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
     [SerializeField] float SetTime;      // LostTimeにセットする時間.
@@ -29,8 +30,9 @@ public class Jailer : MonoBehaviour
     void Start()
     {
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
+        GameManager = GameManager.GameManagerInstance;
         isDiscover = false;
-        isArrest = false;
+        
         ThisSavePos = transform.position;
     }
 
@@ -150,8 +152,9 @@ public class Jailer : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            // TODO 捕まえたときの処理.
-            
+            GameObject HitPlayer = collision.gameObject;
+            GameManager.ArrestPlayer(HitPlayer);
+
             Debug.Log("捕まえました");
         }
     }

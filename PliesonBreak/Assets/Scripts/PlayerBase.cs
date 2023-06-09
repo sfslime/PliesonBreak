@@ -14,6 +14,7 @@ public class PlayerBase : MonoBehaviour
 
     public InputAction InputAction;      // 操作にどういったキーを割り当てるかを決めるためのクラス.
     public UIManagerBase UIManager;      // UIを管理するマネージャー.
+    
     [SerializeField] DoorBase Door;
     [SerializeField] InteractObjectBase InteractObjectBase;
     [SerializeField] SearchPoint SearchPoint;

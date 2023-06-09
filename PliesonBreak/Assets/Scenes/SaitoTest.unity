@@ -16187,6 +16187,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1260805335
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1260805336}
+  m_Layer: 0
+  m_Name: Plison
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1260805336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260805335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.19, y: 1.65, z: -0.23561236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317444978
 GameObject:
   m_ObjectHideFlags: 0
@@ -22787,7 +22818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: HaveId
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Name
@@ -23059,7 +23090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 851215735}
   PlayerPrefabName: 
-  PrisonPoint: {fileID: 0}
+  PrisonPoint: {fileID: 1260805335}
   ReleaseErea: 0
   ReleaseEffectSettings:
     ActiveTime: 1
@@ -23286,6 +23317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4952c14334dde11418d0ff0df9f99963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
   Target: {fileID: 851215741}
   PatrolPointList:
   - {fileID: 1448295910}
@@ -23294,7 +23326,6 @@ MonoBehaviour:
   - {fileID: 949446539}
   isDiscover: 0
   isLostTarget: 0
-  isArrest: 0
   isRestraint: 0
   LostTime: 0
   SetTime: 5

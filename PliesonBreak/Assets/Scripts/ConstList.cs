@@ -18,6 +18,7 @@ namespace ConstList
     {
         None,
         Key,
+        StockKey,
         Door,
         Prison,
         NullDrop,
@@ -28,12 +29,18 @@ namespace ConstList
         BearTrap,
     }
 
+    /// <summary>
+    /// 探索ポイントから出現するアイテムのID
+    /// この中の数がそのまま出現率になる
+    /// </summary>
     public enum ItemID
     {
         None,
         Key,
+        StockKey,
         EscapeItem1,
         EscapeItem2,
+        BearTrap,
         Count
     }
 
@@ -53,6 +60,11 @@ namespace ConstList
         COUNT
     }
 
+    /// <summary>
+    /// Photonのカスタムプロパティ拡張メソッド用クラス
+    /// 使用する場合は Playerクラス.
+    /// で使える
+    /// </summary>
     public static class PhotonCustumPropertie
     {
         private const string GameStatusKey = "Gs";

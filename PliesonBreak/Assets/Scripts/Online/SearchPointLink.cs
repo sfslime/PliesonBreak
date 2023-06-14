@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ConstList;
 
 /*
 探索ポイントをオンライン化するスクリプト
@@ -58,6 +59,11 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
         //※falseの場合、中身がNullDropであることが確定している
     }
 
+    public void SetDropItem(InteractObjs Obj)
+    {
+        photonView.RPC(nameof(RPCSetDropItem), RpcTarget.Others, Obj);
+    }
+
     /// <summary>
     /// Destroy単体では他のオブジェクトが破壊されないのでRPC化する
     /// </summary>
@@ -77,6 +83,16 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
         OriginSearchPoint.StopSearch();
         //アイテム出現
         OriginSearchPoint.InstantiateItem();
+    }
+
+    /// <summary>
+    /// 他のプレイヤーにもセットする
+    /// </summary>
+    /// <param name="Obj"></param>
+    [PunRPC]
+    void RPCSetDropItem(InteractObjs Obj)
+    {
+        OriginSearchPoint.SetDropItem(Obj);
     }
 
 }

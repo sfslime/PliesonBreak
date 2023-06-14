@@ -69,6 +69,7 @@ public class MapManager : MonoBehaviourPunCallbacks
                 Point.transform.parent = SearchPointList.transform;
                 //ƒAƒCƒeƒ€Š„‚è“–‚Ä
                 Point.GetComponent<SearchPoint>().SetDropItem(ItemIDList[cnt]);
+                Point.GetComponent<SearchPointLink>().SetDropItem(ItemIDList[cnt]);
             }
 
             SelectedList.Add(PopList);

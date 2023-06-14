@@ -8,10 +8,10 @@ public class InteractObjectBase : MonoBehaviour
 {
     protected PlayerBase PlayerBase;
     [SerializeField] protected GameManager GameManager;
-    [SerializeField] protected KeysLink KeysLink;
+    [SerializeField] KeysLink KeysLink;
     protected Jailer Jailer;
 
-    SpriteRenderer SpriteRenderer;
+    protected SpriteRenderer SpriteRenderer;
     public InteractObjs NowInteract;
     int SaveId;  // IDÇï€ë∂ÇµÇƒÇ®Ç≠ïœêî.
 
@@ -20,12 +20,12 @@ public class InteractObjectBase : MonoBehaviour
         GameManager = GameManager.GameManagerInstance;
         SpriteRenderer = GetComponent<SpriteRenderer>();
         if (GameManager == null) Debug.Log("GameManagerInstance not found");
-        KeysLink = GetComponent<KeysLink>();
     }
 
     void Start()
     {
         SetUp();
+        KeysLink = GetComponent<KeysLink>();
     }
 
     void Update()
@@ -82,9 +82,19 @@ public class InteractObjectBase : MonoBehaviour
     {
         switch (NowInteract)
         {
-            case InteractObjs.Key:
+            case InteractObjs.Key1:
                 Debug.Log("Sprite:Key");
-                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key);
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                break;
+
+            case InteractObjs.Key2:
+                Debug.Log("Sprite:Key");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                break;
+
+            case InteractObjs.Key3:
+                Debug.Log("Sprite:Key");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
                 break;
 
             case InteractObjs.EscapeItem1:

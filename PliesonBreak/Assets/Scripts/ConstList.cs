@@ -17,8 +17,9 @@ namespace ConstList
     public enum InteractObjs
     {
         None,
-        Key,
-        StockKey,
+        Key1,
+        Key2,
+        Key3,
         Door,
         Prison,
         NullDrop,
@@ -26,7 +27,8 @@ namespace ConstList
         EscapeItem1,
         EscapeItem2,
         EscapeObj,
-        BearTrap,
+        OpenBearTrap,
+        CloseBearTrap,
     }
 
     /// <summary>
@@ -37,10 +39,8 @@ namespace ConstList
     {
         None,
         Key,
-        StockKey,
         EscapeItem1,
         EscapeItem2,
-        BearTrap,
         Count
     }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using ConstList;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class PlayerBase : MonoBehaviour
     public UIManagerBase UIManager;      // UIを管理するマネージャー.
     
     [SerializeField] DoorBase Door;
+    [SerializeField] Prison Prison;
     [SerializeField] InteractObjectBase InteractObjectBase;
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
@@ -78,6 +81,10 @@ public class PlayerBase : MonoBehaviour
                     Door = collision.gameObject.GetComponent<DoorBase>();
                     break;
 
+                case (int)InteractObjs.Prison:
+                    Prison = collision.gameObject.GetComponent<Prison>();
+                    break;
+
                 case (int)InteractObjs.Search:
                     SearchPoint = collision.gameObject.GetComponent<SearchPoint>();
                     break;
@@ -136,7 +143,8 @@ public class PlayerBase : MonoBehaviour
         // 拾えないアイテムの排除.
         Debug.Log("ID>" + ObjID);
         if (ObjID != (int)InteractObjs.Search && 
-            ObjID != (int)InteractObjs.Door && 
+            ObjID != (int)InteractObjs.Door &&
+            ObjID != (int)InteractObjs.Prison &&
             ObjID != (int)InteractObjs.EscapeObj &&
             ObjID != (int)InteractObjs.OpenBearTrap &&
             ObjID != (int)InteractObjs.CloseBearTrap)
@@ -170,6 +178,13 @@ public class PlayerBase : MonoBehaviour
 
             case (int)InteractObjs.Door:
                 PlayerHaveKey();
+                break;
+
+            case (int)InteractObjs.Prison:
+                if (!PhotonNetwork.LocalPlayer.GetArrestStatus())
+                {
+                    Prison.PrisonOpen(true);
+                }
                 break;
 
             case (int)InteractObjs.EscapeItem1:

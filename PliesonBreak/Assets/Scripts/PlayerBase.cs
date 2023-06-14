@@ -146,7 +146,9 @@ public class PlayerBase : MonoBehaviour
             HaveId = ObjID;
         }
         // オブジェクトを破棄.
-        if ((ObjID == (int)InteractObjs.Key ||
+        if ((ObjID == (int)InteractObjs.Key1 ||
+             ObjID == (int)InteractObjs.Key2 ||
+             ObjID == (int)InteractObjs.Key3 ||
              ObjID == (int)InteractObjs.EscapeItem1 ||
              ObjID == (int)InteractObjs.EscapeItem2) &&
              isPlayerHaveItem == false)
@@ -161,7 +163,15 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine("Search");
                 break;
 
-            case (int)InteractObjs.Key:
+            case (int)InteractObjs.Key1:
+                isPlayerHaveItem = true;
+                break;
+
+            case (int)InteractObjs.Key2:
+                isPlayerHaveItem = true;
+                break;
+
+            case (int)InteractObjs.Key3:
                 isPlayerHaveItem = true;
                 break;
 
@@ -203,16 +213,16 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerHaveKey()
     {
-        if (HaveId != (int)InteractObjs.Key)
-        {
-            Debug.Log("鍵がかかっている");
-        }
-        else if (HaveId == (int)InteractObjs.Key)
+        if (HaveId == Door.NeedKeyID)
         {
             Debug.Log("ドアが開いた");
             Door.DoorOpen(true);
             isPlayerHaveItem = false;
             HaveId = (int)InteractObjs.None;
+        }
+        else
+        {
+            Debug.Log("鍵がかかっている");
         }
     }
 

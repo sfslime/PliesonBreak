@@ -6,6 +6,8 @@ public class DoorBase : InteractObjectBase
 {
     Collider2D Collider2D;
 
+    public int NeedKeyID;  // ƒhƒA‚É‘Î‰ž‚µ‚½Œ®.
+
     //”ò“c’Ç‰Á•ª
     private DoorLink DoorLink;
     [SerializeField] bool isOpen;
@@ -31,6 +33,7 @@ public class DoorBase : InteractObjectBase
     public void DoorOpen(bool isopendoor)
     {
         if (isopendoor == isOpen) return;
+
         if(isopendoor == true)
         {
             Collider2D.enabled = false;

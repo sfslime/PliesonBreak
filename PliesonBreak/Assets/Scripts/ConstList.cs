@@ -17,7 +17,9 @@ namespace ConstList
     public enum InteractObjs
     {
         None,
-        Key,
+        Key1,
+        Key2,
+        Key3,
         Door,
         Prison,
         NullDrop,

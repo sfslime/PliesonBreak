@@ -82,9 +82,19 @@ public class InteractObjectBase : MonoBehaviour
     {
         switch (NowInteract)
         {
-            case InteractObjs.Key:
+            case InteractObjs.Key1:
                 Debug.Log("Sprite:Key");
-                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key);
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                break;
+
+            case InteractObjs.Key2:
+                Debug.Log("Sprite:Key");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                break;
+
+            case InteractObjs.Key3:
+                Debug.Log("Sprite:Key");
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
                 break;
 
             case InteractObjs.EscapeItem1:

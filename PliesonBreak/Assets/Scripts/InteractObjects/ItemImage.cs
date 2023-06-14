@@ -36,9 +36,17 @@ public class ItemImage : MonoBehaviour
         HaveId = Player.HaveId;
 
         // Debug.Log("HaveId > " +HaveId);
-        if(HaveId == (int)InteractObjs.Key)
+        if(HaveId == (int)InteractObjs.Key1)
         {
-            image.sprite = GameManager.ReturnSprite(InteractObjs.Key);
+            image.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+        }
+        else if (HaveId == (int)InteractObjs.Key2)
+        {
+            image.sprite = GameManager.ReturnSprite(InteractObjs.Key2);
+        }
+        else if (HaveId == (int)InteractObjs.Key3)
+        {
+            image.sprite = GameManager.ReturnSprite(InteractObjs.Key2);
         }
         else if(HaveId == (int)InteractObjs.EscapeItem1)
         {
@@ -49,7 +57,9 @@ public class ItemImage : MonoBehaviour
             image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
         }
 
-        if (HaveId != (int)InteractObjs.Key &&
+        if (HaveId != (int)InteractObjs.Key1 &&
+            HaveId != (int)InteractObjs.Key2 &&
+            HaveId != (int)InteractObjs.Key3 &&
             HaveId != (int)InteractObjs.EscapeItem1 &&
             HaveId != (int)InteractObjs.EscapeItem2)
         {

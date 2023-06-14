@@ -138,6 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 9
-  isOpen: 0
+  NowInteract: 11
+  isOpen: 1
   isRestraint: 0

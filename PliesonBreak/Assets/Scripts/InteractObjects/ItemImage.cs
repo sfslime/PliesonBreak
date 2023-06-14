@@ -15,7 +15,6 @@ public class ItemImage : MonoBehaviour
 
     void Start()
     {
-       
         image = GetComponent<Image>();
         
         GameManager = GameManager.GameManagerInstance;
@@ -35,36 +34,33 @@ public class ItemImage : MonoBehaviour
     {
         HaveId = Player.HaveId;
 
-        // Debug.Log("HaveId > " +HaveId);
-        if(HaveId == (int)InteractObjs.Key1)
+        switch (HaveId)
         {
-            image.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
-        }
-        else if (HaveId == (int)InteractObjs.Key2)
-        {
-            image.sprite = GameManager.ReturnSprite(InteractObjs.Key2);
-        }
-        else if (HaveId == (int)InteractObjs.Key3)
-        {
-            image.sprite = GameManager.ReturnSprite(InteractObjs.Key2);
-        }
-        else if(HaveId == (int)InteractObjs.EscapeItem1)
-        {
-            image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
-        }
-        else if (HaveId == (int)InteractObjs.EscapeItem2)
-        {
-            image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
-        }
+            case (int)InteractObjs.Key1:
+                image.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                break;
 
-        if (HaveId != (int)InteractObjs.Key1 &&
-            HaveId != (int)InteractObjs.Key2 &&
-            HaveId != (int)InteractObjs.Key3 &&
-            HaveId != (int)InteractObjs.EscapeItem1 &&
-            HaveId != (int)InteractObjs.EscapeItem2)
-        {
-            Debug.Log("None");
-            image.sprite = GameManager.ReturnSprite(InteractObjs.None);
+            case (int)InteractObjs.Key2:
+                image.sprite = GameManager.ReturnSprite(InteractObjs.Key2);
+                break;
+
+            case (int)InteractObjs.Key3:
+                image.sprite = GameManager.ReturnSprite(InteractObjs.Key3);
+                break;
+
+            case (int)InteractObjs.EscapeItem1:
+                image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem1);
+                break;
+
+            case (int)InteractObjs.EscapeItem2:
+                image.sprite = GameManager.ReturnSprite(InteractObjs.EscapeItem2);
+                break;
+
+            default:
+                image.sprite = GameManager.ReturnSprite(InteractObjs.None);
+                Debug.Log("None");
+                break;
         }
+        // Debug.Log("HaveId > " +HaveId);
     }
 }

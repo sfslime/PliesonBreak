@@ -53,6 +53,7 @@ MonoBehaviour:
   - RPCDoorLink
   - RPCSetItem
   - RPCStateLink
+  - RPCSetDropItem
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

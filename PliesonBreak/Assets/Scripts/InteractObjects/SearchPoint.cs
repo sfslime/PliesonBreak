@@ -163,7 +163,9 @@ public class SearchPoint : InteractObjectBase
     /// <param name="interactobj"></param>
     public void SetDropItem(InteractObjs interactobj)
     {
+        if (DropItemID == interactobj) return;
         DropItemID = interactobj;
+        GetComponent<SearchPointLink>().SetDropItem(interactobj);
 
         //if(DropItem/*èäéùID*/ == InteractObjs.None)
         //{

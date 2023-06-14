@@ -93,6 +93,7 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
     void RPCSetDropItem(InteractObjs Obj)
     {
         OriginSearchPoint.SetDropItem(Obj);
+        Debug.Log("RPC ItemSet");
     }
 
 }

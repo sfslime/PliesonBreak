@@ -8660,6 +8660,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
+--- !u!1 &1089460010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089460011}
+  - component: {fileID: 1089460012}
+  m_Layer: 2
+  m_Name: PlayerSercth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1089460011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089460010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2133130462}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1089460012
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089460010}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
 --- !u!1 &1097864079
 GameObject:
   m_ObjectHideFlags: 0
@@ -23504,80 +23552,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
---- !u!1001 &7777259315839168584
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7777259314813865108, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_Name
-      value: Jailer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 19.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865110, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 851215741}
-    - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: PatrolPointList.Array.data[0]
-      value: 
-      objectReference: {fileID: 1448295910}
-    - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: PatrolPointList.Array.data[1]
-      value: 
-      objectReference: {fileID: 488016322}
-    - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: PatrolPointList.Array.data[2]
-      value: 
-      objectReference: {fileID: 1238148731}
-    - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
-      propertyPath: PatrolPointList.Array.data[3]
-      value: 
-      objectReference: {fileID: 949446539}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}

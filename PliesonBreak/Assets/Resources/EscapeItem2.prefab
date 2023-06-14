@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2956417195914730987}
   - component: {fileID: 2537209771534898394}
   m_Layer: 0
-  m_Name: EscapeItem1 - Copy
+  m_Name: EscapeItem2
   m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5dbb279ff6a089c46be8f02e0c09b855, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a1186367e21f6e4a8519cd60cd156e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 10.71}
+    oldSize: {x: 5, y: 5.38}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 8
+  NowInteract: 6
 --- !u!114 &-2956417195914730987
 MonoBehaviour:
   m_ObjectHideFlags: 0

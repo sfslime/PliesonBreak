@@ -25,7 +25,7 @@ public class PlayerBase : MonoBehaviour
     public int HaveId;                        // 現在持っているアイテムのID.
     [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
     [SerializeField] bool isSearch;           // インタラクトしているかどうか
-    public bool isMove;                  // 動けるかどうか.
+    public bool isMove;                       // 動けるかどうか.
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
@@ -141,7 +141,6 @@ public class PlayerBase : MonoBehaviour
             ObjID != (int)InteractObjs.OpenBearTrap &&
             ObjID != (int)InteractObjs.CloseBearTrap)
         {
-            
             InteractObjectBase.RequestSprite();
             HaveId = ObjID;
         }
@@ -164,13 +163,7 @@ public class PlayerBase : MonoBehaviour
                 break;
 
             case (int)InteractObjs.Key1:
-                isPlayerHaveItem = true;
-                break;
-
             case (int)InteractObjs.Key2:
-                isPlayerHaveItem = true;
-                break;
-
             case (int)InteractObjs.Key3:
                 isPlayerHaveItem = true;
                 break;
@@ -180,9 +173,6 @@ public class PlayerBase : MonoBehaviour
                 break;
 
             case (int)InteractObjs.EscapeItem1:
-                isPlayerHaveItem = true;
-                break;
-
             case (int)InteractObjs.EscapeItem2:
                 isPlayerHaveItem = true;
                 break;

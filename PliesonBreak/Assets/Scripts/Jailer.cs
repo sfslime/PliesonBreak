@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Jailer : MonoBehaviour
 {
     NavMeshAgent2D NavMeshAgent2D;      //NavMeshAgent2Dを使用するための変数.
-    [SerializeField] GameManager GameManager;
     [SerializeField] Transform Target;  //追跡するターゲット.
+    [SerializeField] GameManager GameManager;
 
     [SerializeField] List<Transform> PatrolPointList = new List<Transform>();
     int PatrolNumIndex;
@@ -15,7 +15,7 @@ public class Jailer : MonoBehaviour
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
     
-    public bool isRestraint;   // 動けるかどうか
+    public bool isRestraint;             // 動けるかどうか
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
     [SerializeField] float SetTime;      // LostTimeにセットする時間.
 
@@ -23,9 +23,9 @@ public class Jailer : MonoBehaviour
     Vector3 SavePlayerPos;               // プレイヤーのポジションを保存.
 
     // 視界のパラメータ.
-    [SerializeField] int RayNum;                    // Rayの本数.
-    [SerializeField] float Angle;                   // 角度.
-    [SerializeField] float Distance;                // Rayの距離.
+    [SerializeField] int RayNum;         // Rayの本数.
+    [SerializeField] float Angle;        // 角度.
+    [SerializeField] float Distance;     // Rayの距離.
 
     void Start()
     {
@@ -67,6 +67,7 @@ public class Jailer : MonoBehaviour
                 PatrolNumIndex = (PatrolNumIndex + 1) % PatrolPointList.Count;
                 NavMeshAgent2D.isArrival = false;
             }
+
             NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex].position);
         }
         else if (isDiscover == true)
@@ -82,14 +83,15 @@ public class Jailer : MonoBehaviour
     /// </summary>
     void JailerSight()
     {
-        float AngleIncrement = Angle / (RayNum - 1);                     // Rayの角度増分
-        Vector3 RelativeVector = transform.position - ThisSavePos;       // 相対ベクター.
-        Vector3 ForwardDir = RelativeVector.normalized;                  // オブジェクトが向いている方向の取得.
+        float AngleIncrement = Angle / (RayNum - 1);                   // Rayの角度増分
+        Vector3 RelativeVector = transform.position - ThisSavePos;     // 相対ベクター.
+        Vector3 ForwardDir = RelativeVector.normalized;                // オブジェクトが向いている方向の取得.
         ThisSavePos = transform.position;
 
         for (int num = 0; num < RayNum; num++)
         {
-            float StartAngle = -Angle / 2;  // 扇の開始角度.
+            // 扇の開始角度.
+            float StartAngle = -Angle / 2;
 
             // 現在の向き.
             float CurrentAngle = StartAngle + num * AngleIncrement;

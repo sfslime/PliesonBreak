@@ -22812,14 +22812,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1574552609, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-      propertyPath: HaveId
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Name
       value: PlayerSprite
@@ -23319,8 +23311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4952c14334dde11418d0ff0df9f99963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   Target: {fileID: 851215741}
+  GameManager: {fileID: 0}
   PatrolPointList:
   - {fileID: 1448295910}
   - {fileID: 488016322}

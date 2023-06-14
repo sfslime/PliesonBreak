@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 600
+  SaveSpeed: 0
   InputAction:
     m_Name: Input
     m_Type: 0
@@ -446,13 +447,16 @@ MonoBehaviour:
     m_Flags: 0
   UIManager: {fileID: 0}
   Door: {fileID: 0}
+  Prison: {fileID: 0}
   InteractObjectBase: {fileID: 0}
   SearchPoint: {fileID: 0}
   Goal: {fileID: 0}
+  BearTrap: {fileID: 0}
   KeysLink: {fileID: 0}
   ObjID: 0
   HaveId: 1
   isPlayerHaveItem: 0
   isSearch: 0
+  isMove: 0
   isEscapeItem: 0000
   AnimState: 0

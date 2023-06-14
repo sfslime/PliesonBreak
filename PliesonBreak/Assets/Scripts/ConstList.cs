@@ -38,7 +38,9 @@ namespace ConstList
     public enum ItemID
     {
         None,
-        Key,
+        Key1,
+        Key2,
+        Key3,
         EscapeItem1,
         EscapeItem2,
         Count

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2956417195914730987}
   - component: {fileID: 2537209771534898394}
   m_Layer: 0
-  m_Name: EscapeItem1
+  m_Name: Key2
   m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 8
+  NowInteract: 2
 --- !u!114 &-2956417195914730987
 MonoBehaviour:
   m_ObjectHideFlags: 0

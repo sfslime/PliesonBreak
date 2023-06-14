@@ -375,7 +375,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 2
+  NowInteract: 4
+  NeedKeyID: 1
+  isOpen: 0
 --- !u!114 &8025419951612197766
 MonoBehaviour:
   m_ObjectHideFlags: 0

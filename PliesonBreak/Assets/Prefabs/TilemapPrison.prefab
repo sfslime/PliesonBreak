@@ -250,7 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 3
+  NowInteract: 5
   Prisonpoint: {fileID: 275386212895818949}
   CloseTimeLimit: 10
 --- !u!114 &275386212870858823

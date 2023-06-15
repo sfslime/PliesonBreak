@@ -140134,8 +140134,10 @@ GameObject:
   - component: {fileID: 1861379733}
   - component: {fileID: 1861379732}
   - component: {fileID: 1861379731}
+  - component: {fileID: 1861379735}
+  - component: {fileID: 1861379734}
   m_Layer: 0
-  m_Name: boat
+  m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140234,6 +140236,35 @@ Transform:
   m_Father: {fileID: 410902722}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861379734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861379730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f735ada81c007434b832ed281aebe239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OriginObject: {fileID: 0}
+--- !u!114 &1861379735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861379730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7353468ca946346bfb14a911aa7432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  KeysLink: {fileID: 0}
+  NowInteract: 10
+  NeedEscapeList: 0800000009000000
 --- !u!1 &1888953665
 GameObject:
   m_ObjectHideFlags: 0

@@ -254,6 +254,12 @@ public class GameManager : MonoBehaviour
     public void ReleasePrison()
     {
         //解放メッセージ
+
+        //テストで全員を解放
+        foreach(var player in PhotonNetwork.PlayerList)
+        {
+            player.SetArrestStatus(false);
+        }
     }
 
     /// <summary>

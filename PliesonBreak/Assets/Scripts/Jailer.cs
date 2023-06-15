@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Jailer : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class Jailer : MonoBehaviour
 
     void Update()
     {
-        if(isRestraint == false)
+        if (isRestraint == false)
         {
             SetNextPatrolPoint();
             LostPlayer();

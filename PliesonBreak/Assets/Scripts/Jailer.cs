@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class Jailer : MonoBehaviour
+public class Jailer : MonoBehaviourPun
 {
     NavMeshAgent2D NavMeshAgent2D;      //NavMeshAgent2Dを使用するための変数.
     [SerializeField] Transform Target;  //追跡するターゲット.
@@ -14,7 +15,9 @@ public class Jailer : MonoBehaviour
 
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
-    
+    [SerializeField] bool isCapture;     // プレイヤーを捕まえたかどうか.
+
+
     public bool isRestraint;             // 動けるかどうか
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
     [SerializeField] float SetTime;      // LostTimeにセットする時間.
@@ -38,11 +41,8 @@ public class Jailer : MonoBehaviour
 
     void Update()
     {
-        if(isRestraint == false)
-        {
-            SetNextPatrolPoint();
-            LostPlayer();
-        }
+        SetNextPatrolPoint();
+        LostPlayer();
     }
 
     private void FixedUpdate()
@@ -50,7 +50,7 @@ public class Jailer : MonoBehaviour
         JailerSight();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         ArrestPlayer(collision);
     }
@@ -70,7 +70,7 @@ public class Jailer : MonoBehaviour
 
             NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex].position);
         }
-        else if (isDiscover == true)
+        else if (isDiscover == true && isCapture == false)
         {
             // プレイヤーを追いかける処理.
             NavMeshAgent2D.SetDestination(Target.position);
@@ -107,6 +107,7 @@ public class Jailer : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 isDiscover = true;
+                isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;
@@ -151,13 +152,13 @@ public class Jailer : MonoBehaviour
     /// プレイヤーを捕まえた時の処理.
     /// </summary>
     /// <param name="collision"></param>
-    public void ArrestPlayer(Collision2D collision)
+    public void ArrestPlayer(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
-
+            isCapture = true;
             Debug.Log("捕まえました");
         }
     }

@@ -10,7 +10,7 @@ public class Jailer : MonoBehaviourPun
     [SerializeField] Transform Target;  //追跡するターゲット.
     [SerializeField] GameManager GameManager;
 
-    [SerializeField] List<Transform> PatrolPointList = new List<Transform>();
+    [SerializeField] List<Vector3> PatrolPointList = new List<Vector3>();
     int PatrolNumIndex;
 
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
@@ -41,8 +41,11 @@ public class Jailer : MonoBehaviourPun
 
     void Update()
     {
-        SetNextPatrolPoint();
-        LostPlayer();
+        if (isRestraint == false)
+        {
+            SetNextPatrolPoint();
+            LostPlayer();
+        }
     }
 
     private void FixedUpdate()
@@ -50,7 +53,7 @@ public class Jailer : MonoBehaviourPun
         JailerSight();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         ArrestPlayer(collision);
     }
@@ -68,9 +71,9 @@ public class Jailer : MonoBehaviourPun
                 NavMeshAgent2D.isArrival = false;
             }
 
-            NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex].position);
+            NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex]);
         }
-        else if (isDiscover == true && isCapture == false)
+        else if (isDiscover == true)
         {
             // プレイヤーを追いかける処理.
             NavMeshAgent2D.SetDestination(Target.position);
@@ -107,7 +110,6 @@ public class Jailer : MonoBehaviourPun
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 isDiscover = true;
-                isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;
@@ -152,13 +154,13 @@ public class Jailer : MonoBehaviourPun
     /// プレイヤーを捕まえた時の処理.
     /// </summary>
     /// <param name="collision"></param>
-    public void ArrestPlayer(Collider2D collision)
+    public void ArrestPlayer(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
-            isCapture = true;
+
             Debug.Log("捕まえました");
         }
     }
@@ -166,7 +168,7 @@ public class Jailer : MonoBehaviourPun
     /// <summary>
     /// 巡回ポイントの追加.
     /// </summary>
-    public void AddPatrolPoint(Transform patrolpoint)
+    public void AddPatrolPoint(Vector3 patrolpoint)
     {
         PatrolPointList.Add(patrolpoint);
     }

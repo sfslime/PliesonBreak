@@ -23458,30 +23458,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 546908855}
     m_Modifications:
-    - target: {fileID: 1487964317151183942, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: m_Tiles.Array.data[0].second.m_AllTileFlags
-      value: 1073741825
-      objectReference: {fileID: 0}
-    - target: {fileID: 1487964317151183942, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: m_Tiles.Array.data[1].second.m_AllTileFlags
-      value: 1073741825
-      objectReference: {fileID: 0}
-    - target: {fileID: 1487964317151183942, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: m_Tiles.Array.data[2].second.m_AllTileFlags
-      value: 1073741825
-      objectReference: {fileID: 0}
-    - target: {fileID: 1487964317151183942, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: m_Tiles.Array.data[3].second.m_AllTileFlags
-      value: 1073741825
-      objectReference: {fileID: 0}
-    - target: {fileID: 1487964317151183942, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: m_Tiles.Array.data[4].second.m_AllTileFlags
-      value: 1073741825
-      objectReference: {fileID: 0}
-    - target: {fileID: 1487964317151183942, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: m_Tiles.Array.data[5].second.m_AllTileFlags
-      value: 1073741825
-      objectReference: {fileID: 0}
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -23525,18 +23501,6 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: NeedKeyID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: NowInteract
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
-      propertyPath: sceneViewId
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8417083808402987442, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_Name

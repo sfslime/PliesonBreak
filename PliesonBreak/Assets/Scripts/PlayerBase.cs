@@ -218,7 +218,7 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerHaveKey()
     {
-        if (HaveId == Door.NeedKeyID)
+        if (HaveId == (int)Door.NeedKeyID)
         {
             Debug.Log("ƒhƒA‚ªŠJ‚¢‚½");
             Door.DoorOpen(true);

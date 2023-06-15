@@ -18,7 +18,7 @@ false の場合にのみ探索すること
 public class SearchPoint : InteractObjectBase
 {
     //保持している、探索後に出現させるアイテム
-    private InteractObjs DropItemID;
+    [SerializeField] private InteractObjs DropItemID;
     //テストで、出したいアイテムがある場合セットする
     [SerializeField,Tooltip("テストで出したいアイテムの設定済みスクリプト(必要な場合のみSet)")] InteractObjs TestDropItemID;
     //標準探索時間。秒単位で記述

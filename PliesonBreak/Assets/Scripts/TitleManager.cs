@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using ConstList;
 
 public class TitleManager : MonoBehaviourPunCallbacks
 {
@@ -72,6 +73,12 @@ public class TitleManager : MonoBehaviourPunCallbacks
         ConectServer.RoomProperties.RoomName = RoomNm.ToString();
         ConectServer.RoomProperties.MaxPlayer = MaxPlayer;
         SceneManager.LoadScene("WaitRoom");
+    }
+
+    public void TitleBack()
+    {
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene(SceanNames.STARTTITLE.ToString());
     }
 
     // Start is called before the first frame update

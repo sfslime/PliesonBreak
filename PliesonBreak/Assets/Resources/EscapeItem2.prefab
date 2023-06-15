@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   KeysLink: {fileID: 0}
-  NowInteract: 6
+  NowInteract: 9
 --- !u!114 &-2956417195914730987
 MonoBehaviour:
   m_ObjectHideFlags: 0

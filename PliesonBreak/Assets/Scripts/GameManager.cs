@@ -329,6 +329,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameClear()
+    {
+
+        if (PhotonNetwork.IsMasterClient) PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());
+    }
+
     public void Setprisonpoint(GameObject point)
     {
         PrisonPoint = point;

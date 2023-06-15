@@ -71,7 +71,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     void RoomStatusUpDate()
     {
-        if (PhotonNetwork.CountOfPlayersInRooms <= 1)
+        if (!isMaster)
         {
             SceanMoveButton.interactable = false;
         }
@@ -80,8 +80,6 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
-
-        if (isMaster) SceanMoveButton.interactable = true;
 
         SceanMoveButton.transform.GetChild(0).gameObject.GetComponent<Text>().text
             = "ŠJŽn(" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers + ")";

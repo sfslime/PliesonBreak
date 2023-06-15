@@ -50,8 +50,6 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
     {
         if (isDestroy)
         {
-            //他のプレイヤーでアイテムを出現させる（探索時にアイテムがある場合常にこれを呼ぶ）
-            photonView.RPC(nameof(RPCDropItem), RpcTarget.Others);
             //すべてのプレイヤーで同じポイントを破壊する
             photonView.RPC(nameof(RPCDestroy), RpcTarget.Others);
         }
@@ -92,6 +90,7 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPCSetDropItem(InteractObjs Obj)
     {
+        if(OriginSearchPoint == null) OriginSearchPoint = GetComponent<SearchPoint>();
         OriginSearchPoint.SetDropItem(Obj);
         Debug.Log("RPC ItemSet");
     }

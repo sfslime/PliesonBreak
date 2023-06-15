@@ -56,9 +56,12 @@ namespace ConstList
 
     public enum SceanNames
     {
+        STARTTITLE,
+        TUTORIAL,
         TITLE,
         WAITROOM,
         GAME,
+        ENDGAME,
         COUNT
     }
 

@@ -274,7 +274,10 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     public void ChangeHaveItem(int olditem)
     {
-        HaveId = olditem;
+        if(isSearch == false)
+        {
+            HaveId = olditem;
+        }
     }
 
     public AnimCode GetAnimState()

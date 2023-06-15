@@ -89,12 +89,12 @@ public class InteractObjectBase : MonoBehaviour
 
             case InteractObjs.Key2:
                 Debug.Log("Sprite:Key");
-                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key2);
                 break;
 
             case InteractObjs.Key3:
                 Debug.Log("Sprite:Key");
-                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key1);
+                SpriteRenderer.sprite = GameManager.ReturnSprite(InteractObjs.Key3);
                 break;
 
             case InteractObjs.EscapeItem1:

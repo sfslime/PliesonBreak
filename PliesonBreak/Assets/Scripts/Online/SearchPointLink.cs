@@ -68,7 +68,8 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPCDestroy()
     {
-        Destroy(gameObject);
+        OriginSearchPoint.StopSearch();
+        gameObject.SetActive(false);
     }
 
     /// <summary>

@@ -145,6 +145,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             }
 
             isKeyPop = false;
+            IDList.Clear();
             for(int Cnt=0;Cnt<Index; Cnt++)
             {
                 InteractObjs item;

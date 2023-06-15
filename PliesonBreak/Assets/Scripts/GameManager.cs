@@ -108,6 +108,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Tooltip("牢屋の場所")] GameObject PrisonPoint;
 
+    [SerializeField, Tooltip("看守の出現場所の元兼出現先")] GameObject JailersRoot;
+
+    [SerializeField, Tooltip("看守の巡回先")] GameObject PatrolRoot;
+
     [SerializeField, Tooltip("ゲームの進行状態（エリアの解放状態）")] int ReleaseErea;
 
     [SerializeField, Header("エリア解放時設定"), Tooltip("脱出アイテム・表示時間・音量・SEなどの設定")] ReleaseEffectSetting ReleaseEffectSettings;
@@ -229,11 +233,18 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// 看守を生成する
-    /// 未作成のため空白
     /// </summary>
     void PopJailer()
     {
-
+        for(int i=0;i< JailersRoot.transform.childCount;i++)
+        {
+            var obj = PhotonNetwork.Instantiate("Jailer", JailersRoot.transform.GetChild(i).transform.position, Quaternion.identity);
+            for(int j = 0; j < PatrolRoot.transform.GetChild(i).childCount; j++)
+            {
+                obj.GetComponent<Jailer>().AddPatrolPoint(PatrolRoot.transform.GetChild(i).GetChild(j));
+            }
+            
+        }
     }
 
     /// <summary>

@@ -154,11 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   GameManager: {fileID: 0}
-  PatrolPointList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  PatrolPointList: []
   isDiscover: 0
   isLostTarget: 0
   isRestraint: 0
@@ -253,7 +249,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 430851115398172055}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

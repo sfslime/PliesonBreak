@@ -21,9 +21,13 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField, Tooltip("目的表示テキストの表示先")] Text TutorialTextObject;
     [SerializeField, Tooltip("吹き出しの表示先")] Text TutorialMessageObject;
+
+    public static TutorialManager Instance;
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
+
         Faze = -1;
 
         foreach(var Arrow in TutorialArrow)
@@ -72,7 +76,7 @@ public class TutorialManager : MonoBehaviour
         }
 
         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene(SceanNames.TITLE.ToString());
+        SceneManager.LoadScene(SceanNames.LOBBY.ToString());
     }
 
 }

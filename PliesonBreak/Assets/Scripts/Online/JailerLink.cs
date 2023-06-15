@@ -26,6 +26,7 @@ public class JailerLink : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPCAddPatrolPoint(Vector3 point)
     {
+        if(OriginObject == null) OriginObject = GetComponent<Jailer>();
         OriginObject.AddPatrolPoint(point);
     }
 }

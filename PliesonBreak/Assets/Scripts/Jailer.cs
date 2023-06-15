@@ -180,4 +180,6 @@ public class Jailer : MonoBehaviourPun
     {
         PatrolPointList.Clear();
     }
+
+
 }

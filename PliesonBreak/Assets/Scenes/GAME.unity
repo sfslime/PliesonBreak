@@ -2513,7 +2513,7 @@ MonoBehaviour:
   ListRoot: {fileID: 763266767}
   PopSettings:
     PointNmList: 040000000200000008000000030000000a000000020000000c000000
-    KeyIDList: 01000000010000000100000001000000010000000100000001000000
+    KeyIDList: 01000000030000000100000008000000010000000900000001000000
     NullDropRate:
     - 0.3
     - 0
@@ -3177,7 +3177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &501072366
 SpriteRenderer:
   m_ObjectHideFlags: 0

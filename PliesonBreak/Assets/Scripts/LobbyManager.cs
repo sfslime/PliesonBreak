@@ -7,7 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using ConstList;
 
-public class TitleManager : MonoBehaviourPunCallbacks
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
     const string RoomHead = "Room ";
     const string RoomMidle =  "\néQâ¡êlêî\n";

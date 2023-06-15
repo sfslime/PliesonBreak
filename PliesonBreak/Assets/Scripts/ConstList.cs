@@ -57,7 +57,7 @@ namespace ConstList
     {
         STARTTITLE,
         TUTORIAL,
-        TITLE,
+        LOBBY,
         WAITROOM,
         GAME,
         ENDGAME,

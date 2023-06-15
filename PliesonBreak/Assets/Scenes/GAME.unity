@@ -1210,6 +1210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
       value: 8
@@ -1823,6 +1827,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
       value: 13
@@ -2060,6 +2068,10 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
@@ -2587,7 +2599,7 @@ MonoBehaviour:
     EffectPanel: {fileID: 0}
   EscapeSettings:
     isGoal: 0
-    NeedEscapeList: 05000000
+    NeedEscapeList: 0800000009000000
   InteractSprits:
   - {fileID: 21300000, guid: 970a436e9d8a12b44b7e9674421ce6a1, type: 3}
   - {fileID: 21300000, guid: de537b4cddb6ce54986a22d66e442193, type: 3}
@@ -2893,6 +2905,10 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
@@ -3794,6 +3810,10 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
@@ -5204,6 +5224,10 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
@@ -34260,7 +34284,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -42743,6 +42767,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
       value: 15
@@ -43254,6 +43282,10 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId
@@ -47112,7 +47144,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -140136,6 +140168,7 @@ GameObject:
   - component: {fileID: 1861379731}
   - component: {fileID: 1861379735}
   - component: {fileID: 1861379734}
+  - component: {fileID: 1861379736}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -140265,6 +140298,28 @@ MonoBehaviour:
   KeysLink: {fileID: 0}
   NowInteract: 10
   NeedEscapeList: 0800000009000000
+--- !u!114 &1861379736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861379730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 20
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1888953665
 GameObject:
   m_ObjectHideFlags: 0
@@ -140476,6 +140531,10 @@ PrefabInstance:
     - target: {fileID: 5359656031621154709, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699197833226022569, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
+      propertyPath: NeedKeyID
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8025419951612197766, guid: 77ced927ccec52e468c51281740b5b74, type: 3}
       propertyPath: sceneViewId

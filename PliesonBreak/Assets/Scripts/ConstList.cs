@@ -33,7 +33,6 @@ namespace ConstList
 
     /// <summary>
     /// 探索ポイントから出現するアイテムのID
-    /// この中の数がそのまま出現率になる
     /// </summary>
     public enum ItemID
     {

@@ -365,7 +365,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 591667190}
         m_TargetAssemblyTypeName: ConectServer, Assembly-CSharp
-        m_MethodName: OnJoinedRoom
+        m_MethodName: TryRoomJoin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

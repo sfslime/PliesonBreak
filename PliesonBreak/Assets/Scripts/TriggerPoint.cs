@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TriggerPoint : MonoBehaviour
 {
-    TutorialManager TutorialManager;
+    [SerializeField] TutorialManager TutorialManager;
 
     public int NextTrriger;
 
     void Start()
     {
-        
+        TutorialManager = TutorialManager.Instance;
     }
 
     // Update is called once per frame

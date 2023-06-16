@@ -27,11 +27,15 @@ public class TutorialManager : MonoBehaviour
     [SerializeField, Tooltip("ê^Ç¡à√Ç…Ç»ÇÈÇ‹Ç≈ÇÃÉåÅ[Ég"),Range(0.01f,0.2f)] float MaskRate;
 
     public static TutorialManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Instance = this;
-
         Faze = -1;
 
         for(int i = 0; i < ArrowRoot.transform.childCount; i++)
@@ -59,7 +63,7 @@ public class TutorialManager : MonoBehaviour
         if(Faze + 1 == Trrigerfaze)
         {
             Faze++;
-            TutorialMessageObject.text = TutorialTexts[Faze];
+            TutorialTextObject.text = TutorialTexts[Faze];
             TutorialMessageObject.text = TutorialMessage[Faze];
             ArrowRoot.transform.GetChild(Faze).gameObject.SetActive(true);
             TrrigerPointRoot.transform.GetChild(Faze).gameObject.SetActive(true);

@@ -48,9 +48,12 @@ public class ConectServer : MonoBehaviourPunCallbacks
 
     public void TryRoomJoin()
     {
-        if(isOffline) { PhotonNetwork.JoinOrCreateRoom(RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default); }else
-        //ルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom(RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default);
+        if(isOffline) { PhotonNetwork.JoinOrCreateRoom("5", new RoomOptions(), TypedLobby.Default); } else
+        {
+            //ルームに参加する（ルームが存在しなければ作成して参加する）
+            PhotonNetwork.JoinOrCreateRoom(RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default);
+        }
+        
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック

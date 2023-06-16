@@ -10,7 +10,7 @@ public class Jailer : MonoBehaviourPun
     [SerializeField] Transform Target;  //追跡するターゲット.
     [SerializeField] GameManager GameManager;
 
-    [SerializeField] List<Transform> PatrolPointList = new List<Transform>();
+    [SerializeField] List<Vector3> PatrolPointList = new List<Vector3>();
     int PatrolNumIndex;
 
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
@@ -68,7 +68,7 @@ public class Jailer : MonoBehaviourPun
                 NavMeshAgent2D.isArrival = false;
             }
 
-            NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex].position);
+            NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex]);
         }
         else if (isDiscover == true && isCapture == false)
         {
@@ -158,7 +158,7 @@ public class Jailer : MonoBehaviourPun
         {
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
-            isCapture = true;
+
             Debug.Log("捕まえました");
         }
     }
@@ -166,7 +166,7 @@ public class Jailer : MonoBehaviourPun
     /// <summary>
     /// 巡回ポイントの追加.
     /// </summary>
-    public void AddPatrolPoint(Transform patrolpoint)
+    public void AddPatrolPoint(Vector3 patrolpoint)
     {
         PatrolPointList.Add(patrolpoint);
     }

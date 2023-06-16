@@ -241,7 +241,7 @@ public class GameManager : MonoBehaviour
             var obj = PhotonNetwork.Instantiate("Jailer", JailersRoot.transform.GetChild(i).transform.position, Quaternion.identity);
             for(int j = 0; j < PatrolRoot.transform.GetChild(i).childCount; j++)
             {
-                obj.GetComponent<Jailer>().AddPatrolPoint(PatrolRoot.transform.GetChild(i).GetChild(j));
+                obj.GetComponent<JailerLink>().AddPatrolPoint(PatrolRoot.transform.GetChild(i).GetChild(j).position);
             }
             
         }

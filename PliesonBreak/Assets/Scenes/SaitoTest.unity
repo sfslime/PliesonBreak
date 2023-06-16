@@ -790,7 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ea560865bb51240bdbc6fdbf0999ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOffline: 0
+  isOffline: 1
   OnConect:
     m_PersistentCalls:
       m_Calls:
@@ -7439,17 +7439,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
   m_PrefabInstance: {fileID: 1728290880}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &851215736 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
-  m_PrefabInstance: {fileID: 1728290880}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851215735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9be6c39237081c42b5273fb72cca5e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &851215741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2658396639101774395, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
@@ -15980,7 +15969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca5917c3a7256d4ca0ce647930bb572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 851215736}
+  Player: {fileID: 0}
   GameManager: {fileID: 0}
   image: {fileID: 0}
 --- !u!114 &1101294344
@@ -16106,7 +16095,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 851215736}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerBase, Assembly-CSharp
         m_MethodName: PushInteractButton
         m_Mode: 1
@@ -16218,6 +16207,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263634306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2584562454183963053, guid: a7c7881d41c97e44c8a9f9f873b682d0, type: 3}
+  m_PrefabInstance: {fileID: 2584562453847943581}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96857853fea54cc47a5151e8672752f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1317444978
 GameObject:
   m_ObjectHideFlags: 0
@@ -22671,6 +22671,74 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1600071766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1600071767}
+  - component: {fileID: 1600071768}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1600071767
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600071766}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 851215741}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1600071768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600071766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ea560865bb51240bdbc6fdbf0999ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOffline: 1
+  OnConect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1600071768}
+        m_TargetAssemblyTypeName: ConectServer, Assembly-CSharp
+        m_MethodName: TryRoomJoin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnJoinde:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1622790779
 GameObject:
   m_ObjectHideFlags: 0
@@ -22755,7 +22823,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 851215736}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerBase, Assembly-CSharp
         m_MethodName: PushInteractButton
         m_Mode: 1
@@ -22812,6 +22880,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: Door
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: Goal
+      value: 
+      objectReference: {fileID: 1317444981}
+    - target: {fileID: 1574552619, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: BearTrap
+      value: 
+      objectReference: {fileID: 1263634306}
     - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Name
       value: PlayerSprite
@@ -23083,6 +23163,8 @@ MonoBehaviour:
   Player: {fileID: 851215735}
   PlayerPrefabName: 
   PrisonPoint: {fileID: 1260805335}
+  JailersRoot: {fileID: 0}
+  PatrolRoot: {fileID: 0}
   ReleaseErea: 0
   ReleaseEffectSettings:
     ActiveTime: 1
@@ -23314,12 +23396,13 @@ MonoBehaviour:
   Target: {fileID: 851215741}
   GameManager: {fileID: 0}
   PatrolPointList:
-  - {fileID: 1448295910}
-  - {fileID: 488016322}
-  - {fileID: 1238148731}
-  - {fileID: 949446539}
+  - {x: 2.08474e+23, y: 7.13e-43, z: 1.6838476e+22}
+  - {x: 0.00000016502379, y: -5.8266014e-10, z: 7.12e-43}
+  - {x: 4.6e-44, y: 0.00000004242722, z: 2.08474e+23}
+  - {x: 7.13e-43, y: 2.0847458e+23, z: 7.13e-43}
   isDiscover: 0
   isLostTarget: 0
+  isCapture: 0
   isRestraint: 0
   LostTime: 0
   SetTime: 5

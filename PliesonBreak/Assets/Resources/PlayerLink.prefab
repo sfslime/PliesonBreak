@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 2760900588405956406}
   - component: {fileID: 3093676773399748528}
   - component: {fileID: 4853378204322639214}
-  - component: {fileID: 7682601838486867396}
+  - component: {fileID: -1722589633617049795}
   m_Layer: 0
   m_Name: PlayerLink
   m_TagString: Player
@@ -966,7 +966,7 @@ MonoBehaviour:
   SpriteAnimator: {fileID: 87258227797878426}
   AnimState: 0
   isAnim: 0
---- !u!61 &7682601838486867396
+--- !u!61 &-1722589633617049795
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

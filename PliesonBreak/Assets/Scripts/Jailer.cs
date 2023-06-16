@@ -41,11 +41,8 @@ public class Jailer : MonoBehaviourPun
 
     void Update()
     {
-        if (isRestraint == false)
-        {
-            SetNextPatrolPoint();
-            LostPlayer();
-        }
+        SetNextPatrolPoint();
+        LostPlayer();
     }
 
     private void FixedUpdate()
@@ -53,7 +50,7 @@ public class Jailer : MonoBehaviourPun
         JailerSight();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         ArrestPlayer(collision);
     }
@@ -73,7 +70,7 @@ public class Jailer : MonoBehaviourPun
 
             NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex]);
         }
-        else if (isDiscover == true)
+        else if (isDiscover == true && isCapture == false)
         {
             // プレイヤーを追いかける処理.
             NavMeshAgent2D.SetDestination(Target.position);
@@ -110,6 +107,7 @@ public class Jailer : MonoBehaviourPun
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 isDiscover = true;
+                 isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;
@@ -154,7 +152,7 @@ public class Jailer : MonoBehaviourPun
     /// プレイヤーを捕まえた時の処理.
     /// </summary>
     /// <param name="collision"></param>
-    public void ArrestPlayer(Collision2D collision)
+    public void ArrestPlayer(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {

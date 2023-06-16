@@ -312,6 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 591667188}
   - component: {fileID: 591667189}
+  - component: {fileID: 591667190}
   m_Layer: 0
   m_Name: TitleSceanManager
   m_TagString: Untagged
@@ -346,6 +347,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c140b0ef5ee45742abe008cf7483181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &591667190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591667187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ea560865bb51240bdbc6fdbf0999ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOffline: 1
+  OnConect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 591667190}
+        m_TargetAssemblyTypeName: ConectServer, Assembly-CSharp
+        m_MethodName: OnJoinedRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnJoinde:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1154319491
 GameObject:
   m_ObjectHideFlags: 0

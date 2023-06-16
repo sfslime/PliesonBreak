@@ -22,6 +22,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField, Tooltip("目的表示テキストの表示先")] Text TutorialTextObject;
     [SerializeField, Tooltip("吹き出しの表示先")] Text TutorialMessageObject;
 
+    [SerializeField, Tooltip("終了時のマスク")] Image EndMask;
+    [SerializeField, Tooltip("真っ暗になるまでのレート"),Range(0.01f,0.2f)] float MaskRate;
+
     public static TutorialManager Instance;
     // Start is called before the first frame update
     void Start()
@@ -61,7 +64,7 @@ public class TutorialManager : MonoBehaviour
 
         if(Faze == TutorialTexts.Count-1)
         {
-
+            StartCoroutine(EndTutorial());
         }
     }
 
@@ -69,10 +72,17 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
+        float ClearLance = 0;
         while (true)
         {
             //画面が暗くなる演出
-            break;
+            if(EndMask.color.a >= 0.8f)
+            {
+                break;
+            }
+            ClearLance += MaskRate;
+            EndMask.color = new Color32(1, 1, 1, (byte)ClearLance);
+            yield return null;
         }
 
         PhotonNetwork.Disconnect();

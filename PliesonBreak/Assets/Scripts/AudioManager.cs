@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using ConstList;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviourPun
 {
     [SerializeField,Header("SE設定"), Tooltip("SEリスト")] List<AudioClip> SEList = new List<AudioClip>();
     [SerializeField, Tooltip("音の聞こえる範囲")] float Distance;
@@ -27,13 +28,19 @@ public class AudioManager : MonoBehaviour
         
     }
 
-    public void SE(SEid id,Vector2 pos)
+    public void PlaySE(SEid id, Vector2 pos)
+    {
+        photonView.RPC(nameof(SE), RpcTarget.All, (int)id, pos);
+    }
+
+    [PunRPC]
+    public void SE(int id,Vector2 pos)
     {
         float distance = Vector3.Distance(pos, Player.transform.position);
         float volume = 1f - Mathf.Clamp01((distance - AudioSource.minDistance) / (AudioSource.maxDistance - AudioSource.minDistance));
         volume *= (1f - MinVolume) + MinVolume;  // 最小音量を適用
 
         AudioSource.volume = volume;
-        AudioSource.PlayOneShot(SEList[(int)id]);
+        AudioSource.PlayOneShot(SEList[id]);
     }
 }

@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         //Player = GameObject.Find("")
         //プレイヤーを動けなくする処理
 
-        AudioManager = GetComponent<AudioManager>();
+        AudioManager = GameObject.Find("AudioManager").gameObject.GetComponent<AudioManager>();
         if(AudioManager == null)
         {
             Debug.Log("AudioManager not found");
@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
 
     public void PlaySE(SEid id,Vector2 pos)
     {
-        AudioManager.SE(id, pos);
+        AudioManager.PlaySE(id, pos);
     }
 
     /// <summary>
@@ -502,6 +502,7 @@ public class GameManager : MonoBehaviour
         //2,プレイヤー生成
         var Link = PhotonNetwork.Instantiate(PlayerPrefabName, Player.transform.position, Quaternion.identity);
         Link.GetComponent<PlayerLink>().SetOrigin(Player);
+        Link.GetComponent<Collider2D>().enabled = false;
         PlayerSprite = Link;
 
         //3,(マスター)アイテム生成、送信(メンバー)アイテム受信待機

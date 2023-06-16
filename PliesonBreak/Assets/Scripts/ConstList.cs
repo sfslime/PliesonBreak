@@ -50,7 +50,10 @@ namespace ConstList
         None,
         Search,
         SearchHit,
-        SearchNull
+        SearchNull,
+        DoorOpen,
+        JailerWalk,
+        Arrest
     }
 
     public enum SceanNames

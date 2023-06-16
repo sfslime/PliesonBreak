@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using ConstList;
 
 public class Jailer : MonoBehaviourPun
 {
@@ -69,6 +70,7 @@ public class Jailer : MonoBehaviourPun
             }
 
             NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex]);
+            GameManager.PlaySE(SEid.JailerWalk, transform.position);
         }
         else if (isDiscover == true && isCapture == false)
         {
@@ -158,7 +160,7 @@ public class Jailer : MonoBehaviourPun
         {
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
-
+            GameManager.PlaySE(SEid.Arrest, transform.position);
             Debug.Log("•ß‚Ü‚¦‚Ü‚µ‚½");
         }
     }

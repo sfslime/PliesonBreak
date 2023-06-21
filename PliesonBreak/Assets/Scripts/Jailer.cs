@@ -109,7 +109,7 @@ public class Jailer : MonoBehaviourPun
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 isDiscover = true;
-                 isCapture = false;
+                isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;

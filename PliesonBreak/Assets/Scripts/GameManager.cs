@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
 
     public void PlaySE(SEid id,Vector2 pos)
     {
-        AudioManager.PlaySE(id, pos);
+       // AudioManager.PlaySE(id, pos);
     }
 
     /// <summary>

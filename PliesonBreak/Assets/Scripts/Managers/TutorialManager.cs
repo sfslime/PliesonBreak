@@ -41,6 +41,8 @@ public class TutorialManager : MonoBehaviour
         ClearTrrigers();
 
         TutorialTrriger(0);
+
+        BGMManager.Instance.SetBGM(BGMid.DEFALTGAME);
     }
 
     // Update is called once per frame

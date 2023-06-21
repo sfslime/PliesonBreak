@@ -57,6 +57,15 @@ namespace ConstList
         Discover,
     }
 
+    public enum BGMid
+    {
+        NONE,
+        TITLE,
+        DEFALTGAME,
+        CHASE,
+        ENDING
+    }
+
     public enum SceanNames
     {
         STARTTITLE,

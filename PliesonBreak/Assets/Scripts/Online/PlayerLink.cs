@@ -23,6 +23,7 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
     [SerializeField,Tooltip("接続済みかどうか")] bool isJoin = false;
     [SerializeField, Tooltip("画像とプレイヤーのずれ修正")] Vector3 Offset;
     Vector3 PlayerPosition;
+    Vector3 PlayerScale;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,11 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
     void Update()
     {
         //移動計算用ポジションに変換
-        if (photonView.IsMine && isJoin) PlayerPosition = OriginObject.transform.position;
+        if (photonView.IsMine && isJoin)
+        {
+            PlayerPosition = OriginObject.transform.position;
+            PlayerScale = OriginObject.transform.localScale;
+        }
     }
 
     private void FixedUpdate()
@@ -43,6 +48,7 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         if (!photonView.IsMine && !isJoin) return;
         PlayerPosition += Offset;
         transform.position = Vector3.Lerp(transform.position, PlayerPosition, LerpSpeed * Time.fixedDeltaTime);
+        transform.localScale = PlayerScale;
     }
 
     /// <summary>
@@ -93,11 +99,13 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         {
             // プレイヤーオブジェクトの位置情報を送信
             stream.SendNext(PlayerPosition);
+            stream.SendNext(PlayerScale);
         }
         else
         {
             // プレイヤーオブジェクトの位置情報を受信
             PlayerPosition = (Vector3)stream.ReceiveNext();
+            PlayerScale = (Vector3)stream.ReceiveNext();
         }
     }
 }

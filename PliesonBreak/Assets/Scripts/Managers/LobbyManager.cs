@@ -87,6 +87,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         isInLobby = false;
         //参加処理中かロビー参加前は押せなくする
         ButtonRoot.interactable = false;
+
+        BGMManager.Instance.SetBGM(BGMid.TITLE);
     }
 
     // Update is called once per frame

@@ -193,6 +193,8 @@ public class GameManager : MonoBehaviour
 
         //MessageText.transform.parent.gameObject.SetActive(false);
 
+        BGMManager.Instance.SetBGM(BGMid.DEFALTGAME);
+
         Debug.Log("Start OK");
     }
 

@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 using ConstList;
 
-public class TitleSceanManager : MonoBehaviour
+public class EndGameManager : MonoBehaviour
 {
-    [SerializeField, Tooltip("開発用シーンに移動する場合、そのシーン名を入れる")] string TestSceanName;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PhotonNetwork.Disconnect();
+        BGMManager.Instance.SetBGM(BGMid.ENDING);
     }
 
     // Update is called once per frame
@@ -18,8 +19,7 @@ public class TitleSceanManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(TestSceanName == null) SceneManager.LoadScene(TestSceanName);
-            else SceneManager.LoadScene(SceanNames.TUTORIAL.ToString());
+            SceneManager.LoadScene(SceanNames.STARTTITLE.ToString());
         }
     }
 }

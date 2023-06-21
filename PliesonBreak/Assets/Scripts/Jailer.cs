@@ -33,17 +33,20 @@ public class Jailer : MonoBehaviourPun
 
     void Start()
     {
+        
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agent‚ÉNavMeshAgent2D‚ðŽæ“¾
         GameManager = GameManager.GameManagerInstance;
         isDiscover = false;
         
         ThisSavePos = transform.position;
+        
     }
 
     void Update()
     {
         SetNextPatrolPoint();
         LostPlayer();
+        GameManager.PlaySE(SEid.Discover, transform.position);
     }
 
     private void FixedUpdate()

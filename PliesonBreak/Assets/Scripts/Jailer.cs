@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.UI;
 using Photon.Pun;
 using ConstList;
@@ -26,6 +27,9 @@ public class Jailer : MonoBehaviourPun
     Vector3 ThisSavePos;                 // 自身のポジションを保存.
     Vector3 SavePlayerPos;               // プレイヤーのポジションを保存.
 
+    Animator Animator;                   // アニメーター
+    AnimCode AnimState;                  // アニメーション状態
+
     // 視界のパラメータ.
     [SerializeField] int RayNum;         // Rayの本数.
     [SerializeField] float Angle;        // 角度.
@@ -36,6 +40,8 @@ public class Jailer : MonoBehaviourPun
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
         GameManager = GameManager.GameManagerInstance;
         isDiscover = false;
+        AnimState = AnimCode.Walk;
+        Animator = GetComponent<Animator>();
         
         ThisSavePos = transform.position;
     }
@@ -44,6 +50,7 @@ public class Jailer : MonoBehaviourPun
     {
         SetNextPatrolPoint();
         LostPlayer();
+        StartCoroutine(SetBoolTrigger(AnimState));
     }
 
     private void FixedUpdate()
@@ -71,11 +78,13 @@ public class Jailer : MonoBehaviourPun
 
             NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex]);
             GameManager.PlaySE(SEid.JailerWalk, transform.position);
+            AnimState = AnimCode.Run;
         }
         else if (isDiscover == true && isCapture == false)
         {
             // プレイヤーを追いかける処理.
             NavMeshAgent2D.SetDestination(Target.position);
+            AnimState = AnimCode.Run;
         }
         
     }
@@ -161,6 +170,7 @@ public class Jailer : MonoBehaviourPun
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
             GameManager.PlaySE(SEid.Arrest, transform.position);
+            AnimState = AnimCode.Search;
             Debug.Log("捕まえました");
         }
     }
@@ -181,5 +191,22 @@ public class Jailer : MonoBehaviourPun
         PatrolPointList.Clear();
     }
 
+    #region アニメーション
+
+    /// <summary>
+    /// Triggerが使えないため、boolのオンオフで代用
+    /// trueにしたあと1フレーム後にfalseにする
+    /// </summary>
+    /// <param name="anim"></param>
+    /// <returns></returns>
+    IEnumerator SetBoolTrigger(AnimCode anim)
+    {
+        Animator.SetBool(anim.ToString(), true);
+        yield return null;
+        Animator.SetBool(anim.ToString(), false);
+        yield break;
+    }
+
+    #endregion
 
 }

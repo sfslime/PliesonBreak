@@ -38,11 +38,7 @@ public class TutorialManager : MonoBehaviour
     {
         Faze = -1;
 
-        for(int i = 0; i < ArrowRoot.transform.childCount; i++)
-        {
-            ArrowRoot.transform.GetChild(i).gameObject.SetActive(false);
-            TrrigerPointRoot.transform.GetChild(i).gameObject.SetActive(false);
-        }
+        ClearTrrigers();
 
         TutorialTrriger(0);
     }
@@ -51,6 +47,15 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void ClearTrrigers()
+    {
+        for (int i = 0; i < ArrowRoot.transform.childCount; i++)
+        {
+            ArrowRoot.transform.GetChild(i).gameObject.SetActive(false);
+            TrrigerPointRoot.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -62,6 +67,7 @@ public class TutorialManager : MonoBehaviour
     {
         if(Faze + 1 == Trrigerfaze)
         {
+            ClearTrrigers();
             Faze++;
             TutorialTextObject.text = TutorialTexts[Faze];
             TutorialMessageObject.text = TutorialMessage[Faze];

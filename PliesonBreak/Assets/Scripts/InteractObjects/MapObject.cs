@@ -19,6 +19,6 @@ public class MapObject : InteractObjectBase
 
     IEnumerator LookMap()
     {
-
+        yield break;
     }
 }

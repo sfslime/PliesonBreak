@@ -6,6 +6,7 @@ using ConstList;
 
 public class TitleSceanManager : MonoBehaviour
 {
+    [SerializeField, Tooltip("開発用シーンに移動する場合、そのシーン名を入れる")] string TestSceanName;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,8 @@ public class TitleSceanManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(SceanNames.TUTORIAL.ToString());
+            if(TestSceanName == null) SceneManager.LoadScene(TestSceanName);
+            else SceneManager.LoadScene(SceanNames.TUTORIAL.ToString());
         }
     }
 }

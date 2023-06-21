@@ -58,7 +58,7 @@ public class ItemImage : MonoBehaviour
 
             default:
                 image.sprite = GameManager.ReturnSprite(InteractObjs.None);
-                Debug.Log("None");
+                // Debug.Log("None");
                 break;
         }
         // Debug.Log("HaveId > " +HaveId);

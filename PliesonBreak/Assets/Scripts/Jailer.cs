@@ -102,6 +102,7 @@ public class Jailer : MonoBehaviourPun
         Vector3 ForwardDir = RelativeVector.normalized;                // オブジェクトが向いている方向の取得.
         ThisSavePos = transform.position;
 
+
         for (int num = 0; num < RayNum; num++)
         {
             // 扇の開始角度.
@@ -109,6 +110,16 @@ public class Jailer : MonoBehaviourPun
 
             // 現在の向き.
             float CurrentAngle = StartAngle + num * AngleIncrement;
+
+            // 向きを変える処理.
+            if(CurrentAngle < 0.1f)
+            {
+
+            }
+            else if(CurrentAngle > 0.1f)
+            {
+
+            }
 
             Quaternion RayRotation = Quaternion.Euler(0, 0, CurrentAngle);
 

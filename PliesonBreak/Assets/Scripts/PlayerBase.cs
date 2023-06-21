@@ -113,10 +113,10 @@ public class PlayerBase : MonoBehaviour
     /// </summary>
     void PlayerMove()
     {
+        var MoveVector = InputAction.ReadValue<Vector2>();
+
         if (isSearch == false && isMove == false)
         {
-            var MoveVector = InputAction.ReadValue<Vector2>();
-
             Speed = SaveSpeed;
             Rb.velocity = new Vector3(MoveVector.x * Speed, MoveVector.y * Speed, 0) * Time.deltaTime;
         }
@@ -124,6 +124,17 @@ public class PlayerBase : MonoBehaviour
         {
             Speed = 0;
         }
+
+        // Œü‚«‚ğ•Ï‚¦‚éˆ—.
+        if(MoveVector.x < 1)
+        {
+
+        }
+        else
+        {
+
+        }
+
     }
 
     /// <summary>

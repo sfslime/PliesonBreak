@@ -53,7 +53,8 @@ namespace ConstList
         SearchNull,
         DoorOpen,
         JailerWalk,
-        Arrest
+        Arrest,
+        Discover,
     }
 
     public enum SceanNames

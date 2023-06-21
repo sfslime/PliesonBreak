@@ -37,6 +37,7 @@ public class Jailer : MonoBehaviourPun
 
     void Start()
     {
+        
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agent‚ÉNavMeshAgent2D‚ðŽæ“¾
         GameManager = GameManager.GameManagerInstance;
         isDiscover = false;
@@ -44,6 +45,7 @@ public class Jailer : MonoBehaviourPun
         Animator = GetComponent<Animator>();
         
         ThisSavePos = transform.position;
+        
     }
 
     void Update()
@@ -51,6 +53,7 @@ public class Jailer : MonoBehaviourPun
         SetNextPatrolPoint();
         LostPlayer();
         StartCoroutine(SetBoolTrigger(AnimState));
+        GameManager.PlaySE(SEid.Discover, transform.position);
     }
 
     private void FixedUpdate()
@@ -118,7 +121,7 @@ public class Jailer : MonoBehaviourPun
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 isDiscover = true;
-                 isCapture = false;
+                isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;

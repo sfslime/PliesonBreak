@@ -36,31 +36,6 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviour
 {
-    #region 列挙体
-
-    /// <summary>
-    /// ゲームの現在の状態を表す列挙体
-    /// </summary>
-    enum GAMESTATUS
-    {
-        NONE,    //ゲームシーン外、もしくはセットされていない
-        READY,   //ゲーム開始前
-        INGAME,  //ゲーム中
-        ENDGAME, //ゲーム終了後
-        COUNT    //この列挙体の数
-    }
-
-    /// <summary>
-    /// ゲームの進行具合を表す列挙体
-    /// </summary>
-    enum GAMEFAZES
-    {
-        EXPLORE,  //探索中。最終部屋前までの状態
-        LAST,     //最終部屋
-        COUNT     //この列挙体の数
-    }
-
-    #endregion
 
     #region クラス内クラス
 
@@ -320,6 +295,8 @@ public class GameManager : MonoBehaviour
             PhotonNetwork.LocalPlayer.SetArrestCntStatus(PhotonNetwork.LocalPlayer.GetArrestCntStatus() - Time.deltaTime);
         }
 
+        //全員つかまっているか判定する
+        bool isAllArrest = true;
         foreach(var player in PhotonNetwork.PlayerList)
         {
             if(player == PhotonNetwork.LocalPlayer)
@@ -332,6 +309,8 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     //通常画像を表示
+
+                    isAllArrest = false;
                 }
             }
             else
@@ -344,8 +323,13 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     //通常画像を表示
+                    isAllArrest = false;
                 }
             }
+        }
+        if (isAllArrest)
+        {
+            GameOver();
         }
     }
 
@@ -358,7 +342,22 @@ public class GameManager : MonoBehaviour
             TutorialManager.Instance.TutorialTrriger(true);
             return;
         }
-        if (PhotonNetwork.IsMasterClient) PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());
+        PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.ENDGAME_WIN);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.ENDGAME_WIN);
+        }
+    }
+
+    void GameOver()
+    {
+        if (SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString()) return;
+
+        PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.ENDGAME_LOSE);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());
+        }
     }
 
     public void Setprisonpoint(GameObject point)

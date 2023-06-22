@@ -5,6 +5,30 @@ using Photon.Realtime;
 
 namespace ConstList
 {
+
+    /// <summary>
+    /// ゲームの現在の状態を表す列挙体
+    /// </summary>
+    enum GAMESTATUS
+    {
+        NONE,         //ゲームシーン外、もしくはセットされていない
+        READY,        //ゲーム開始前
+        INGAME,       //ゲーム中
+        ENDGAME_WIN,  //ゲーム勝利
+        ENDGAME_LOSE, //ゲーム敗北
+        COUNT         //この列挙体の数
+    }
+
+    /// <summary>
+    /// ゲームの進行具合を表す列挙体
+    /// </summary>
+    enum GAMEFAZES
+    {
+        EXPLORE,  //探索中。最終部屋前までの状態
+        LAST,     //最終部屋
+        COUNT     //この列挙体の数
+    }
+
     public enum AnimCode
     {
         None,

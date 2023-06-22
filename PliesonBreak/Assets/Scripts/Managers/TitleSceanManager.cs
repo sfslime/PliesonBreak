@@ -18,7 +18,7 @@ public class TitleSceanManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(TestSceanName != null) SceneManager.LoadScene(TestSceanName);
+            if(TestSceanName != "") SceneManager.LoadScene(TestSceanName);
             else SceneManager.LoadScene(SceanNames.TUTORIAL.ToString());
         }
     }

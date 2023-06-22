@@ -30,7 +30,7 @@ public class ConectServer : MonoBehaviourPunCallbacks
     {
         if(isOffline) PhotonNetwork.OfflineMode = true;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
-        PhotonNetwork.ConnectUsingSettings();
+        else PhotonNetwork.ConnectUsingSettings();
     }
 
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック

@@ -41,9 +41,9 @@ public class DoorBase : InteractObjectBase
         if(isopendoor == true)
         {
             Collider2D.enabled = false;
+            GameManager.PlaySE(SEid.DoorOpen, transform.position);
             GetComponent<cDoorSpriteChange>().ChangeTile(isopendoor);
             Padlock.SetActive(false);
-            GameManager.PlaySE(SEid.DoorOpen, transform.position);
         }
         else
         {

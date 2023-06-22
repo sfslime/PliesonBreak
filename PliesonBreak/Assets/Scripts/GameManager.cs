@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using ConstList;
@@ -230,7 +231,7 @@ public class GameManager : MonoBehaviour
 
     public void PlaySE(SEid id,Vector2 pos)
     {
-       // AudioManager.PlaySE(id, pos);
+       AudioManager.PlaySE(id, pos);
     }
 
     /// <summary>
@@ -559,6 +560,13 @@ public class GameManager : MonoBehaviour
         if (Init())
         {
             StartCoroutine(InitGame());
+        }else if(SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString())
+        {
+            //チュートリアルの例外処理
+            var Link = PhotonNetwork.Instantiate(PlayerPrefabName, Player.transform.position, Quaternion.identity);
+            Link.GetComponent<PlayerLink>().SetOrigin(Player);
+            Link.GetComponent<Collider2D>().enabled = false;
+            PlayerSprite = Link;
         }
     }
 

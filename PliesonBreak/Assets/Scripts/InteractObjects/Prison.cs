@@ -59,6 +59,7 @@ public class Prison : InteractObjectBase
         {
             Collider2D.isTrigger = true;
             GameManager.ReleasePrison();
+            GameManager.PlaySE(ConstList.SEid.Arrest, transform.position);
             StartCoroutine(PrisonCloseLimit());
         }
         else

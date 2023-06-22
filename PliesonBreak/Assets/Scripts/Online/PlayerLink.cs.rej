@@ -1,9 +1,0 @@
-diff a/PliesonBreak/Assets/Scripts/Online/PlayerLink.cs b/PliesonBreak/Assets/Scripts/Online/PlayerLink.cs	(rejected hunks)
-@@ -23,6 +23,7 @@
-     [SerializeField,Tooltip("�ڑ��ς݂��ǂ���")] bool isJoin = false;
-     [SerializeField, Tooltip("�摜�ƃv���C���[�̂���C��")] Vector3 Offset;
-     Vector3 PlayerPosition;
-+<<<<<<< HEAD
-     Vector3 Scale;
- 
-     // Start is called before the first frame update

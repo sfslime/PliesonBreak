@@ -2748,8 +2748,8 @@ MonoBehaviour:
   - {fileID: 762486187142702149, guid: bf2dd34bdfe6ed342bd98b17be04a4e5, type: 3}
   - {fileID: 3133997238768261890, guid: dee186f8e3848464a93d4b7d79d87731, type: 3}
   - {fileID: 3133997238768261890, guid: dc7540d0c81638d469f47db3346df86f, type: 3}
-  - {fileID: 3133997238768261890, guid: dc7540d0c81638d469f47db3346df86f, type: 3}
-  - {fileID: 3133997238768261890, guid: dc7540d0c81638d469f47db3346df86f, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 2584562454183963062, guid: a7c7881d41c97e44c8a9f9f873b682d0, type: 3}
 --- !u!4 &414469882
 Transform:

@@ -157,7 +157,7 @@ public class MapManager : MonoBehaviourPunCallbacks
                 else
                 {
                     //アイテムID内でランダムに生成し、その文字列からオブジェクトIDに変換
-                    item = (InteractObjs)Enum.Parse(typeof(InteractObjs), ((ItemID)UnityEngine.Random.Range((int)ItemID.None + 1, (int)ItemID.Count - 1)).ToString());
+                    item = (InteractObjs)Enum.Parse(typeof(InteractObjs), ((ItemID)UnityEngine.Random.Range((int)ItemID.None + 1, (int)ItemID.Count)).ToString());
                 }
                 if (KeyID == item) isKeyPop = true;
                 IDList.Add(item);

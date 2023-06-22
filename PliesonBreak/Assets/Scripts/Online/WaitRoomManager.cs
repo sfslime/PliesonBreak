@@ -21,14 +21,18 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
     private bool isMaster;
     //ルーム内で接続できているか
     private bool isInRoom;
+    //スタートしたかどうか
+    private bool isStart;
 
     /// <summary>
     /// 現在のメンバーでゲームシーンに移動する
     /// </summary>
     public void MoveGameScean()
     {
+        if (isStart) return;
         if (isMaster)
         {
+            isStart = true;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(/*"ProttypeSeacn");*/SceanNames.GAME.ToString());
         }
@@ -93,6 +97,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
     {
         isMaster = false;
         isInRoom = false;
+        isStart = false;
         TryRoomJoin();
     }
 

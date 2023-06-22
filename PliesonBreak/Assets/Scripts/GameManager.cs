@@ -100,6 +100,9 @@ public class GameManager : MonoBehaviour
 
     private InitList InitLists = new InitList();
 
+    //現在はテストで結果を記録
+    public static bool GameResult;
+
     #endregion
 
     #region マネージャー変数
@@ -275,11 +278,13 @@ public class GameManager : MonoBehaviour
     {
         if (InitCheck())
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GameStart();
-                Debug.Log("GameStart");
-            }
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    GameStart();
+            //    Debug.Log("GameStart");
+            //}
+            GameStart();
+            Debug.Log("GameStart");
         }
     }
 
@@ -342,18 +347,19 @@ public class GameManager : MonoBehaviour
             TutorialManager.Instance.TutorialTrriger(true);
             return;
         }
-        PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.ENDGAME_WIN);
+        GameResult = true;
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.ENDGAME_WIN);
+            PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());
         }
     }
 
     void GameOver()
     {
-        if (SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString()) return;
+        if (SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString() || GameStatus == GAMESTATUS.ENDGAME_LOSE) return;
 
-        PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.ENDGAME_LOSE);
+        GameStatus = GAMESTATUS.ENDGAME_LOSE;
+        GameResult = false;
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());

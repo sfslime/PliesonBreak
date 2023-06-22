@@ -12,7 +12,7 @@ public class EndGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(PhotonNetwork.LocalPlayer.GetGameStatus() == (int)GAMESTATUS.ENDGAME_WIN)
+        if(GameManager.GameResult)
         {
             Endtext.text = "GAME CLEAR!!";
         }
@@ -20,6 +20,7 @@ public class EndGameManager : MonoBehaviour
         {
             Endtext.text = "GAME OVER..";
         }
+        Debug.Log(PhotonNetwork.LocalPlayer.GetGameStatus());
         PhotonNetwork.Disconnect();
         BGMManager.Instance.SetBGM(BGMid.ENDING);
     }

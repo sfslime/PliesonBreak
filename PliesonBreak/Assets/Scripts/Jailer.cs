@@ -18,6 +18,7 @@ public class Jailer : MonoBehaviourPun
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
     [SerializeField] bool isCapture;     // プレイヤーを捕まえたかどうか.
+    [SerializeField] bool ishunt;        // プレイヤーを追跡しているかどうか.
 
 
     public bool isRestraint;             // 動けるかどうか
@@ -53,7 +54,6 @@ public class Jailer : MonoBehaviourPun
         SetNextPatrolPoint();
         LostPlayer();
         StartCoroutine(SetBoolTrigger(AnimState));
-        GameManager.PlaySE(SEid.Discover, transform.position);
         Debug.Log(SEid.Discover);
     }
 
@@ -81,7 +81,7 @@ public class Jailer : MonoBehaviourPun
             }
 
             NavMeshAgent2D.SetDestination(PatrolPointList[PatrolNumIndex]);
-            GameManager.PlaySE(SEid.JailerWalk, transform.position);
+            // GameManager.PlaySE(SEid.JailerWalk, transform.position);
             AnimState = AnimCode.Run;
         }
         else if (isDiscover == true && isCapture == false)
@@ -122,7 +122,11 @@ public class Jailer : MonoBehaviourPun
             // プレイヤーを発見.
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                isDiscover = true;
+                if(isDiscover == false)
+                {
+                    GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
+                    isDiscover = true;
+                }
                 isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;

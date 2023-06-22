@@ -112,6 +112,7 @@ MonoBehaviour:
   isDiscover: 0
   isLostTarget: 0
   isCapture: 0
+  ishunt: 0
   isRestraint: 0
   LostTime: 0
   SetTime: 5

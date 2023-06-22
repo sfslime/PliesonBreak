@@ -187,7 +187,7 @@ public class Jailer : MonoBehaviourPun
         {
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
-            GameManager.PlaySE(SEid.Arrest, transform.position);
+            GameManager.PlaySE(SEid.Arrest, GameManager.GameManagerInstance.GetPlayer().transform.position);
             AnimState = AnimCode.Search;
             Debug.Log("•ß‚Ü‚¦‚Ü‚µ‚½");
         }

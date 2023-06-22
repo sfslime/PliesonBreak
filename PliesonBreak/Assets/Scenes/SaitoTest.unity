@@ -23004,6 +23004,10 @@ PrefabInstance:
       propertyPath: BearTrap
       value: 
       objectReference: {fileID: 1263634306}
+    - target: {fileID: 1775186233, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
+      propertyPath: ViewScale
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2658396639101774392, guid: 999a0646dffd3d74e880f0454819bdf5, type: 3}
       propertyPath: m_Name
       value: PlayerSprite
@@ -23366,6 +23370,7 @@ MonoBehaviour:
   isDiscover: 0
   isLostTarget: 0
   isCapture: 0
+  ishunt: 0
   isRestraint: 0
   LostTime: 0
   SetTime: 5

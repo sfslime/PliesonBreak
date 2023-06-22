@@ -27,7 +27,7 @@ public class PlayerBase : MonoBehaviour
     public int ObjID;                         // 現在重なっているオブジェクトの情報を取得.
     public int HaveId;                        // 現在持っているアイテムのID.
     [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
-    [SerializeField] bool isSearch;           // インタラクトしているかどうか
+    [SerializeField] bool isSearch;           // インタラクトしているかどうか.
     public bool isMove;                       // 動けるかどうか.
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
@@ -167,7 +167,11 @@ public class PlayerBase : MonoBehaviour
         switch (ObjID)
         {
             case (int)InteractObjs.Search:
-                StartCoroutine("Search");
+                
+                if (isSearch == false)
+                {
+                    StartCoroutine(Search());
+                }
                 break;
 
             case (int)InteractObjs.Key1:
@@ -252,8 +256,11 @@ public class PlayerBase : MonoBehaviour
     IEnumerator Search()
     {
         isSearch = true;
+        Rb.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return StartCoroutine(SearchPoint.SearchStart(1));
         isSearch = false;
+        Rb.constraints = RigidbodyConstraints2D.None;
+        Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     /// <summary>
@@ -276,6 +283,7 @@ public class PlayerBase : MonoBehaviour
     {
         if(isSearch == false)
         {
+            StartCoroutine(ItemSwitchingWaitTime(0.5f));
             HaveId = olditem;
         }
     }
@@ -287,6 +295,13 @@ public class PlayerBase : MonoBehaviour
         if (Rb.velocity.magnitude > 0) return AnimCode.Run;
 
         return AnimCode.Idel;
+    }
+
+    IEnumerator ItemSwitchingWaitTime(float time)
+    {
+        UIManager.IsInteractButton(false);
+        yield return new WaitForSeconds(time);
+        UIManager.IsInteractButton(true);
     }
 }
 

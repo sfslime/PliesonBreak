@@ -87,6 +87,7 @@ public class Jailer : MonoBehaviourPun
         else if (isDiscover == true && isCapture == false)
         {
             // プレイヤーを追いかける処理.
+
             NavMeshAgent2D.SetDestination(Target.position);
             AnimState = AnimCode.Run;
         }
@@ -141,7 +142,7 @@ public class Jailer : MonoBehaviourPun
             else if (hit.collider == null && SavePlayerPos != Vector3.zero)
             {
                 isLostTarget = true;
-                Debug.Log("プレイヤーを見失った");
+                // Debug.Log("プレイヤーを見失った");
             }
             else if(hit.collider == null)
             {
@@ -171,7 +172,6 @@ public class Jailer : MonoBehaviourPun
                     BGMManager.Instance.SetBGM(BGMid.DEFALTGAME);
                 }
                 isDiscover = isLostTarget = false;
-
                 LostTime = 0;
             }
         }
@@ -185,6 +185,7 @@ public class Jailer : MonoBehaviourPun
     {
         if(collision.gameObject.tag == "Player")
         {
+            isCapture = true;
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
             GameManager.PlaySE(SEid.Arrest, GameManager.GameManagerInstance.GetPlayer().transform.position);

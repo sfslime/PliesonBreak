@@ -23,12 +23,12 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
     [SerializeField,Tooltip("接続済みかどうか")] bool isJoin = false;
     [SerializeField, Tooltip("画像とプレイヤーのずれ修正")] Vector3 Offset;
     Vector3 PlayerPosition;
-    Vector3 PlayerScale;
+    public Vector3 Scale;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Scale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -38,7 +38,6 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine && isJoin)
         {
             PlayerPosition = OriginObject.transform.position;
-            PlayerScale = OriginObject.transform.localScale;
         }
     }
 
@@ -48,7 +47,15 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         if (!photonView.IsMine && !isJoin) return;
         PlayerPosition += Offset;
         transform.position = Vector3.Lerp(transform.position, PlayerPosition, LerpSpeed * Time.fixedDeltaTime);
-        transform.localScale = PlayerScale;
+        transform.localScale = Scale;
+        if(OriginObject.transform.localScale.x < 0)
+        {
+            TurnSprite(false);
+        }
+        else if (OriginObject.transform.localScale.x > 0)
+        {
+            TurnSprite(true);
+        }
     }
 
     /// <summary>
@@ -59,6 +66,25 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
     {
         OriginObject = OriginPlayer;
         isJoin = true;
+    }
+
+    public void TurnSprite(bool isRight)
+    {
+        if (isRight)
+        {
+            if(Scale.x < 0)
+            {
+                Scale.x *= -1;
+            }
+        }
+        else
+        {
+            if(Scale.x > 0)
+            {
+                Scale.x *= 1;
+            }
+        }
+        transform.localScale = Scale;
     }
 
     public GameObject GetOrigin()
@@ -99,13 +125,13 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         {
             // プレイヤーオブジェクトの位置情報を送信
             stream.SendNext(PlayerPosition);
-            stream.SendNext(PlayerScale);
+            stream.SendNext(Scale);
         }
         else
         {
             // プレイヤーオブジェクトの位置情報を受信
             PlayerPosition = (Vector3)stream.ReceiveNext();
-            PlayerScale = (Vector3)stream.ReceiveNext();
+            Scale = (Vector3)stream.ReceiveNext();
         }
     }
 }

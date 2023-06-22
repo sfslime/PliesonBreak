@@ -111,16 +111,6 @@ public class Jailer : MonoBehaviourPun
             // Œ»İ‚ÌŒü‚«.
             float CurrentAngle = StartAngle + num * AngleIncrement;
 
-            // Œü‚«‚ğ•Ï‚¦‚éˆ—.
-            if(CurrentAngle < 0.1f)
-            {
-
-            }
-            else if(CurrentAngle > 0.1f)
-            {
-
-            }
-
             Quaternion RayRotation = Quaternion.Euler(0, 0, CurrentAngle);
 
             Vector3 RayDir = RayRotation * ForwardDir;

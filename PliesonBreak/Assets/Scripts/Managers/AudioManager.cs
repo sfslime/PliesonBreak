@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviourPun
 
     public void PlaySE(SEid id, Vector2 pos)
     {
+        Debug.Log(id);
         photonView.RPC(nameof(SE), RpcTarget.All, (int)id, pos);
     }
 

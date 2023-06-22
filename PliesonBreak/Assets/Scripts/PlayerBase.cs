@@ -298,6 +298,11 @@ public class PlayerBase : MonoBehaviour
         return AnimCode.Idel;
     }
 
+    /// <summary>
+    /// アイテムの切り替えを連続でできないようにする為の関数.
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
     IEnumerator ItemSwitchingWaitTime(float time)
     {
         UIManager.IsInteractButton(false);

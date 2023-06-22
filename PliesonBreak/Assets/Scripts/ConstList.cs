@@ -80,7 +80,8 @@ namespace ConstList
         Arrest,
         Discover,
         EscapeItemSet,
-        DoorClose
+        DoorClose,
+        PlayerWalk
     }
 
     public enum BGMid

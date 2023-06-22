@@ -99,6 +99,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         ButtonRoot.interactable = false;
 
         BGMManager.Instance.SetBGM(BGMid.TITLE);
+
+        PhotonNetwork.LocalPlayer.SetGameStatus((int)GAMESTATUS.NONE);
     }
 
     // Update is called once per frame

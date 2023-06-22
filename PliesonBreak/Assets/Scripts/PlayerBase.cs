@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using ConstList;
 using Photon.Pun;
@@ -33,6 +34,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
     [SerializeField, Header("アニメーション用変数"), Tooltip("現在のアニメーション状態")] AnimCode AnimState;
+    private AudioSource AudioSource;          // 足音再生用
 
     #endregion
 
@@ -58,6 +60,8 @@ public class PlayerBase : MonoBehaviour
         UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
         SaveSpeed = Speed;
         isMove = false;
+        AudioSource = GetComponent<AudioSource>();
+        StartCoroutine(WalkSE());
     }
 
     void Update()
@@ -274,6 +278,28 @@ public class PlayerBase : MonoBehaviour
         isMove = true;
         yield return new WaitForSeconds(time);
         isMove = false;
+    }
+
+    /// <summary>
+    /// 足音を鳴らすコルーチン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator WalkSE()
+    {
+        Vector3 pos = transform.position;
+        while (true)
+        {
+            if(pos != transform.position)
+            {
+                if (!AudioSource.isPlaying) AudioSource.Play();
+            }
+            else
+            {
+                AudioSource.Stop();
+            }
+            pos = transform.position;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
     
 

@@ -43,7 +43,7 @@ public class Jailer : MonoBehaviourPun
         GameManager = GameManager.GameManagerInstance;
         isDiscover = false;
         AnimState = AnimCode.Walk;
-        Animator = GetComponent<Animator>();
+        Animator = transform.GetChild(0).GetComponent<Animator>();
         
         ThisSavePos = transform.position;
         

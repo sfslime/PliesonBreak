@@ -124,17 +124,6 @@ public class PlayerBase : MonoBehaviour
         {
             Speed = 0;
         }
-
-        // Œü‚«‚ğ•Ï‚¦‚éˆ—.
-        if(MoveVector.x < 1)
-        {
-
-        }
-        else
-        {
-
-        }
-
     }
 
     /// <summary>

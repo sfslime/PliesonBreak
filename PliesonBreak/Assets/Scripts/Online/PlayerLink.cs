@@ -78,12 +78,15 @@ public class PlayerLink : MonoBehaviourPun, IPunObservable
         }
         else
         {
-            if (Scale.x > 0)
+            if(Scale.x > 0)
             {
-                Scale.x *= -1;
+                Scale.x *= 1;
             }
         }
+        transform.localScale = Scale;
     }
+
+    
 
     public GameObject GetOrigin()
     {

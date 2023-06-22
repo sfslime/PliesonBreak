@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c140b0ef5ee45742abe008cf7483181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestSceanName: 
+  TestSceanName: SaitoGame
 --- !u!114 &591667190
 MonoBehaviour:
   m_ObjectHideFlags: 0

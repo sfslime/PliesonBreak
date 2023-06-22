@@ -79,7 +79,8 @@ namespace ConstList
         JailerWalk,
         Arrest,
         Discover,
-        EscapeItemSet
+        EscapeItemSet,
+        DoorClose
     }
 
     public enum BGMid

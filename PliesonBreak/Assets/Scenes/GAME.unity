@@ -1025,6 +1025,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aa0588da85d46594a81567764f2bbc30, type: 3}
   - {fileID: 8300000, guid: 2b13f426b9fdb494db23e2f1850b3694, type: 3}
   - {fileID: 8300000, guid: b05501617e8a3924caa52add9f1b4d07, type: 3}
+  - {fileID: 8300000, guid: 77e1c30f778c19d48987d5a650067d3c, type: 3}
   Distance: 5
   MinVolume: 0.001
 --- !u!82 &96232332

@@ -360,6 +360,7 @@ public class GameManager : MonoBehaviour
 
         GameStatus = GAMESTATUS.ENDGAME_LOSE;
         GameResult = false;
+        PhotonNetwork.AutomaticallySyncScene = true;
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());

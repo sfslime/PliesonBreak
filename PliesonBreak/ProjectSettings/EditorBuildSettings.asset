@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SaitoGAME.unity
     guid: 4a25638db60ea9f47bf7e5b4b1c504d1
+  - enabled: 1
+    path: Assets/Scenes/ENDGAME.unity
+    guid: a6f671e1e2fcfb547b26902c81e29c96
   m_configObjects: {}

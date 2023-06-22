@@ -75,21 +75,31 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     void RoomStatusUpDate()
     {
-        if (!isMaster)
-        {
-            SceanMoveButton.interactable = false;
-        }
 
         if(PhotonNetwork.CurrentRoom.PlayerCount >= PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
 
-        SceanMoveButton.transform.GetChild(0).gameObject.GetComponent<Text>().text
+        if (!isInRoom)
+        {
+            SceanMoveButton.interactable = false;
+        }
+        else
+        {
+            if (!isMaster)
+            {
+                SceanMoveButton.interactable = false;
+            }
+            else
+            {
+                SceanMoveButton.interactable = true;
+            }
+            SceanMoveButton.transform.GetChild(0).gameObject.GetComponent<Text>().text
             = "開始(" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers + ")";
 
-        //メンバリストを表示
-
+            //メンバリストを表示
+        }
     }
 
     // Start is called before the first frame update

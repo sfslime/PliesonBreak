@@ -127,9 +127,9 @@ public class Jailer : MonoBehaviourPun
                     if (GameManager.GetPlayer() == hit.collider.gameObject)
                     {
                         BGMManager.Instance.SetBGM(BGMid.CHASE);
+                        GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
                     }
-
-                    GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
+                    
                     isDiscover = true;
                 }
                 isCapture = false;
@@ -187,7 +187,10 @@ public class Jailer : MonoBehaviourPun
         {
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
-            GameManager.PlaySE(SEid.Arrest, GameManager.GameManagerInstance.GetPlayer().transform.position);
+            if(collision.gameObject == GameManager.GetPlayer())
+            {
+                GameManager.PlaySE(SEid.Arrest, GameManager.GameManagerInstance.GetPlayer().transform.position);
+            }
             AnimState = AnimCode.Search;
             Debug.Log("•ß‚Ü‚¦‚Ü‚µ‚½");
         }

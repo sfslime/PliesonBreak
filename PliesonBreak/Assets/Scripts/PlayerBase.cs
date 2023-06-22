@@ -231,6 +231,7 @@ public class PlayerBase : MonoBehaviour
         }
         else
         {
+            GameManager.GameManagerInstance.PlaySE(SEid.DoorClose, transform.position);
             Debug.Log("Œ®‚ª‚©‚©‚Á‚Ä‚¢‚é");
         }
     }

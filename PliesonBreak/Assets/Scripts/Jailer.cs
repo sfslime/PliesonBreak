@@ -54,6 +54,7 @@ public class Jailer : MonoBehaviourPun
         LostPlayer();
         StartCoroutine(SetBoolTrigger(AnimState));
         GameManager.PlaySE(SEid.Discover, transform.position);
+        Debug.Log(SEid.Discover);
     }
 
     private void FixedUpdate()

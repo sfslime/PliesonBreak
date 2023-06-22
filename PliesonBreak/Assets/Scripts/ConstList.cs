@@ -55,6 +55,7 @@ namespace ConstList
         JailerWalk,
         Arrest,
         Discover,
+        EscapeItemSet
     }
 
     public enum BGMid
@@ -63,6 +64,7 @@ namespace ConstList
         TITLE,
         DEFALTGAME,
         CHASE,
+        TUTORIALEND,
         ENDING
     }
 

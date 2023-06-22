@@ -91,11 +91,12 @@ public class TutorialManager : MonoBehaviour
     public void TutorialTrriger(bool isEnd)
     {
         StartCoroutine(EndTutorial());
+        BGMManager.Instance.SetBGM(BGMid.TUTORIALEND);
     }
 
     IEnumerator EndTutorial()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         float ClearLance = 0;
         while (true)

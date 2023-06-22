@@ -50,6 +50,7 @@ public class Goal : InteractObjectBase
             //脱出アイテムをセット
             EscapeItemList[Item] = true;
             GoalLink.StateLink(Item);
+            GameManager.PlaySE(SEid.EscapeItemSet, transform.position);
             return true;
         }
 

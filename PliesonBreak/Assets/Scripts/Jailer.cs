@@ -124,6 +124,11 @@ public class Jailer : MonoBehaviourPun
             {
                 if(isDiscover == false)
                 {
+                    if (GameManager.GetPlayer() == hit.collider.gameObject)
+                    {
+                        BGMManager.Instance.SetBGM(BGMid.CHASE);
+                    }
+
                     GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
                     isDiscover = true;
                 }
@@ -161,6 +166,10 @@ public class Jailer : MonoBehaviourPun
             // ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚ç‚ê‚È‚©‚Á‚½ê‡„‰ñ‚É–ß‚é
             if(LostTime < 0)
             {
+                if(isDiscover == true)
+                {
+                    BGMManager.Instance.SetBGM(BGMid.DEFALTGAME);
+                }
                 isDiscover = isLostTarget = false;
 
                 LostTime = 0;

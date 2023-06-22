@@ -31,6 +31,7 @@ public class Goal : InteractObjectBase
     public void PlayerGoal()
     {
         Debug.Log("ÉSÅ[ÉãÇµÇ‹ÇµÇΩÅIÅI");
+        GameManager.GameClear();
     }
 
     /// <summary>

@@ -28,7 +28,11 @@ public class ConectServer : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        if(isOffline) PhotonNetwork.OfflineMode = true;
+        if (isOffline)
+        {
+            Debug.Log(PhotonNetwork.IsConnected);
+            PhotonNetwork.OfflineMode = true;
+        }
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         else PhotonNetwork.ConnectUsingSettings();
     }

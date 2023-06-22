@@ -351,7 +351,13 @@ public class GameManager : MonoBehaviour
 
     public void GameClear()
     {
-
+        if (EscapeSettings.isGoal) return;
+        EscapeSettings.isGoal = true;
+        if(SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString())
+        {
+            TutorialManager.Instance.TutorialTrriger(true);
+            return;
+        }
         if (PhotonNetwork.IsMasterClient) PhotonNetwork.LoadLevel(SceanNames.ENDGAME.ToString());
     }
 

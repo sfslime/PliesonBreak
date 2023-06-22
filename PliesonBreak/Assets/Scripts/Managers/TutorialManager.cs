@@ -24,7 +24,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField, Tooltip("吹き出しの表示先")] Text TutorialMessageObject;
 
     [SerializeField, Tooltip("終了時のマスク")] Image EndMask;
-    [SerializeField, Tooltip("真っ暗になるまでのレート"),Range(0.01f,0.2f)] float MaskRate;
+    [SerializeField, Tooltip("真っ暗になるまでのレート"),Range(0.1f,10f)] float MaskRate;
 
     public static TutorialManager Instance;
 
@@ -82,15 +82,20 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if(Faze == TutorialTexts.Count-1)
+        if(Faze == TutorialTexts.Count)
         {
             StartCoroutine(EndTutorial());
         }
     }
 
+    public void TutorialTrriger(bool isEnd)
+    {
+        StartCoroutine(EndTutorial());
+    }
+
     IEnumerator EndTutorial()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         float ClearLance = 0;
         while (true)
@@ -101,7 +106,7 @@ public class TutorialManager : MonoBehaviour
                 break;
             }
             ClearLance += MaskRate;
-            EndMask.color = new Color32(1, 1, 1, (byte)ClearLance);
+            EndMask.color = new Color32(0, 0, 0, (byte)ClearLance);
             yield return null;
         }
 

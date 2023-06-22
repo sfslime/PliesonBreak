@@ -880,7 +880,6 @@ MonoBehaviour:
   LerpSpeed: 10
   isJoin: 0
   Offset: {x: 0, y: -0.5, z: 0}
-  Scale: {x: 0, y: 0, z: 0}
 --- !u!114 &930732714524950414
 MonoBehaviour:
   m_ObjectHideFlags: 0

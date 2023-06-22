@@ -77,7 +77,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void TitleBack()
     {
+        StartCoroutine(WaitDisConect());
+        
+    }
+
+    IEnumerator WaitDisConect()
+    {
         PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+        {
+            yield return null;
+        }
         SceneManager.LoadScene(SceanNames.STARTTITLE.ToString());
     }
 

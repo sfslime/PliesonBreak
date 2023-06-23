@@ -12,6 +12,7 @@ TagManager:
   - InteractObject
   - Jailer
   - Ground
+  - RetreatArea
   layers:
   - Default
   - TransparentFX

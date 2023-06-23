@@ -23,11 +23,13 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] SearchPoint SearchPoint;
     [SerializeField] Goal Goal;
     [SerializeField] BearTrap BearTrap;
+    [SerializeField] MapObject MapObject;
     public KeysLink KeysLink;
     public int ObjID;                         // 現在重なっているオブジェクトの情報を取得.
     public int HaveId;                        // 現在持っているアイテムのID.
     [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
     [SerializeField] bool isSearch;           // インタラクトしているかどうか.
+    [SerializeField] bool isLookMap;          // マップを開いているかどうか.
     public bool isMove;                       // 動けるかどうか.
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
@@ -96,8 +98,11 @@ public class PlayerBase : MonoBehaviour
                 case (int)InteractObjs.CloseBearTrap:
                     BearTrap = collision.gameObject.GetComponent<BearTrap>();
                     break;
+
+                case (int)InteractObjs.Map:
+                    MapObject = collision.gameObject.GetComponent<MapObject>();
+                    break;
             }
-            // Debug.Log("ObjID" +ObjID);
         }
 
         EnterInteractObj(collision);
@@ -147,7 +152,8 @@ public class PlayerBase : MonoBehaviour
             ObjID != (int)InteractObjs.Prison &&
             ObjID != (int)InteractObjs.EscapeObj &&
             ObjID != (int)InteractObjs.OpenBearTrap &&
-            ObjID != (int)InteractObjs.CloseBearTrap)
+            ObjID != (int)InteractObjs.CloseBearTrap &&
+            ObjID != (int)InteractObjs.Map)
         {
             InteractObjectBase.RequestSprite();
             HaveId = ObjID;
@@ -208,6 +214,11 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(BearTrap.BearTrapOpen(3));
                 StartCoroutine(InteractTime(3));
                 break;
+
+            case (int)InteractObjs.Map:
+                Map();
+                break;
+                
         }
 
         if (isPlayerHaveItem == true)
@@ -261,6 +272,19 @@ public class PlayerBase : MonoBehaviour
         isSearch = false;
         Rb.constraints = RigidbodyConstraints2D.None;
         Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    void Map()
+    {
+        if(isLookMap == true)
+        {
+            MapObject.LookMap(true);
+        }
+        else
+        {
+            MapObject.LookMap(false);
+        }
+        
     }
 
     /// <summary>

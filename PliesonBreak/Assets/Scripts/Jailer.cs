@@ -104,7 +104,6 @@ public class Jailer : MonoBehaviourPun
         Vector3 ForwardDir = RelativeVector.normalized;                // オブジェクトが向いている方向の取得.
         ThisSavePos = transform.position;
 
-
         for (int num = 0; num < RayNum; num++)
         {
             // 扇の開始角度.
@@ -119,6 +118,13 @@ public class Jailer : MonoBehaviourPun
 
             // Rayの発射.
             RaycastHit2D hit = Physics2D.Raycast(transform.position, RayDir, Distance);
+
+            // 強制的に巡回に戻す処理.
+            if (hit.collider != null && hit.collider.CompareTag("RetreatArea"))
+            {
+                isDiscover = false;
+                isLostTarget = false;
+            }
 
             // プレイヤーを発見.
             if (hit.collider != null && hit.collider.CompareTag("Player"))

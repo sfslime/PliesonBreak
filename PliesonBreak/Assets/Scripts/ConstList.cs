@@ -53,6 +53,7 @@ namespace ConstList
         EscapeObj,
         OpenBearTrap,
         CloseBearTrap,
+        Map,
     }
 
     /// <summary>

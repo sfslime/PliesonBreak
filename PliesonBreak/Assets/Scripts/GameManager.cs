@@ -556,6 +556,7 @@ public class GameManager : MonoBehaviour
         else
         {
             //行うことはないのでスキップ
+            InitLists.MapInit = true;
         }
 
         //5,初期化待機

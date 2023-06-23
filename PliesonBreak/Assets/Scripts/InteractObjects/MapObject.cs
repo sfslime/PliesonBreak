@@ -17,8 +17,15 @@ public class MapObject : InteractObjectBase
         
     }
 
-    IEnumerator LookMap()
+    public void LookMap(bool isdisplay)
     {
-        yield break;
+        if (isdisplay == true)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

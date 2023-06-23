@@ -87,6 +87,7 @@ public class Jailer : MonoBehaviourPun
         else if (isDiscover == true && isCapture == false)
         {
             // プレイヤーを追いかける処理.
+
             NavMeshAgent2D.SetDestination(Target.position);
             AnimState = AnimCode.Run;
         }
@@ -103,7 +104,6 @@ public class Jailer : MonoBehaviourPun
         Vector3 ForwardDir = RelativeVector.normalized;                // オブジェクトが向いている方向の取得.
         ThisSavePos = transform.position;
 
-
         for (int num = 0; num < RayNum; num++)
         {
             // 扇の開始角度.
@@ -118,6 +118,13 @@ public class Jailer : MonoBehaviourPun
 
             // Rayの発射.
             RaycastHit2D hit = Physics2D.Raycast(transform.position, RayDir, Distance);
+
+            // 強制的に巡回に戻す処理.
+            if (hit.collider != null && hit.collider.CompareTag("RetreatArea"))
+            {
+                isDiscover = false;
+                isLostTarget = false;
+            }
 
             // プレイヤーを発見.
             if (hit.collider != null && hit.collider.CompareTag("Player"))
@@ -141,7 +148,7 @@ public class Jailer : MonoBehaviourPun
             else if (hit.collider == null && SavePlayerPos != Vector3.zero)
             {
                 isLostTarget = true;
-                Debug.Log("プレイヤーを見失った");
+                // Debug.Log("プレイヤーを見失った");
             }
             else if(hit.collider == null)
             {
@@ -171,7 +178,6 @@ public class Jailer : MonoBehaviourPun
                     BGMManager.Instance.SetBGM(BGMid.DEFALTGAME);
                 }
                 isDiscover = isLostTarget = false;
-
                 LostTime = 0;
             }
         }
@@ -185,6 +191,7 @@ public class Jailer : MonoBehaviourPun
     {
         if(collision.gameObject.tag == "Player")
         {
+            isCapture = true;
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
             if(collision.gameObject == GameManager.GetPlayer())

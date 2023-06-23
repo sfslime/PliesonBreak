@@ -401,6 +401,11 @@ public class GameManager : MonoBehaviour
         return EscapeSettings.NeedEscapeList;
     }
 
+    public GAMESTATUS GetGameStatus()
+    {
+        return GameStatus;
+    }
+
 
     #endregion
 

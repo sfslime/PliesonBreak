@@ -9,7 +9,7 @@ namespace ConstList
     /// <summary>
     /// ゲームの現在の状態を表す列挙体
     /// </summary>
-    enum GAMESTATUS
+    public enum GAMESTATUS
     {
         NONE,         //ゲームシーン外、もしくはセットされていない
         READY,        //ゲーム開始前
@@ -66,6 +66,7 @@ namespace ConstList
         Key3,
         EscapeItem1,
         EscapeItem2,
+        OpenBearTrap,
         Count
     }
 

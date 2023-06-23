@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ConstList;
 
 public class Goal : InteractObjectBase
@@ -9,6 +10,8 @@ public class Goal : InteractObjectBase
     Dictionary<InteractObjs, bool> EscapeItemList = new Dictionary<InteractObjs, bool>();
     [SerializeField,Tooltip("脱出に必要なアイテムのリスト")]
     List<InteractObjs> NeedEscapeList = new List<InteractObjs>();
+    [SerializeField, Tooltip("目標アイテムの表示先の親")] 
+    GameObject TargetItemImageRoot;
     GoalLink GoalLink;
 
     // Start is called before the first frame update
@@ -23,6 +26,7 @@ public class Goal : InteractObjectBase
     void Update()
     {
         CheckGoal();
+        TagetItemDisplay();
     }
 
     /// <summary>
@@ -58,6 +62,15 @@ public class Goal : InteractObjectBase
         return false;
     }
 
+    /// <summary>
+    /// 既にセットされた脱出アイテムのリストを返す
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<InteractObjs,bool> GetSetList()
+    {
+        return EscapeItemList;
+    }
+
     void CheckGoal()
     {
         if (NeedEscapeList.Count == 0) return;
@@ -77,6 +90,35 @@ public class Goal : InteractObjectBase
             EscapeItemList.Add(item, false);
         }
         
+    }
+
+    void TagetItemDisplay()
+    {
+        if(GameManager.GetGameStatus() == GAMESTATUS.INGAME)
+        {
+            if(TargetItemImageRoot != null)
+            {
+                int cnt = 0;
+                foreach(var item in EscapeItemList)
+                {
+                    if (item.Value)
+                    {
+                        ItemChecked(TargetItemImageRoot.transform.GetChild(cnt).gameObject);
+                    }
+                    cnt++;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// セット済みアイテムにチェックマークを付ける
+    /// </summary>
+    void ItemChecked(GameObject image)
+    {
+        var item = image.transform.GetChild(0);
+        item.GetComponent<Image>().color = new Color32(255, 255, 255, 50);
+        item.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     public void testSetItem(int obj)

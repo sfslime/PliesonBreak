@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2584562454183963057}
   - component: {fileID: 2584562454183963053}
   m_Layer: 0
-  m_Name: BearTrap
+  m_Name: OpenBearTrap
   m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     #region ゲーム進行変数
 
-    [SerializeField, Tooltip("現在のゲームの状態")] GAMESTATUS GameStatus { get; set; }
+    [SerializeField, Tooltip("現在のゲームの状態")] GAMESTATUS GameStatus;
 
     [SerializeField, Tooltip("プレイヤークラス(testでインスペクターから)")] GameObject Player;
 
@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("アイテム関係"), Tooltip("アイテム変更用画像")] List<Sprite> InteractSprits = new List<Sprite>();
 
     [SerializeField, Tooltip("アイテム出現用プレファブ")] List<GameObject> interactObjectPrefabs = new List<GameObject>();
+
+    [SerializeField, Tooltip("地図画像")] GameObject MapImage;
 
     private InitList InitLists = new InitList();
 
@@ -137,8 +139,11 @@ public class GameManager : MonoBehaviour
         InitLists.MapInit = false;
 
         //プレイヤーの探索
-        //Player = GameObject.Find("")
+        Player = GameObject.Find("PlayerSprite");
         //プレイヤーを動けなくする処理
+        Player.GetComponent<PlayerBase>().isMove = true;
+
+        MapDisplay(false);
 
         AudioManager = GameObject.Find("AudioManager").gameObject.GetComponent<AudioManager>();
         if(AudioManager == null)
@@ -173,6 +178,8 @@ public class GameManager : MonoBehaviour
         //MessageText.transform.parent.gameObject.SetActive(false);
 
         BGMManager.Instance.SetBGM(BGMid.DEFALTGAME);
+
+        Player.GetComponent<PlayerBase>().isMove = false;
 
         Debug.Log("Start OK");
     }
@@ -383,6 +390,16 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// マップを表示する
+    /// 引数でマップのオンオフ
+    /// </summary>
+    /// <param name="isDisplay"></param>
+    public void MapDisplay(bool isDisplay)
+    {
+        MapImage.SetActive(isDisplay);
+    }
+
+    /// <summary>
     /// アイテム出現用に引数に応じてゲームオブジェクトを返す
     /// </summary>
     /// <param name="ObjectID"></param>
@@ -400,6 +417,11 @@ public class GameManager : MonoBehaviour
     public List<InteractObjs> GetNeedItemList()
     {
         return EscapeSettings.NeedEscapeList;
+    }
+
+    public GAMESTATUS GetGameStatus()
+    {
+        return GameStatus;
     }
 
 

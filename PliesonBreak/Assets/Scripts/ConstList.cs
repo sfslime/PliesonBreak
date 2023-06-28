@@ -112,7 +112,8 @@ namespace ConstList
         RED,
         GREAN,
         BLUE,
-        WHITE
+        WHITE,
+        COUNT
     }
 
     /// <summary>
@@ -126,6 +127,7 @@ namespace ConstList
         private const string InitStatusKey = "Is";
         private const string ArrestStatusKey = "As";
         private const string ArrestCntStatusKey = "ACs";
+        private const string PlayerColorStatusKey = "PCs";
 
         private static readonly ExitGames.Client.Photon.Hashtable propsToSet = new ExitGames.Client.Photon.Hashtable();
 
@@ -217,6 +219,18 @@ namespace ConstList
         public static void SetArrestCntStatus(this Player player, float cnt)
         {
             propsToSet[ArrestCntStatusKey] = cnt;
+            player.SetCustomProperties(propsToSet);
+            propsToSet.Clear();
+        }
+
+        public static int GetPlayerColorStatus(this Player player)
+        {
+            return (player.CustomProperties[PlayerColorStatusKey] is int cnt) ? cnt : 0;
+        }
+
+        public static void SetPlayerColorStatus(this Player player,int color)
+        {
+            propsToSet[PlayerColorStatusKey] = color;
             player.SetCustomProperties(propsToSet);
             propsToSet.Clear();
         }

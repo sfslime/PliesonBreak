@@ -140,6 +140,9 @@ public class GameManager : MonoBehaviour
         //Player = GameObject.Find("")
         //プレイヤーを動けなくする処理
 
+        //チュートリアル内で捕まった情報をリセット
+        PhotonNetwork.LocalPlayer.SetArrestStatus(false);
+
         AudioManager = GameObject.Find("AudioManager").gameObject.GetComponent<AudioManager>();
         if(AudioManager == null)
         {
@@ -448,6 +451,11 @@ public class GameManager : MonoBehaviour
             //捕まり演出(その場にエフェクト、SE、画面にメッセージ、アニメーション)
 
             player.transform.position = PrisonPoint.transform.position;
+
+            if (SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString())
+            {
+                yield break;
+            }
 
             //捕まり処理（カウント開始や捕まり状態送信）
             PhotonNetwork.LocalPlayer.SetArrestStatus(true);

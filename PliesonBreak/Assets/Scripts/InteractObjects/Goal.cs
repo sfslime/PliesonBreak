@@ -85,11 +85,11 @@ public class Goal : InteractObjectBase
     void SetNeedItemList()
     {
         NeedEscapeList = GameManager.GetNeedItemList();
+
         foreach(var item in NeedEscapeList)
         {
             EscapeItemList.Add(item, false);
         }
-        
     }
 
     void TagetItemDisplay()

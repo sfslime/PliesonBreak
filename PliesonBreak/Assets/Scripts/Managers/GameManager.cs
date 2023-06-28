@@ -34,6 +34,8 @@ using Photon.Realtime;
 ì¬ÒF”ò“c
  */
 
+[AddComponentMenu("Managers/GAME/GameManager",10)]
+
 public class GameManager : MonoBehaviour
 {
 

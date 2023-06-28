@@ -11,6 +11,8 @@ using Photon.Realtime;
 ‚±‚±‚Å‚ÍƒhƒA‚Ì“–‚½‚è”»’è‚Ìİ’è‚Ì‚İ‚ğs‚¤
  */
 
+[AddComponentMenu("IntaractObjects/Obj/Prison")]
+
 public class Prison : InteractObjectBase
 {
     //“–‚½‚è”»’èŠÇ—

@@ -10,6 +10,7 @@ public class Jailer : MonoBehaviourPun
 {
     NavMeshAgent2D NavMeshAgent2D;      //NavMeshAgent2Dを使用するための変数.
     [SerializeField] Transform Target;  //追跡するターゲット.
+    LineRenderer[] LineRenderer;
     [SerializeField] GameManager GameManager;
 
     [SerializeField] List<Vector3> PatrolPointList = new List<Vector3>();
@@ -38,7 +39,8 @@ public class Jailer : MonoBehaviourPun
 
     void Start()
     {
-        
+        // LineRendererコンポーネントを取得して配列に格納
+        LineRenderer = new LineRenderer[RayNum];
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
         GameManager = GameManager.GameManagerInstance;
         isDiscover = false;
@@ -46,7 +48,21 @@ public class Jailer : MonoBehaviourPun
         Animator = transform.GetChild(0).GetComponent<Animator>();
         
         ThisSavePos = transform.position;
-        
+
+        for (int i = 0; i < RayNum; i++)
+        {
+            GameObject lineObj = new GameObject("LineRenderer" + i);
+            LineRenderer[i] = lineObj.AddComponent<LineRenderer>();
+
+            // LineRendererの設定
+            LineRenderer[i].positionCount = 2;       // 頂点の数を2に設定（始点と終点）
+            LineRenderer[i].startWidth = 0.1f;      // 線の開始幅
+            LineRenderer[i].endWidth = 0.1f;        // 線の終了幅
+            LineRenderer[i].material = new Material(Shader.Find("Sprites/Default"));  // 線のマテリアル
+            LineRenderer[i].startColor = Color.white; // 線の開始色
+            LineRenderer[i].endColor = Color.yellow;   // 線の終了色
+        }
+
     }
 
     void Update()
@@ -119,6 +135,11 @@ public class Jailer : MonoBehaviourPun
             // Rayの発射.
             RaycastHit2D hit = Physics2D.Raycast(transform.position, RayDir, Distance);
 
+            // 線の始点と終点の座標を設定
+            LineRenderer[num].SetPosition(0, transform.position);
+            LineRenderer[num].SetPosition(1, transform.position + RayDir * Distance);
+
+
             // 強制的に巡回に戻す処理.
             if (hit.collider != null && hit.collider.CompareTag("RetreatArea"))
             {
@@ -156,7 +177,10 @@ public class Jailer : MonoBehaviourPun
                 SavePlayerPos = Vector3.zero;
             }
 
-            Debug.DrawRay(transform.position, RayDir * Distance, Color.red);
+            if (!Debug.isDebugBuild)
+            {
+                Debug.DrawRay(transform.position, RayDir * Distance, Color.red);
+            }
         }
     }
 

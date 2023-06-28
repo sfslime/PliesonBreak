@@ -24,7 +24,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField, Tooltip("吹き出しの表示先")] Text TutorialMessageObject;
 
     [SerializeField, Tooltip("終了時のマスク")] Image EndMask;
-    [SerializeField, Tooltip("真っ暗になるまでのレート"),Range(0.1f,10f)] float MaskRate;
+    [SerializeField, Tooltip("真っ暗になるまでのレート"),Range(1f,50f)] float MaskRate;
 
     public static TutorialManager Instance;
 
@@ -111,7 +111,7 @@ public class TutorialManager : MonoBehaviour
             {
                 break;
             }
-            ClearLance += MaskRate;
+            ClearLance += MaskRate * Time.deltaTime;
             EndMask.color = new Color32(0, 0, 0, (byte)ClearLance);
             yield return null;
         }

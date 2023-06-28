@@ -21,7 +21,7 @@ using Photon.Realtime;
 3,アイテム生成、送信
 4,看守生成、送信
 5,初期化完了、待機
-6,コネクトサーバークラスによるゲーム開始関数
+6,ゲーム開始関数
 
 (メンバー)
 1,接続確認、待機
@@ -29,7 +29,7 @@ using Photon.Realtime;
 3,アイテム受信待機
 4,看守受信待機
 5,初期化完了、待機
-6,コネクトサーバークラスによるゲーム開始関数
+6,ゲーム開始関数
 
 作成者：飛田
  */
@@ -179,7 +179,6 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// 各種初期化が終わったかをチェックする
-    /// 現在はテストのため、マップの生成も行っている
     /// </summary>
     bool InitCheck()
     {
@@ -338,6 +337,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ゴールにすべてのアイテムが入った時にゴールから呼ばれる
+    /// チュートリアル中かどうかによって処理を派生させる
+    /// </summary>
     public void GameClear()
     {
         if (EscapeSettings.isGoal) return;
@@ -354,6 +357,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 全員が捕まった時に呼ばれる
+    /// ゲーム状態を終了にセットし、敗北状態で次のシーンに移る
+    /// </summary>
     void GameOver()
     {
         if (SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString() || GameStatus == GAMESTATUS.ENDGAME_LOSE) return;
@@ -366,6 +373,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 起動時に牢屋から呼ばれ、捕まった際にここに転送される
+    /// </summary>
+    /// <param name="point"></param>
     public void Setprisonpoint(GameObject point)
     {
         PrisonPoint = point;
@@ -391,16 +402,30 @@ public class GameManager : MonoBehaviour
         return interactObjectPrefabs[(int)ObjectID];
     }
 
+    /// <summary>
+    /// プレイヤーオブジェクトを返す
+    /// ゲームオブジェクトなので必要に応じてGetComponentする
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetPlayer()
     {
         return Player;
     }
 
+    /// <summary>
+    /// ゴールに必要なアイテム情報を返す
+    /// 主にゴールから呼ばれる
+    /// </summary>
+    /// <returns></returns>
     public List<InteractObjs> GetNeedItemList()
     {
         return EscapeSettings.NeedEscapeList;
     }
 
+    /// <summary>
+    /// 現在のゲーム状態を返す
+    /// </summary>
+    /// <returns></returns>
     public GAMESTATUS GetGameStatus()
     {
         return GameStatus;
@@ -539,6 +564,7 @@ public class GameManager : MonoBehaviour
         {
             //行うことはないのでスキップ
             InitLists.MapInit = true;
+            Debug.Log("Map Ok");
         }
 
         //5,初期化待機

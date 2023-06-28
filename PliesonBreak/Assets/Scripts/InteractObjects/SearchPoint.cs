@@ -68,22 +68,26 @@ public class SearchPoint : InteractObjectBase
     /// <returns></returns>
     public IEnumerator SearchStart(float addsearchtime)
     {
+        //’Tõ‚É•K—v‚È•Ï”‚ð‰Šú‰»
         isCoroutineStop = false;
         isNowSearch = true;
         float Timer = 0;
         Debug.Log("point:’TõŠJŽn");
         float SearchTime = DefaltSearchTime * addsearchtime;
 
+        //SEÄ¶
         AudioSource.Play();
 
         while (true)
         {
+            //ˆÀ‘S‚É’†Ž~‚·‚é‚½‚ßA•Ï”‚ÅŠÄŽ‹
             if (isCoroutineStop)
             {
                 AudioSource.Stop();
                 yield break;
             }
 
+            //’TõŽžŠÔ‚ð’´‚¦‚é‚Ü‚Å‘Ò‹@
             if(Timer >= SearchTime)
             {
                 break;

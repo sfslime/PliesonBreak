@@ -168,6 +168,12 @@ public class MapManager : MonoBehaviourPunCallbacks
         return IDList;
     }
 
+    /// <summary>
+    /// 乱数をパーセント(0~0.1)でできる関数
+    /// 戻り値でその確立になったかを返す
+    /// </summary>
+    /// <param name="Probability"></param>
+    /// <returns></returns>
     bool RandomPar(float Probability)
     {
         float nm = UnityEngine.Random.Range(0f, 1f);

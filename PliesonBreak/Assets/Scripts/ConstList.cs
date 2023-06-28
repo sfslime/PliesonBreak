@@ -107,6 +107,14 @@ namespace ConstList
         COUNT
     }
 
+    public enum PlayerColors
+    {
+        RED,
+        GREAN,
+        BLUE,
+        WHITE
+    }
+
     /// <summary>
     /// Photonのカスタムプロパティ拡張メソッド用クラス
     /// 使用する場合は Playerクラス.

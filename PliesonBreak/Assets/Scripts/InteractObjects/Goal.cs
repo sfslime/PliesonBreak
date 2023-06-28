@@ -94,7 +94,7 @@ public class Goal : InteractObjectBase
 
     void TagetItemDisplay()
     {
-        if((GameManager)GameManager.GetGameStatus() == GAMESTATUS.INGAME)
+        if(GameManager.GetGameStatus() == GAMESTATUS.INGAME)
         {
             if(TargetItemImageRoot != null)
             {

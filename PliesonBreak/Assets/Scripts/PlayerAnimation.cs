@@ -9,7 +9,7 @@ using Photon.Realtime;
 public class PlayerAnimation : MonoBehaviourPunCallbacks
 {
 
-    [SerializeField,Tooltip("アニメーションさせるアニメーター(Set必須)")] Animator SpriteAnimator;
+    [SerializeField,Tooltip("アニメーションさせるアニメーター")] Animator SpriteAnimator;
     [SerializeField,Tooltip("アニメーションのステータス(関数で変更)")] AnimCode AnimState;
     [SerializeField,Tooltip("現在アニメーションのさせるかどうか(関数で変更)")] bool isAnim;
     PlayerBase Player;
@@ -17,12 +17,17 @@ public class PlayerAnimation : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        var sprite = transform.GetChild(photonView.Owner.GetPlayerColorStatus()).gameObject;
+        sprite.SetActive(true);
+        SpriteAnimator = sprite.GetComponent<Animator>();
+
         if (!photonView.IsMine) return;
 
         var gamemanager = GameManager.GameManagerInstance;
         if (gamemanager == null) return;
 
         Player = gamemanager.GetPlayer().GetComponent<PlayerBase>();
+
         isAnim = true;
     }
 

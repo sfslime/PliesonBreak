@@ -90,10 +90,12 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
             if (!isMaster)
             {
                 SceanMoveButton.interactable = false;
+                MessageText.text = "開始をまっています...";
             }
             else
             {
                 SceanMoveButton.interactable = true;
+                MessageText.text = "開始を押すとゲームが始まります";
             }
             SceanMoveButton.transform.GetChild(0).gameObject.GetComponent<Text>().text
             = "開始(" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers + ")";

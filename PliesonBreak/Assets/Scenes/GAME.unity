@@ -2787,9 +2787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b980bf018f65f943a6bd81f6f5b7d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameStatus: 0
   Player: {fileID: 2113882996}
-  PlayerPrefabName: PlayerLink
+  PlayerPrefabName: PlayerLink_Colors
   PrisonPoint: {fileID: 0}
   JailersRoot: {fileID: 1371262628}
   PatrolRoot: {fileID: 1898707587}
@@ -2812,11 +2811,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5dbb279ff6a089c46be8f02e0c09b855, type: 3}
   - {fileID: 21300000, guid: c60d6620a36bbbd449ea9ddf5bc163bb, type: 3}
   - {fileID: 21300000, guid: fb134c2022d9ede42acd396e268e9ca3, type: 3}
-  - {fileID: 21300000, guid: 78091778ca2724b4489fc915f40d692a, type: 3}
-  - {fileID: 21300000, guid: 7a1186367e21f6e4a8519cd60cd156e6, type: 3}
+  - {fileID: 21300000, guid: c110c8b841040d146805d63bcf8829d7, type: 3}
+  - {fileID: 21300000, guid: cf60895887bfdb84cbf3a733452f0064, type: 3}
   - {fileID: 21300000, guid: c60d6620a36bbbd449ea9ddf5bc163bb, type: 3}
-  - {fileID: 21300000, guid: fb88827a752b0f04980cf8d41d8f0236, type: 3}
   - {fileID: 21300000, guid: 0580d79096856f54f9b8556aa003625f, type: 3}
+  - {fileID: 21300000, guid: fb88827a752b0f04980cf8d41d8f0236, type: 3}
   interactObjectPrefabs:
   - {fileID: 0}
   - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}
@@ -2831,7 +2830,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 2584562454183963062, guid: a7c7881d41c97e44c8a9f9f873b682d0, type: 3}
-  MapImage: {fileID: 1297423053}
 --- !u!4 &414469882
 Transform:
   m_ObjectHideFlags: 0
@@ -3439,7 +3437,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6096,7 +6094,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1425959656}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -49406,6 +49404,7 @@ RectTransform:
   - {fileID: 65952322}
   - {fileID: 484759368}
   - {fileID: 1297423054}
+  - {fileID: 961017626}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51212,7 +51211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7a1186367e21f6e4a8519cd60cd156e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf60895887bfdb84cbf3a733452f0064, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -147341,7 +147340,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 78091778ca2724b4489fc915f40d692a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c110c8b841040d146805d63bcf8829d7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

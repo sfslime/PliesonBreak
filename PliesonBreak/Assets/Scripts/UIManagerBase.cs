@@ -40,4 +40,9 @@ public class UIManagerBase : MonoBehaviour
             InteractButton.SetActive(true);
         }
     }
+
+    public bool GetInteractButtonActive()
+    {
+        return InteractButton.activeSelf;
+    }
 }

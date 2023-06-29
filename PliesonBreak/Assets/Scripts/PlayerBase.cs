@@ -31,7 +31,9 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] bool isPlayerHaveItem;   // プレイヤーが一度に持てるアイテムの個数.
     [SerializeField] bool isSearch;           // インタラクトしているかどうか.
     [SerializeField] bool isLookMap;          // マップを開いているかどうか.
+    
     public bool isMove;                       // 動けるかどうか.
+
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
@@ -68,7 +70,10 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space) && ObjID != (int)InteractObjs.None && UIManager.GetInteractButtonActive())
+        {
+            PushInteractButton();
+        }
     }
 
     private void FixedUpdate()
@@ -81,6 +86,7 @@ public class PlayerBase : MonoBehaviour
         // 触れたインタラクトオブジェクトのComponentの取得.
         if (collision.gameObject.tag == "InteractObject")
         {
+           
             switch (ObjID)
             {
                 case (int)InteractObjs.Door:
@@ -108,7 +114,6 @@ public class PlayerBase : MonoBehaviour
                     break;
             }
         }
-
         EnterInteractObj(collision);
     }
 
@@ -150,7 +155,7 @@ public class PlayerBase : MonoBehaviour
     public void PushInteractButton()
     {
         // 拾えないアイテムの排除.
-        Debug.Log("ID>" + ObjID);
+        // Debug.Log("ID>" + ObjID);
         if (ObjID != (int)InteractObjs.Search && 
             ObjID != (int)InteractObjs.Door &&
             ObjID != (int)InteractObjs.Prison &&

@@ -95,7 +95,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
             else
             {
                 SceanMoveButton.interactable = true;
-                MessageText.text = "開始を押すとゲームが始まります";
+                MessageText.text = "スペースキーを押すとゲームが始まります";
             }
             SceanMoveButton.transform.GetChild(0).gameObject.GetComponent<Text>().text
             = "開始(" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers + ")";
@@ -119,6 +119,10 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
         if (isInRoom)
         {
             RoomStatusUpDate();
+            if (Input.GetKeyDown(KeyCode.Space) && SceanMoveButton.IsInteractable())
+            {
+                MoveGameScean();
+            }
         }
     }
 }

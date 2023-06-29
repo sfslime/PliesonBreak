@@ -339,7 +339,7 @@ public class PlayerBase : MonoBehaviour
     {
         if(isSearch == false)
         {
-            StartCoroutine(ItemSwitchingWaitTime(0.5f));
+            StartCoroutine(ItemSwitchingWaitTime(1.0f));
             HaveId = olditem;
         }
     }

@@ -66,7 +66,7 @@ public class TestItem : MonoBehaviour
         if (Point.GetComponent<SearchPoint>().GetSearchState())
         {
             Debug.Log("test:’TõŠJn");
-            yield return StartCoroutine(Point.GetComponent<SearchPoint>().SearchStart(1));
+            yield return StartCoroutine(Point.GetComponent<SearchPoint>().SearchStart(1,null));
             Debug.Log("test:’TõI—¹");
         }
     }

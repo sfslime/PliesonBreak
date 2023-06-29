@@ -15,20 +15,22 @@ using ConstList;
 EndIntearact関数を呼ぶ
  */
 
-public class SearchPointLink : MonoBehaviourPunCallbacks
+public class SearchPointLink : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] SearchPoint OriginSearchPoint;
+    private float Searchprogress;
 
     // Start is called before the first frame update
     void Start()
     {
         OriginSearchPoint = GetComponent<SearchPoint>();
+        Searchprogress = OriginSearchPoint.GetSearchProgress();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Searchprogress = OriginSearchPoint.GetSearchProgress();
     }
 
     /// <summary>
@@ -94,6 +96,24 @@ public class SearchPointLink : MonoBehaviourPunCallbacks
         if(OriginSearchPoint == null) OriginSearchPoint = GetComponent<SearchPoint>();
         OriginSearchPoint.SetDropItem(Obj);
         Debug.Log("RPC ItemSet");
+    }
+
+    /// <summary>
+    /// 探索進行度の共有
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <param name="info"></param>
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(Searchprogress);
+        }
+        else
+        {
+            Searchprogress = ((float)stream.ReceiveNext());
+            OriginSearchPoint.SetSearchProgress(Searchprogress);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using ConstList;
@@ -23,6 +24,8 @@ public class SearchPoint : InteractObjectBase
     [SerializeField,Tooltip("テストで出したいアイテムの設定済みスクリプト(必要な場合のみSet)")] InteractObjs TestDropItemID;
     //標準探索時間。秒単位で記述
     [SerializeField,Range(1f,10f),Tooltip("デフォルトの探索時間(Set必須)")] float DefaltSearchTime;
+    //探索の進行度の変数。他のユーザーと共有される
+    [SerializeField, Tooltip("探索の進行度")] float SearchProgress;
     //コルーチンのストップフラグ
     bool isCoroutineStop;
     //探索中かどうか
@@ -50,6 +53,8 @@ public class SearchPoint : InteractObjectBase
             SetDropItem(TestDropItemID);
         }
 
+        SearchProgress = 0;
+
         AudioSource = GetComponent<AudioSource>();
     }
 
@@ -63,17 +68,17 @@ public class SearchPoint : InteractObjectBase
     /// この探索ポイントを探索開始する。呼び出し前に必ずGetSearchStateで探索確認を行う
     /// 呼び出す際はStartCroutineで呼び出し、リターンで終了が返ってくる。
     /// 引数:addsearchtime,1を基準に探索時間を変化させる。例　0.9で10%早く、1.5で50%遅くなる
+    ///      slider,進行具合を表示したいスライダーを入れる。表示しないならnull
     /// </summary>
     /// <param name="addsearchtime"></param>
     /// <returns></returns>
-    public IEnumerator SearchStart(float addsearchtime)
+    public IEnumerator SearchStart(float addsearchtime,Slider slider)
     {
         //探索に必要な変数を初期化
         isCoroutineStop = false;
         isNowSearch = true;
-        float Timer = 0;
         Debug.Log("point:探索開始");
-        float SearchTime = DefaltSearchTime * addsearchtime;
+        float SearchTime = DefaltSearchTime;
 
         //SE再生
         AudioSource.Play();
@@ -84,15 +89,22 @@ public class SearchPoint : InteractObjectBase
             if (isCoroutineStop)
             {
                 AudioSource.Stop();
+                if (slider) slider.gameObject.SetActive(false);
                 yield break;
             }
 
+            //引数でスライダーが渡されていればそれを使って表示
+            if (slider)
+            {
+                SearchInfDisplay(slider);
+            }
+
             //探索時間を超えるまで待機
-            if(Timer >= SearchTime)
+            if(SearchProgress >= SearchTime)
             {
                 break;
             }
-            Timer += Time.deltaTime;
+            SearchProgress += Time.deltaTime * addsearchtime;
             yield return null;
         }
 
@@ -114,7 +126,7 @@ public class SearchPoint : InteractObjectBase
     /// </summary>
     public void TestSearch()
     {
-        StartCoroutine(SearchStart(1));
+        StartCoroutine(SearchStart(1,null));
     }
 
     /// <summary>
@@ -184,5 +196,31 @@ public class SearchPoint : InteractObjectBase
     public void ChangeDropItem(InteractObjs interactObject)
     {
         DropItemID = interactObject;
+    }
+
+    /// <summary>
+    /// 探索の進行度を受信する
+    /// </summary>
+    /// <param name="progress"></param>
+    public void SetSearchProgress(float progress)
+    {
+        SearchProgress = progress;
+    }
+
+    public float GetSearchProgress()
+    {
+        return SearchProgress;
+    }
+
+    public void SearchInfDisplay(Slider slider)
+    {
+        slider.gameObject.SetActive(true);
+        slider.maxValue = DefaltSearchTime;
+        slider.minValue = 0;
+        slider.value = SearchProgress;
+        if(slider.value >= slider.maxValue)
+        {
+            slider.gameObject.SetActive(false);
+        }
     }
 }

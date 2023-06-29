@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using ConstList;
@@ -33,7 +34,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] bool isLookMap;          // マップを開いているかどうか.
     
     public bool isMove;                       // 動けるかどうか.
-
+    [SerializeField, Tooltip("探索進行度を表示するスライダー")] Slider ProgressSlider;
 
     [SerializeField] List<bool> isEscapeItem; // 脱出アイテムを持っているときに脱出オブジェクトに触れたらtrueを返す.
 
@@ -70,6 +71,10 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
+        if (isSearch && Input.anyKeyDown)
+        {
+            SearchPoint.StopSearch();
+        }
         if (Input.GetKeyDown(KeyCode.Space) && ObjID != (int)InteractObjs.None && UIManager.GetInteractButtonActive())
         {
             PushInteractButton();
@@ -278,7 +283,7 @@ public class PlayerBase : MonoBehaviour
     {
         isSearch = true;
         Rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        yield return StartCoroutine(SearchPoint.SearchStart(1));
+        yield return StartCoroutine(SearchPoint.SearchStart(1,ProgressSlider));
         isSearch = false;
         Rb.constraints = RigidbodyConstraints2D.None;
         Rb.constraints = RigidbodyConstraints2D.FreezeRotation;

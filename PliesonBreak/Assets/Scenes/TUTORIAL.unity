@@ -2248,7 +2248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
       propertyPath: RayNum
-      value: 10
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7777259314813865111, guid: 5899d8b19df85c74094ace9d6023c491, type: 3}
       propertyPath: PatrolPointList.Array.size

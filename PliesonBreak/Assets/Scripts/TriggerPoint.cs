@@ -21,7 +21,10 @@ public class TriggerPoint : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        TutorialManager.TutorialTrriger(NextTrriger);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            TutorialManager.TutorialTrriger(NextTrriger);
+        }   
     }
 
 }

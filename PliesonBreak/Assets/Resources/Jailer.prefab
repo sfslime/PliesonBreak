@@ -113,8 +113,8 @@ MonoBehaviour:
   ishunt: 0
   isRestraint: 0
   LostTime: 0
-  SetTime: 5
-  RayNum: 10
+  SetTime: 3
+  RayNum: 20
   Angle: 15
   Distance: 5
 --- !u!50 &7777259314813865130
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a3abaa264ec204d8c8a0ab69f4fe54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4.5
   stoppingDistance: 0.1
   isArrival: 0
 --- !u!114 &-2166742742328544404

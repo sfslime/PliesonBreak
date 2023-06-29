@@ -114,7 +114,7 @@ MonoBehaviour:
   isRestraint: 0
   LostTime: 0
   SetTime: 5
-  RayNum: 10
+  RayNum: 20
   Angle: 15
   Distance: 5
 --- !u!50 &7777259314813865130

@@ -631,6 +631,11 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+        //ãŸã}èIóπ
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         switch (GameStatus)
         {
             case GAMESTATUS.READY:

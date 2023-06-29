@@ -16,7 +16,7 @@ public class TitleSceanManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.anyKeyDown)
         {
             if(TestSceanName != "") SceneManager.LoadScene(TestSceanName);
             else SceneManager.LoadScene(SceanNames.TUTORIAL.ToString());

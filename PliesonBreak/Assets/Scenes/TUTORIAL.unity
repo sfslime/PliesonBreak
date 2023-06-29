@@ -1680,7 +1680,7 @@ MonoBehaviour:
   TutorialTextObject: {fileID: 944893069}
   TutorialMessageObject: {fileID: 1120207142}
   EndMask: {fileID: 735823839}
-  MaskRate: 0.5
+  MaskRate: 80
 --- !u!4 &624553648
 Transform:
   m_ObjectHideFlags: 0
@@ -3667,7 +3667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2054701142694735954, guid: 2ec1a87a44b503e49a3c3c5d25fb451d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 38.131916
+      value: 37.91
       objectReference: {fileID: 0}
     - target: {fileID: 2054701142694735954, guid: 2ec1a87a44b503e49a3c3c5d25fb451d, type: 3}
       propertyPath: m_LocalPosition.z

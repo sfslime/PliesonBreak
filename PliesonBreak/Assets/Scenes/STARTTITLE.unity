@@ -666,7 +666,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TAP TO START
+  m_Text: ANY KEY TO START
 --- !u!222 &1295004863
 CanvasRenderer:
   m_ObjectHideFlags: 0

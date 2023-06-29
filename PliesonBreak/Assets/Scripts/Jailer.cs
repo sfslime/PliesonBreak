@@ -19,8 +19,7 @@ public class Jailer : MonoBehaviourPun
     [SerializeField] bool isDiscover;    // プレイヤーを見つけているかどうか.
     [SerializeField] bool isLostTarget;  // ターゲットを見失った時.
     [SerializeField] bool isCapture;     // プレイヤーを捕まえたかどうか.
-    [SerializeField] bool ishunt;        // プレイヤーを追跡しているかどうか.
-
+    [SerializeField] bool isTime;        // 指定した時間経過したか.
 
     public bool isRestraint;             // 動けるかどうか
     [SerializeField] float LostTime;     // ターゲットを見失ってから巡回に戻るまでの時間.
@@ -88,7 +87,7 @@ public class Jailer : MonoBehaviourPun
     /// </summary>
     void SetNextPatrolPoint()
     {
-        if(isDiscover == false)
+        if (isDiscover == false)
         {
             if (NavMeshAgent2D.isArrival == true)
             {
@@ -103,7 +102,6 @@ public class Jailer : MonoBehaviourPun
         else if (isDiscover == true && isCapture == false)
         {
             // プレイヤーを追いかける処理.
-
             NavMeshAgent2D.SetDestination(Target.position);
             AnimState = AnimCode.Run;
         }
@@ -148,30 +146,26 @@ public class Jailer : MonoBehaviourPun
             }
 
             // プレイヤーを発見.
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            if (hit.collider != null && hit.collider.CompareTag("Player") && isDiscover == false)
             {
-                if(isDiscover == false)
+                if (GameManager.GetPlayer() == hit.collider.gameObject)
                 {
-                    if (GameManager.GetPlayer() == hit.collider.gameObject)
-                    {
-                        BGMManager.Instance.SetBGM(BGMid.CHASE);
-                        GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
-                    }
-                    
-                    isDiscover = true;
+                    BGMManager.Instance.SetBGM(BGMid.CHASE);
+                    GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
                 }
+                WaitTime(2.0f);
+                isDiscover = true;
                 isCapture = false;
                 Target = hit.collider.gameObject.transform;
                 LostTime = SetTime;
                 SavePlayerPos = Target.position;
-                // Debug.Log("SavePlayerPos" + SavePlayerPos);
             }
             else if (hit.collider == null && SavePlayerPos != Vector3.zero)
             {
                 isLostTarget = true;
                 // Debug.Log("プレイヤーを見失った");
             }
-            else if(hit.collider == null)
+            else if (hit.collider == null)
             {
                 // 保存していたポジションの初期化.
                 SavePlayerPos = Vector3.zero;
@@ -218,6 +212,7 @@ public class Jailer : MonoBehaviourPun
             isCapture = true;
             GameObject HitPlayer = collision.gameObject;
             GameManager.ArrestPlayer(HitPlayer);
+
             if(collision.gameObject == GameManager.GetPlayer())
             {
                 GameManager.PlaySE(SEid.Arrest, GameManager.GameManagerInstance.GetPlayer().transform.position);
@@ -241,6 +236,12 @@ public class Jailer : MonoBehaviourPun
     public void ClearPatorlPoint()
     {
         PatrolPointList.Clear();
+    }
+
+    IEnumerator WaitTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isTime = true;
     }
 
     #region アニメーション

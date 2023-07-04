@@ -13,14 +13,24 @@ public class MapManager : MonoBehaviourPunCallbacks
     {
         [SerializeField,Tooltip("各エリアの出現するポイント数")] public List<int> PointNmList;
         [SerializeField,Tooltip("各エリアに出現させるキーアイテムのリスト")]public List<InteractObjs> KeyIDList;
-        [SerializeField, Tooltip("各エリアに出現するはずれポイントの確率")] public List<float> NullDropRate = new List<float>();
+        [SerializeField,Tooltip("各エリアに出現するはずれポイントの確率")] public List<float> NullDropRate = new List<float>();
+        [SerializeField, Tooltip("各エリアに出現するアイテムの確立(ItemID順で、パーセント)"), Range(0f, 1.0f)] public List<List<float>> ItemRate = new List<List<float>>();
+    }
+
+    [System.Serializable]
+    class AreaPopSetting
+    {
+        [SerializeField, Tooltip("このエリアに出現するポイント数"),Range(1,20)] public int PointNm;
+        [SerializeField, Tooltip("このエリアに必ず出現するキーアイテムのリスト")] public List<InteractObjs> KeyList;
+        [SerializeField, Tooltip("このエリアのはずれアイテムの確立(値は%)"), Range(0f, 1f)] public float NullDropRate;
+        [SerializeField, Tooltip("このエリアの各アイテムの出現確立(ItemID基準)"),Range(0f,1f)] public List<float> ItemRateList = new List<float>();
     }
 
     [SerializeField,Tooltip("サーチポイントのリストの親まとめ")]GameObject SearchPointListRoot;
 
     [SerializeField, Tooltip("各エリアの候補地点の親まとめ")] GameObject ListRoot;
 
-    [SerializeField, Header("アイテムの出現設定")] PopSetting PopSettings;
+    [SerializeField, Header("アイテムの出現設定。各エリアごとに管理")] List<AreaPopSetting> AreaPopSettings = new List<AreaPopSetting>();
 
     GameManager GameManager;
 
@@ -56,7 +66,7 @@ public class MapManager : MonoBehaviourPunCallbacks
             var SearchPointList = SearchPointListRoot.transform.GetChild(AreaNm).gameObject;
 
             //アイテムの抽選
-            var ItemIDList = ItemSelect(PopList.Count, PopSettings.KeyIDList[AreaNm],AreaNm);
+            var ItemIDList = ItemSelect(PopList.Count, AreaPopSettings[AreaNm].KeyList,AreaNm);
 
             //決定したポイント毎に生成処理
             for (int cnt = 0;cnt < PopList.Count;cnt++)
@@ -86,7 +96,7 @@ public class MapManager : MonoBehaviourPunCallbacks
     List<int> SelectPoint(GameObject PointList,int Area)
     {
         List<int> SelectedPoint = new List<int>();
-        for(int Cnt = 0; Cnt < PopSettings.PointNmList[Area]; Cnt++)
+        for(int Cnt = 0; Cnt < AreaPopSettings[Area].PointNm; Cnt++)
         {
             //念のため上限設定
             int errorcount = 0;
@@ -129,14 +139,17 @@ public class MapManager : MonoBehaviourPunCallbacks
     /// 引数で与えられたリスト数で返す
     /// </summary>
     /// <returns></returns>
-    List<InteractObjs> ItemSelect(int Index, InteractObjs KeyID,int Area)
+    List<InteractObjs> ItemSelect(int Index, List<InteractObjs> KeyIDList,int Area)
     {
+        //追加していくアイテムのリスト
         List<InteractObjs> IDList = new List<InteractObjs>();
         bool isKeyPop = false;
 
         int errorcnt = 0;
+        //キーアイテムが出現していない間ループ
         while (!isKeyPop)
         {
+            //無限ループ回避
             errorcnt++;
             if (errorcnt > 1000)
             {
@@ -144,28 +157,73 @@ public class MapManager : MonoBehaviourPunCallbacks
                 break;
             }
 
-            isKeyPop = false;
+            //値を初期化
             IDList.Clear();
-            for(int Cnt=0;Cnt<Index; Cnt++)
+
+            //アイテムをインデックスの数まで抽選
+            for (int Cnt=0;Cnt<Index; Cnt++)
             {
                 InteractObjs item;
                 //はずれ確率によってはずれ生成
-                if (RandomPar(PopSettings.NullDropRate[Area]))
+                if (RandomPar(AreaPopSettings[Area].NullDropRate))
                 {
                     item = InteractObjs.NullDrop;
                 }
                 else
                 {
                     //アイテムID内でランダムに生成し、その文字列からオブジェクトIDに変換
-                    item = (InteractObjs)Enum.Parse(typeof(InteractObjs), ((ItemID)UnityEngine.Random.Range((int)ItemID.None + 1, (int)ItemID.Count)).ToString());
+                    //item = (InteractObjs)Enum.Parse(typeof(InteractObjs), ((ItemID)UnityEngine.Random.Range((int)ItemID.None + 1, (int)ItemID.Count)).ToString());
+                    item = (InteractObjs)Enum.Parse(typeof(InteractObjs), RandomItem(AreaPopSettings[Area].ItemRateList).ToString());
                 }
-                if (KeyID == item) isKeyPop = true;
+                //アイテムリストに追加
                 IDList.Add(item);
                 Debug.Log("select item"+item);
             }
+            //キーアイテムが出現しているかの確認
+            isKeyPop = true;
+            foreach (var key in KeyIDList)
+            {
+                //含まれていない時点でもう一度抽選
+                if (!IDList.Contains(key))
+                {
+                    isKeyPop = false;
+                    break;
+                }
+            }
+            
         }
 
         return IDList;
+    }
+
+    /// <summary>
+    /// 与えられたアイテム出現確立から一つを返す
+    /// </summary>
+    /// <param name="ItemRate"></param>
+    /// <returns></returns>
+    ItemID RandomItem(List<float> ItemRate)
+    {
+        ItemID item = ItemID.None;
+        int cnt = 0;
+        while(item == ItemID.None)
+        {
+            //無限ループ回避
+            cnt++;
+            if(cnt > 10000)
+            {
+                Debug.Log("RandomItemError");
+                break;
+            }
+
+            for(int i = 0; i < ItemRate.Count; i++)
+            {
+                if (RandomPar(ItemRate[i]))
+                {
+                    item = (ItemID)i;
+                }
+            }
+        }
+        return item;
     }
 
     /// <summary>

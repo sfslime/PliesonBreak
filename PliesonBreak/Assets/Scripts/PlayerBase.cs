@@ -62,7 +62,7 @@ public class PlayerBase : MonoBehaviour
     void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
-        UIManager = GameObject.Find("UIManager").GetComponent<UIManagerBase>();
+        UIManager = UIManagerBase.instance;
         SaveSpeed = Speed;
         isMove = false;
         AudioSource = GetComponent<AudioSource>();

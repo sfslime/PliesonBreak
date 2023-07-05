@@ -75,6 +75,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("WaitRoom");
     }
 
+    public void SoloMode()
+    {
+        ButtonRoot.interactable = false;
+        ConectServer.RoomProperties.RoomName = "Offline";
+        SceneManager.LoadScene("WaitRoom");
+    }
+
     public void TitleBack()
     {
         StartCoroutine(WaitDisConect());

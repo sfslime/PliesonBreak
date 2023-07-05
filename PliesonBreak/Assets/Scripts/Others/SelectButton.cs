@@ -23,11 +23,11 @@ public class SelectButton : MonoBehaviour
     [System.Serializable]
     class InputButtonKey
     {
-        public KeyCode Up;
-        public KeyCode Down;
-        public KeyCode Right;
-        public KeyCode Left;
-        public KeyCode Select;
+        public List<KeyCode> Up;
+        public List<KeyCode> Down;
+        public List<KeyCode> Right;
+        public List<KeyCode> Left;
+        public List<KeyCode> Select;
     }
 
     //デフォルトで追加するアウトラインの設定
@@ -73,6 +73,9 @@ public class SelectButton : MonoBehaviour
         SelectUpDate();
     }
 
+    /// <summary>
+    /// 選択に関するUpDate
+    /// </summary>
     void SelectUpDate()
     {
         
@@ -108,12 +111,29 @@ public class SelectButton : MonoBehaviour
     Vector2 InputKey()
     {
         Vector2 input = new Vector2(0, 0);
-        if (Input.GetKeyDown(InputButtonKeys.Up)) input.y = -1;
-        if (Input.GetKeyDown(InputButtonKeys.Down)) input.y = 1;
-        if (Input.GetKeyDown(InputButtonKeys.Left)) input.x = -1;
-        if (Input.GetKeyDown(InputButtonKeys.Right)) input.x = 1;
 
-        if (Input.GetKeyDown(InputButtonKeys.Select)) input = new Vector2(Selected, Selected);
+        //各キーの受付確認
+        foreach(var upkey in InputButtonKeys.Up)
+        {
+            if (Input.GetKeyDown(upkey)) input.y = -1;
+        }
+        foreach(var downkey in InputButtonKeys.Down)
+        {
+            if (Input.GetKeyDown(downkey)) input.y = 1;
+        }
+        foreach(var leftkey in InputButtonKeys.Left)
+        {
+            if (Input.GetKeyDown(leftkey)) input.x = -1;
+        }
+        foreach(var rightkey in InputButtonKeys.Right)
+        {
+            if (Input.GetKeyDown(rightkey)) input.x = 1;
+        }
+        
+        foreach(var selectkey in InputButtonKeys.Select)
+        {
+            if (Input.GetKeyDown(selectkey)) input = new Vector2(Selected, Selected);
+        }
 
         return input;
     }

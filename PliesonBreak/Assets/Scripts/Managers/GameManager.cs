@@ -378,6 +378,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DisconnectPlayer()
+    {
+
+    }
+
     /// <summary>
     /// 起動時に牢屋から呼ばれ、捕まった際にここに転送される
     /// </summary>
@@ -634,7 +639,16 @@ public class GameManager : MonoBehaviour
         //緊急終了
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            //チュートリアル中ならスキップに置換
+            if (SceneManager.GetActiveScene().name == SceanNames.TUTORIAL.ToString())
+            {
+                TutorialManager.Instance.TutorialTrriger(true);
+                return;
+            }
+            else
+            {
+                Application.Quit();
+            }
         }
         switch (GameStatus)
         {

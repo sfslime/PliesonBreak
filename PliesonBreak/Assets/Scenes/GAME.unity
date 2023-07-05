@@ -2951,18 +2951,18 @@ MonoBehaviour:
     NeedEscapeList: 0800000009000000
   InteractSprits:
   - {fileID: 21300000, guid: 970a436e9d8a12b44b7e9674421ce6a1, type: 3}
-  - {fileID: 21300000, guid: de537b4cddb6ce54986a22d66e442193, type: 3}
-  - {fileID: 21300000, guid: 5dbb279ff6a089c46be8f02e0c09b855, type: 3}
-  - {fileID: 21300000, guid: c60d6620a36bbbd449ea9ddf5bc163bb, type: 3}
-  - {fileID: 21300000, guid: c60d6620a36bbbd449ea9ddf5bc163bb, type: 3}
-  - {fileID: 21300000, guid: 5dbb279ff6a089c46be8f02e0c09b855, type: 3}
-  - {fileID: 21300000, guid: c60d6620a36bbbd449ea9ddf5bc163bb, type: 3}
-  - {fileID: 21300000, guid: fb134c2022d9ede42acd396e268e9ca3, type: 3}
-  - {fileID: 21300000, guid: c110c8b841040d146805d63bcf8829d7, type: 3}
-  - {fileID: 21300000, guid: cf60895887bfdb84cbf3a733452f0064, type: 3}
-  - {fileID: 21300000, guid: c60d6620a36bbbd449ea9ddf5bc163bb, type: 3}
-  - {fileID: 21300000, guid: 0580d79096856f54f9b8556aa003625f, type: 3}
-  - {fileID: 21300000, guid: fb88827a752b0f04980cf8d41d8f0236, type: 3}
+  - {fileID: -1610687081, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 885085396, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 527621339, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 527621339, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 885085396, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 527621339, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 870793943, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: -1731017422, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: -1641197633, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 527621339, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: -1717477303, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
+  - {fileID: 13892043, guid: 4ae0be189e3fa694c8695b95111cadc7, type: 3}
   interactObjectPrefabs:
   - {fileID: 0}
   - {fileID: 3133997238768261890, guid: 857ce0b4b40dd5045b78a95f26b98171, type: 3}

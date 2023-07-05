@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManagerBase : MonoBehaviour
 {
     public static UIManagerBase instance;
-    [SerializeField]GameObject InteractButton;
+    [SerializeField] GameObject InteractButton;
 
     private void Awake()
     {

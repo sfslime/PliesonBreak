@@ -8,10 +8,13 @@ using ConstList;
 
 public class Jailer : MonoBehaviourPun
 {
-    NavMeshAgent2D NavMeshAgent2D;      //NavMeshAgent2Dを使用するための変数.
-    [SerializeField] Transform Target;  //追跡するターゲット.
+    NavMeshAgent2D NavMeshAgent2D;       // NavMeshAgent2Dを使用するための変数.
+    [SerializeField] Transform Target;   // 追跡するターゲット.
     LineRenderer[] LineRenderer;
     [SerializeField] GameManager GameManager;
+    [SerializeField] UIManagerBase UIManager;
+
+    [SerializeField] GameObject DiscoverMark;  // ！マーク
 
     [SerializeField] List<Vector3> PatrolPointList = new List<Vector3>();
     int PatrolNumIndex;
@@ -42,26 +45,16 @@ public class Jailer : MonoBehaviourPun
         LineRenderer = new LineRenderer[RayNum];
         NavMeshAgent2D = GetComponent<NavMeshAgent2D>(); //agentにNavMeshAgent2Dを取得
         GameManager = GameManager.GameManagerInstance;
+        UIManager = UIManagerBase.instance;
+        DiscoverMark = transform.GetChild(1).gameObject;
         isDiscover = false;
+        IsDiscoverMark(false);
         AnimState = AnimCode.Walk;
         Animator = transform.GetChild(0).GetComponent<Animator>();
         
         ThisSavePos = transform.position;
 
-        for (int i = 0; i < RayNum; i++)
-        {
-            GameObject lineObj = new GameObject("LineRenderer" + i);
-            LineRenderer[i] = lineObj.AddComponent<LineRenderer>();
-
-            // LineRendererの設定
-            LineRenderer[i].positionCount = 2;       // 頂点の数を2に設定（始点と終点）
-            LineRenderer[i].startWidth = 0.1f;      // 線の開始幅
-            LineRenderer[i].endWidth = 0.1f;        // 線の終了幅
-            LineRenderer[i].material = new Material(Shader.Find("Sprites/Default"));  // 線のマテリアル
-            LineRenderer[i].startColor = Color.white; // 線の開始色
-            LineRenderer[i].endColor = Color.yellow;   // 線の終了色
-        }
-
+        LineRendererSetUp();
     }
 
     void Update()
@@ -148,12 +141,14 @@ public class Jailer : MonoBehaviourPun
             // プレイヤーを発見.
             if (hit.collider != null && hit.collider.CompareTag("Player") && isDiscover == false)
             {
+                StartCoroutine(DiscoverWaitTime(1.0f));
+
                 if (GameManager.GetPlayer() == hit.collider.gameObject)
                 {
                     BGMManager.Instance.SetBGM(BGMid.CHASE);
+
                     GameManager.PlaySE(SEid.Discover, GameManager.GetPlayer().transform.position);
                 }
-                WaitTime(2.0f);
                 isDiscover = true;
                 isCapture = false;
                 Target = hit.collider.gameObject.transform;
@@ -175,6 +170,27 @@ public class Jailer : MonoBehaviourPun
             {
                 Debug.DrawRay(transform.position, RayDir * Distance, Color.red);
             }
+        }
+    }
+
+    /// <summary>
+    /// LineRendererの設定と初期化.
+    /// Startで呼ぶ関数.
+    /// </summary>
+    void LineRendererSetUp()
+    {
+        for (int i = 0; i < RayNum; i++)
+        {
+            GameObject lineObj = new GameObject("LineRenderer" + i);
+            LineRenderer[i] = lineObj.AddComponent<LineRenderer>();
+
+            // LineRendererの設定
+            LineRenderer[i].positionCount = 2;       // 頂点の数を2に設定（始点と終点）
+            LineRenderer[i].startWidth = 0.1f;      // 線の開始幅
+            LineRenderer[i].endWidth = 0.1f;        // 線の終了幅
+            LineRenderer[i].material = new Material(Shader.Find("Sprites/Default"));  // 線のマテリアル
+            LineRenderer[i].startColor = Color.white; // 線の開始色
+            LineRenderer[i].endColor = Color.yellow;   // 線の終了色
         }
     }
 
@@ -238,10 +254,23 @@ public class Jailer : MonoBehaviourPun
         PatrolPointList.Clear();
     }
 
-    IEnumerator WaitTime(float time)
+    void IsDiscoverMark(bool isDiscoverMark)
     {
+        if (isDiscoverMark == false)
+        {
+            DiscoverMark.SetActive(false);
+        }
+        else if (isDiscoverMark == true)
+        {
+            DiscoverMark.SetActive(true);
+        }
+    }
+
+    IEnumerator DiscoverWaitTime(float time)
+    {
+        IsDiscoverMark(true);
         yield return new WaitForSeconds(time);
-        isTime = true;
+        IsDiscoverMark(false);
     }
 
     #region アニメーション

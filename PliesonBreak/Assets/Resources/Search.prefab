@@ -128,6 +128,7 @@ MonoBehaviour:
   DropItemID: 0
   TestDropItemID: 0
   DefaltSearchTime: 3
+  SearchProgress: 0
   isDestroy: 0
 --- !u!58 &-402427164621693920
 CircleCollider2D:

@@ -2844,17 +2844,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SearchPointListRoot: {fileID: 125453235}
   ListRoot: {fileID: 763266767}
-  PopSettings:
-    PointNmList: 040000000200000008000000030000000a000000020000000c000000
-    KeyIDList: 01000000030000000100000008000000010000000900000001000000
-    NullDropRate:
+  AreaPopSettings:
+  - PointNm: 4
+    KeyList: 01000000
+    NullDropRate: 0.3
+    ItemRateList:
+    - 0
+    - 0.2
+    - 0.5
     - 0.3
     - 0
-    - 0.5
     - 0
-    - 0.5
+    - 0.1
+  - PointNm: 2
+    KeyList: 03000000
+    NullDropRate: 0
+    ItemRateList:
     - 0
-    - 0.5
+    - 0.4
+    - 0.2
+    - 0.2
+    - 0.1
+    - 0.1
+    - 0
+  - PointNm: 8
+    KeyList: 01000000
+    NullDropRate: 0.5
+    ItemRateList:
+    - 0
+    - 0.2
+    - 0.3
+    - 0.3
+    - 0
+    - 0
+    - 0.2
+  - PointNm: 3
+    KeyList: 08000000
+    NullDropRate: 0
+    ItemRateList:
+    - 0
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.3
+    - 0.1
+    - 0
+  - PointNm: 10
+    KeyList: 01000000
+    NullDropRate: 0.5
+    ItemRateList:
+    - 0
+    - 0.2
+    - 0.3
+    - 0.3
+    - 0
+    - 0
+    - 0.2
+  - PointNm: 2
+    KeyList: 09000000
+    NullDropRate: 0
+    ItemRateList:
+    - 0
+    - 0.2
+    - 0.2
+    - 0.2
+    - 0.1
+    - 0.3
+    - 0
+  - PointNm: 12
+    KeyList: 03000000
+    NullDropRate: 0.5
+    ItemRateList:
+    - 0
+    - 0
+    - 0.3
+    - 0.3
+    - 0.1
+    - 0.1
+    - 0.2
 --- !u!114 &414469881
 MonoBehaviour:
   m_ObjectHideFlags: 0

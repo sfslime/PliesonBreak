@@ -43,6 +43,32 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     void TryRoomJoin()
     {
+        //オフライン以外の時に接続
+        if(ConectServer.RoomProperties.RoomName != "Offline")
+        {
+            //タイトルで確立した情報で接続
+            PhotonNetwork.JoinOrCreateRoom(ConectServer.RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default);
+        }
+        else
+        {
+            StartCoroutine(WaitDisconect());
+            
+        }
+        
+    }
+
+    /// <summary>
+    /// 切断を待ってからオフラインモードを開始する
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator WaitDisconect()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+        {
+            yield return null;
+        }
+        PhotonNetwork.OfflineMode = true;
         //タイトルで確立した情報で接続
         PhotonNetwork.JoinOrCreateRoom(ConectServer.RoomProperties.RoomName, new RoomOptions(), TypedLobby.Default);
     }
@@ -95,7 +121,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
             else
             {
                 SceanMoveButton.interactable = true;
-                MessageText.text = "スペースキーを押すとゲームが始まります";
+                MessageText.text = "スペースキーを押すとゲームが始まります\n下のキャラクターに触れると色を変更出来ます";
             }
             SceanMoveButton.transform.GetChild(0).gameObject.GetComponent<Text>().text
             = "開始(" + PhotonNetwork.CurrentRoom.PlayerCount + "/" + PhotonNetwork.CurrentRoom.MaxPlayers + ")";

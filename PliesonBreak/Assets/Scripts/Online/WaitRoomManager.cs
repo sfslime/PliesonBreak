@@ -116,7 +116,7 @@ public class WaitRoomManager : MonoBehaviourPunCallbacks
             if (!isMaster)
             {
                 SceanMoveButton.interactable = false;
-                MessageText.text = "開始をまっています...";
+                MessageText.text = "開始をまっています...\n下のキャラクターに触れると色を変更出来ます";
             }
             else
             {

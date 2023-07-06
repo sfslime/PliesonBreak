@@ -1024,10 +1024,7 @@ MonoBehaviour:
   - Buttons:
     - {fileID: 2064973655}
     - {fileID: 189913186}
-  - Buttons:
-    - {fileID: 1143441349}
-    - {fileID: 1557004204}
-    - {fileID: 671289421}
+  isForcePush: 0
 --- !u!1001 &877687966
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -166,4 +166,16 @@ public class SelectButton : MonoBehaviour
         }
         return outline;
     }
+
+    /// <summary>
+    /// ボタンを追加する
+    /// 最後尾にリストとして追加
+    /// </summary>
+    /// <param name="ButtonList"></param>
+    public void AddButton(List<GameObject> ButtonList)
+    {
+        ButtonRow buttonRow = new ButtonRow();
+        buttonRow.Buttons = ButtonList;
+        ButtonRows.Add(buttonRow);
+    }
 }

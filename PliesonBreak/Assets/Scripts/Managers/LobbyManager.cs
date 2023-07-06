@@ -42,6 +42,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         isInLobby = true;
 
         ButtonRoot.interactable = true;
+
+        //ƒ{ƒ^ƒ“‚ð’Ç‰Á
+        List<GameObject> Buttons = new List<GameObject>();
+        for(int i=0;i< ButtonRoot.gameObject.transform.childCount;  i++)
+        {
+            Buttons.Add(ButtonRoot.gameObject.transform.GetChild(i).gameObject);
+        }
+        GetComponent<SelectButton>().AddButton(Buttons);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)

@@ -91,7 +91,6 @@ public class PlayerBase : MonoBehaviour
         // 触れたインタラクトオブジェクトのComponentの取得.
         if (collision.gameObject.tag == "InteractObject")
         {
-           
             switch (ObjID)
             {
                 case (int)InteractObjs.Door:
@@ -118,8 +117,12 @@ public class PlayerBase : MonoBehaviour
                     MapObject = collision.gameObject.GetComponent<MapObject>();
                     break;
             }
+            EnterInteractObj(collision);
         }
-        EnterInteractObj(collision);
+        else
+        {
+            if (ObjID != (int)InteractObjs.OpenBearTrap) UIManager.IsInteractButton(false);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -267,12 +270,9 @@ public class PlayerBase : MonoBehaviour
     /// <param name="collision"></param>
     void EnterInteractObj(Collider2D collision)
     {
-        if (collision.gameObject.tag == "InteractObject")
-        {
-            InteractObjectBase = collision.gameObject.GetComponent<InteractObjectBase>();
-            if(ObjID != (int)InteractObjs.OpenBearTrap) UIManager.IsInteractButton(true);
-            KeysLink = InteractObjectBase.PostKeyLink();
-        }
+        InteractObjectBase = collision.gameObject.GetComponent<InteractObjectBase>();
+        if (ObjID != (int)InteractObjs.OpenBearTrap) UIManager.IsInteractButton(true);
+        KeysLink = InteractObjectBase.PostKeyLink();
     }
 
     /// <summary>
@@ -367,7 +367,6 @@ public class PlayerBase : MonoBehaviour
     {
         UIManager.IsInteractButton(false);
         yield return new WaitForSeconds(time);
-        UIManager.IsInteractButton(true);
     }
 }
 

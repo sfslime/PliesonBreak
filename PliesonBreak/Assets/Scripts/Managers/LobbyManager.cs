@@ -16,8 +16,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     [SerializeField, Tooltip("1ルームの参加人数")] int MaxPlayer;
     [SerializeField, Tooltip("参加ボタンリスト")] CanvasGroup ButtonRoot;
+    [SerializeField, Tooltip("アイテム説明パネル")] GameObject ItemPanel;
     //ロビー参加済みか
     private bool isInLobby;
+    //アイテム資料説明中
+    private bool isItemInf;
 
     private List<RoomInfo> RoomInfos;
 
@@ -39,6 +42,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         isInLobby = true;
 
         ButtonRoot.interactable = true;
+
+        //ボタンを追加
+        List<GameObject> Buttons = new List<GameObject>();
+        for(int i=0;i< ButtonRoot.gameObject.transform.childCount;  i++)
+        {
+            Buttons.Add(ButtonRoot.gameObject.transform.GetChild(i).gameObject);
+        }
+        GetComponent<SelectButton>().AddButton(Buttons);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -98,10 +109,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene(SceanNames.STARTTITLE.ToString());
     }
 
+    public void ItemInfbuttonPush()
+    {
+        isItemInf = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         isInLobby = false;
+        isItemInf = false;
         //参加処理中かロビー参加前は押せなくする
         ButtonRoot.interactable = false;
 
@@ -113,6 +130,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+        if (isItemInf)
+        {
+            GetComponent<SelectButton>().enabled = false;
+            ItemPanel.SetActive(true);
+            if (Input.anyKeyDown)
+            {
+                isItemInf = false;
+                GetComponent<SelectButton>().enabled = true;
+                ItemPanel.SetActive(false);
+            }
+        }
     }
 }

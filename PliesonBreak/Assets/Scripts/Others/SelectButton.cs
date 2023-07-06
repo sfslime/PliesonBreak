@@ -42,6 +42,7 @@ public class SelectButton : MonoBehaviour
     [SerializeField, Tooltip("デフォルトのアウトライン設定")] OutLineSetting OutLineSettings;
     [SerializeField, Tooltip("入力を受け取るキー")] InputButtonKey InputButtonKeys;
     [SerializeField, Tooltip("選択できるボタン。Element一個につき一列")] List<ButtonRow> ButtonRows;
+    [SerializeField, Tooltip("ボタンが非インタラクティブでも起動するか")] bool isForcePush;
 
     //選択された場合の数値
     public const float Selected = 99;
@@ -87,7 +88,17 @@ public class SelectButton : MonoBehaviour
         //決定ならそのボタンを起動
         if (input.x == Selected)
         {
-            ButtonRows[(int)NowSelect.y].Buttons[(int)NowSelect.x].GetComponent<Button>().onClick.Invoke();
+            var Button = ButtonRows[(int)NowSelect.y].Buttons[(int)NowSelect.x].GetComponent<Button>();
+            Debug.Log(Button.interactable);
+            if (Button.interactable)
+            {
+                Button.onClick.Invoke();
+            }
+            else
+            {
+                if(isForcePush) Button.onClick.Invoke();
+            }
+            
             return;
         }
         NowSelect += input;
@@ -154,5 +165,17 @@ public class SelectButton : MonoBehaviour
             outline.effectDistance = new Vector2(OutLineSettings.Thickness, -OutLineSettings.Thickness);
         }
         return outline;
+    }
+
+    /// <summary>
+    /// ボタンを追加する
+    /// 最後尾にリストとして追加
+    /// </summary>
+    /// <param name="ButtonList"></param>
+    public void AddButton(List<GameObject> ButtonList)
+    {
+        ButtonRow buttonRow = new ButtonRow();
+        buttonRow.Buttons = ButtonList;
+        ButtonRows.Add(buttonRow);
     }
 }

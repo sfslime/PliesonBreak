@@ -43,7 +43,8 @@ public class Prison : InteractObjectBase
     // Update is called once per frame
     void Update()
     {
-        
+        if (isOpen) gameObject.tag = "Untagged";
+        else gameObject.tag = "InteractObject";
     }
 
     /// <summary>
@@ -79,7 +80,6 @@ public class Prison : InteractObjectBase
     IEnumerator PrisonCloseLimit()
     {
         float timer = 0;
-        gameObject.tag = "Untagged";
         while (true)
         {
             //ŠJ‚¢‚Ä‚éŽž‚É‚Ì‚ÝŒÄ‚Î‚ê‚é‚Í‚¸‚È‚Ì‚Å•Â‚Ü‚Á‚Ä‚¢‚é‚È‚çŽ~‚ß‚é
@@ -90,7 +90,6 @@ public class Prison : InteractObjectBase
                 if (!isPlayerStand)
                 {
                     PrisonOpen(false);
-                    gameObject.tag = "InteractObject";
                     yield break;
                 }
             }
